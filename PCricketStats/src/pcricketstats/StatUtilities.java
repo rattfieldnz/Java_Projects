@@ -7,8 +7,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * This is the Comparator class, which is used to sort a list of players 
- * by the amount of balls they have bowled.
+ * This is the class responsible for calculating statistics  
+ * from the data in the CSV file.The outputSort method handles 
+ * the sorting - by providing the user with options specified 
+ * by an integer value.The sorting itself is handled by the 
+ * Comparator classes. 
  * 
  * @author Rob Attfield
  */
@@ -321,18 +324,18 @@ public class StatUtilities {
      * 
      * @param players The list of players to be sorted
      * @param chosenOption An integer value to choose a sorting option.
-     * 0 = "Sort by balls bowled"
-     * 1 = "Sort by bowling average"
-     * 2 = "Sort by career span"
-     * 3 = "Sort by country name"
-     * 4 = "Sort by economy rate"
-     * 5 = "Sort by number of 5 wicket bags"
-     * 6 = "Sort by matches played"
-     * 7 = "Sort by innings played"
-     * 8 = "Sort by player name"
-     * 9 = "Sort by runs conceded"
-     * 10 = "Sort by strike rate"
-     * 11 = "Sort by wickets taken"
+     * || 0 = "Sort by balls bowled" 
+     * || 1 = "Sort by bowling average" 
+     * || 2 = "Sort by career span" 
+     * || 3 = "Sort by country name" 
+     * || 4 = "Sort by economy rate" 
+     * || 5 = "Sort by number of 5 wicket bags" 
+     * || 6 = "Sort by matches played" 
+     * || 7 = "Sort by innings played" 
+     * || 8 = "Sort by player name" 
+     * || 9 = "Sort by runs conceded" 
+     * || 10 = "Sort by strike rate" 
+     * || 11 = "Sort by wickets taken" ||
      */
     public void outputSort(ArrayList<Player> players, int chosenOption) {
         
