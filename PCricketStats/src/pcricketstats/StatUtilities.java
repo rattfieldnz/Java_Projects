@@ -17,6 +17,10 @@ import java.util.Set;
  */
 public class StatUtilities {
     
+            
+    public String csvHeader = "Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
+                + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
+    
     public ArrayList<String> countries = new ArrayList<String>();
 
     /**
@@ -30,6 +34,56 @@ public class StatUtilities {
         DecimalFormat toTwoDP = new DecimalFormat("#.##");
         
         return Double.parseDouble(toTwoDP.format(value));
+    }
+    
+    /**
+     * This method prints out the number of players specified by the user.
+     * 
+     * @param players The list of players to be printed out.
+     * @param noOfPlayers The number of players to be listed.
+     */
+    public void listNPlayers(ArrayList<Player> players, int noOfPlayers)
+    {
+        System.out.println(csvHeader + "\n");
+        for(int i = 0; i < noOfPlayers; i++)
+        {
+            System.out.println(players.get(i).toString());
+        }
+    }
+    
+    /**
+     * This overloaded method will print out the details of each player - 
+     * that appear between "start" and "end" indexes of the players list.
+     * 
+     * @param players The list of players to be printed out.
+     * @param start The list position of the first player.
+     * @param end The list position of the last player.
+     */
+    public void listNPlayers(ArrayList<Player> players, int start, int end)
+    {
+        System.out.println(csvHeader + "\n");
+        
+        //If start is greater than 0, and less than the total number of players in the list
+        if(start > 0 && end < players.size())
+        {
+            for(int i = 0; i < end && i > start; i++)
+            {
+                System.out.println(players.get(i).toString());
+            }
+        }
+        else
+        {
+            //if start is less than 0, tell the user to not use a negative value
+            if(start < 0)
+            {
+                throw new ArithmeticException("You cannot use a negative index value for 'start'.");
+            }
+            //if end is greater than the size of the players list, tell the user that the value is too large.
+            else if(end > players.size())
+            {
+                throw new ArithmeticException("Your 'end' value cannot be greater than the size of your 'players' list.");
+            }
+        }
     }
 
     /**
@@ -51,7 +105,6 @@ public class StatUtilities {
          * 
          * With thanks to http://stackoverflow.com/questions/13429119/get-unique-values-from-arraylist-in-java
          */
-        
         Set<String> countryNames = new HashSet<String>(countries);
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -338,9 +391,6 @@ public class StatUtilities {
      * || 11 = "Sort by wickets taken" ||
      */
     public void outputSort(ArrayList<Player> players, int chosenOption) {
-        
-        String csvHeader = "Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
-                + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
         
         switch (chosenOption) {
             case 0:
