@@ -5,6 +5,7 @@
 package pcricketstats;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -24,7 +25,10 @@ public class CricketStatsApp {
         
         StatUtilities stats = new StatUtilities();
         
-        stats.outputSort(players, 0);
+        //stats.outputSort(players, 0);
+        
+        //Collections.sort(players, new SortByPlayerName());
+        stats.listNPlayers(players, 6, 9);
         
     }
 }

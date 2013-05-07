@@ -62,11 +62,12 @@ public class StatUtilities {
     public void listNPlayers(ArrayList<Player> players, int start, int end)
     {
         System.out.println(csvHeader + "\n");
-        
-        //If start is greater than 0, and less than the total number of players in the list
+        int i;
+        //If start is greater than 0, and end is less than the total number of players in the list
         if(start > 0 && end < players.size())
         {
-            for(int i = 0; i < end && i > start; i++)
+            
+            for(i = 0; (i <= end && i >= start); i++)
             {
                 System.out.println(players.get(i).toString());
             }
