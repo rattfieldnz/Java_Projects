@@ -54,7 +54,11 @@ public class Player {
     
     /**
      * The method which sets the players ID number.
+<<<<<<< HEAD
      * @param playerID The ID number of a player 
+=======
+     * @param playerName 
+>>>>>>> 56b853348899356f49e129f6dc8bdcae0682f7b9
      */
     public void setPlayerID(int playerID)
     {

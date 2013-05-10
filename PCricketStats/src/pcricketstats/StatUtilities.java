@@ -25,7 +25,11 @@ public class StatUtilities {
      * This method will round a double number to 2 decimal places.
      *
      * @param value The double number to be formatted.
+<<<<<<< HEAD
      * @return The double value, formatted to 2 decimal places.
+=======
+     * @return
+>>>>>>> 56b853348899356f49e129f6dc8bdcae0682f7b9
      */
     private double toDoubleTwoDP(double value) {
         //This will round calculation results to 2 decimal places
