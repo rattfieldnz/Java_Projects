@@ -29,4 +29,8 @@ the projects runtime path.
 * To set a main class in a standard Java project, right-click the project node
 in the Projects window and choose Properties. Then click Run and enter the
 class name in the Main Class field. Alternatively, you can manually type the
+<<<<<<< HEAD
 class name in the manifest Main-Class element.
+=======
+class name in the manifest Main-Class element.
+>>>>>>> 474a59d2f7257c345bf9f56773645bc9d2d4f960

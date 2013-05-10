@@ -18,7 +18,11 @@ import java.util.Set;
 public class StatUtilities {
     
             
+<<<<<<< HEAD
     public String csvHeader = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
+=======
+    public String csvHeader = "Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
+>>>>>>> 474a59d2f7257c345bf9f56773645bc9d2d4f960
                 + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
     public StringBuilder sb = new StringBuilder();
     

@@ -28,7 +28,11 @@ public class CricketStatsApp {
         //stats.outputSort(players, 11);
         
         //Collections.sort(players, new SortByPlayerName());
+<<<<<<< HEAD
         System.out.println(stats.listNPlayers(players,255, 398));
+=======
+        System.out.println(stats.listNPlayers(players,0, 4));
+>>>>>>> 474a59d2f7257c345bf9f56773645bc9d2d4f960
         
         //System.out.println(stats.outputSort(players, 0));
         
