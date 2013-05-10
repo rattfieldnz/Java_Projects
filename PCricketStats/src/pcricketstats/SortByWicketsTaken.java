@@ -34,7 +34,7 @@ public class SortByWicketsTaken implements Comparator<Player> {
             }
             else
             {
-                return Double.compare(p1.getEconomyRate(), p2.getEconomyRate());
+                return 0;
             }
         } 
         else 

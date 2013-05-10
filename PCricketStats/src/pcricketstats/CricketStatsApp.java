@@ -25,12 +25,10 @@ public class CricketStatsApp {
         
         StatUtilities stats = new StatUtilities();
         
-        //stats.outputSort(players, 11);
-        
         //Collections.sort(players, new SortByPlayerName());
-        System.out.println(stats.listNPlayers(players,255, 398));
+        //System.out.println(stats.listNPlayers(players,500));
         
-        //System.out.println(stats.outputSort(players, 0));
+        System.out.println(stats.outputSort(players, 11));
         
     }
 }
