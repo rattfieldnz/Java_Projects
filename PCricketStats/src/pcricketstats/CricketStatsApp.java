@@ -28,7 +28,7 @@ public class CricketStatsApp {
         //Collections.sort(players, new SortByPlayerName());
         //System.out.println(stats.listNPlayers(players,500));
         
-        System.out.println(stats.outputSort(players, 0));
+        System.out.println(stats.aveInningsPerCountry(players, ""));
         
     }
 }

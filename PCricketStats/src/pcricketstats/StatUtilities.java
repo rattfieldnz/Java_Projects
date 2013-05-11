@@ -16,10 +16,10 @@ import java.util.Set;
  */
 public class StatUtilities {
 
-    public String csvHeader = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
+    private String csvHeader = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
             + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
-    public StringBuilder sb = new StringBuilder();
-    public ArrayList<String> countries = new ArrayList<String>();
+    private StringBuilder sb = new StringBuilder();
+    private ArrayList<String> countries = new ArrayList<String>();
 
     /**
      * This method will round a double number to 2 decimal places.
@@ -97,9 +97,9 @@ public class StatUtilities {
          * 
          * With thanks to http://stackoverflow.com/questions/13429119/get-unique-values-from-arraylist-in-java
          */
-        Set<String> countryNames = new HashSet<String>(countries);
+        Set<String> countryNames = new HashSet<String>();
         for (Player p : players) {
-            countries.add(p.getCountryName());
+            countryNames.add(p.getCountryName());
         }
 
         /*End code fragment */
@@ -180,8 +180,8 @@ public class StatUtilities {
                 }
             }
 
-            double aveEconRate = (totalWicketsTaken * 1.0) / noOfPlayers;
-            return toDoubleTwoDP(aveEconRate);
+            double aveWicketsTaken = (totalWicketsTaken * 1.0) / noOfPlayers;
+            return toDoubleTwoDP(aveWicketsTaken);
         } else {
             return 0;
         }
