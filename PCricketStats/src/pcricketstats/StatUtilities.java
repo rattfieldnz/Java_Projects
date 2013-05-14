@@ -82,20 +82,33 @@ public class StatUtilities {
         return sb.toString();
     }
     
-    
+    /**
+     * This method returns the details for a single player, 
+     * as determined by the playerID parsed through.
+     * @param players
+     * @param playerID
+     * @return A String object representing the player's details.
+     */
     public String listSinglePlayer(ArrayList<Player> players, int playerID)
     {
-        if(playerID < players.size())
+        //This reassignment takes into consideration that counting starts at
+        //0 in Java. The first player has an I.D number of 1, not 0...
+        playerID -= 1;
+        
+        StringBuilder sb = new StringBuilder();
+        sb.append(csvHeader + "\n");
+        
+        if(playerID > players.size() || playerID == players.size())
         {
-            return "The player's I.D must be less than " + players.size() + ".";
+            return "'playerID' must be less than or equal to " + players.size() + ".";
         }
-        else if(playerID > players.size())
+        else if(playerID < 0) //this is 0 because of earlier message
         {
-            return "The player's I.D must be greater than " + players.size() + ".";
+            return "'playerID' must be greater than or equal to 1.";
         }
         else
         {
-            return players.get(playerID).toString();
+            return sb.append(players.get(playerID)).toString();
         }
     }
 

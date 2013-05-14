@@ -316,8 +316,6 @@ public class StatUtilitiesTest {
         String expResult = "";
         String result = instance.listPlayersCountry(players, country);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -330,7 +328,25 @@ public class StatUtilitiesTest {
         int chosenOption = 0;
         StatUtilities instance = new StatUtilities();
         instance.outputSort(players, chosenOption);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of listSinglePlayer method, of class StatUtilities.
+     */
+    @Test
+    public void testListSinglePlayer() {
+        System.out.println("listSinglePlayer");
+        
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        int playerID = 1;
+        String expResult = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10";
+        String result = instance.listSinglePlayer(players, playerID);
+        assertEquals(expResult, result);
     }
 }

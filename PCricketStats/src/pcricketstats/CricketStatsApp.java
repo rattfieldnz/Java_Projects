@@ -23,16 +23,16 @@ public class CricketStatsApp {
 //        ReadInStats worker = new ReadInStats();
 //        worker.load(players);
 //        
-//        StatUtilities stats = new StatUtilities();
+        StatUtilities stats = new StatUtilities();
 //        
 //        //Collections.sort(players, new SortByPlayerName());
 //        //System.out.println(stats.listNPlayers(players,500));
 //        
 //        System.out.println(stats.aveInningsPerCountry(players, ""));
         
-//        ArrayList<Player> players = new ArrayList<Player>();
-//        ReadInStats worker = new ReadInStats();
-//        worker.load(players);
+        ArrayList<Player> players = new ArrayList<Player>();
+        ReadInStats worker = new ReadInStats();
+        worker.load(players);
 //        ArrayList<Player> testPlayers = new ArrayList<Player>();
 //        int noOfPlayers = 5;
 //        
@@ -51,5 +51,7 @@ public class CricketStatsApp {
 //        
 //        System.out.println("**********Result**********");
 //        System.out.println(result);
+        
+        System.out.println(stats.listSinglePlayer(players,1));
     }
 }
