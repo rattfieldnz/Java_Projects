@@ -33,25 +33,6 @@ public class CricketStatsApp {
         ArrayList<Player> players = new ArrayList<Player>();
         ReadInStats worker = new ReadInStats();
         worker.load(players);
-//        ArrayList<Player> testPlayers = new ArrayList<Player>();
-//        int noOfPlayers = 5;
-//        
-//        for(int i = 0; i < noOfPlayers; i++)
-//        {
-//            testPlayers.add(players.get(i));
-//        }
-//
-//        StatUtilities instance = new StatUtilities();
-//        
-//        String expResult = instance.listNPlayers(players, noOfPlayers);
-//        String result = instance.listNPlayers(testPlayers, noOfPlayers);
-//        
-//        System.out.println("*********Expected Result***********");
-//        System.out.println(expResult);
-//        
-//        System.out.println("**********Result**********");
-//        System.out.println(result);
-        
-        System.out.println(stats.listSinglePlayer(players,1));
+        System.out.println(stats.listPlayersCountry(players,"Morocco"));
     }
 }

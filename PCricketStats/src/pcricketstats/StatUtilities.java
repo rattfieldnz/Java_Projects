@@ -67,14 +67,23 @@ public class StatUtilities {
     public String listNPlayers(ArrayList<Player> players, int start, int end) {
         //Some assistance and feedback for 'if' and 'for' loop from 
         //http://stackoverflow.com/questions/16411691/printing-out-values-between-two-indexes-in-for-loop/16412114
+        
+        //This reassignment takes into consideration that counting starts at
+        //0 in Java. The first player has an I.D number of 1, not 0...
+        start -= 1;
+        end -= 1;
+        
         StringBuilder sb = new StringBuilder();
-        sb.append(csvHeader + "\n");
+        
         int i;
         if (start < 0) {
-            throw new ArithmeticException("You cannot use a negative index value for 'start'.");
-        } else if (end > players.size()) {
-            throw new ArithmeticException("Your 'end' value cannot be greater than the size of your 'players' list.");
-        } else {
+            sb.append("Your 'start' value must be greater than or equal to 1.");
+        } 
+        else if (end > players.size()) {
+            sb.append("Your 'end' value cannot be greater than the size of your 'players' list.");
+        } 
+        else {
+            sb.append(csvHeader + "\n");
             for (i = start; i <= end; i++) {
                 sb.append(players.get(i).toString() + "\n");
             }
@@ -387,10 +396,6 @@ public class StatUtilities {
      * @return The player's name and country they play for.
      */
     public String listPlayersCountry(ArrayList<Player> players, String country) {
-        String playersFromCountry = "";
-
-        //Sort players so returned players are in alphabetical order
-        Collections.sort(players, new SortByPlayerName());
 
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -400,17 +405,18 @@ public class StatUtilities {
         //this is used to get the unique list of countries (i.e no repeating values)
         Set<String> countryNames = new HashSet<String>(countries);
         /*End code fragment */
-
+        StringBuilder sb = new StringBuilder();
+        sb.append(csvHeader + "\n");
         if (countryNames.contains(country)) {
 
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
-                    playersFromCountry += players.get(i).getPlayerName() + "\n";
+                    sb.append(players.get(i).toString() + "\n");
                 }
             }
-            return playersFromCountry.trim();
+            return sb.toString();
         } else {
-            return "";
+            return "There are no players from the country '" + country + "'.";
         }
     }
 
