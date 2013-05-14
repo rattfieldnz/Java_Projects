@@ -402,7 +402,7 @@ public class StatUtilities {
         }
 
 
-        //this is used to get the unique list of countries (i.e no repeating values)
+        //this is used to get a unique list of countries (i.e no repeating values)
         Set<String> countryNames = new HashSet<String>(countries);
         /*End code fragment */
         StringBuilder sb = new StringBuilder();
