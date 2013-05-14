@@ -26,7 +26,17 @@ public class SortByPlayerName implements Comparator<Player> {
      */
     @Override
     public int compare(Player p1, Player p2) {
-        return p1.getPlayerName().compareTo(p2.getPlayerName());
+        
+        if(p1.getPlayerName().compareTo(p2.getPlayerName()) != 0)
+        {
+            return p1.getPlayerName().compareTo(p2.getPlayerName());
+        }
+        else
+        {
+            //if()
+            return p2.getPlayerLastName().compareTo(p1.getPlayerLastName());
+        }
+        
     }
     
 }

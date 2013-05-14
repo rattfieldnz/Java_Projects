@@ -363,10 +363,211 @@ public class StatUtilitiesTest {
     @Test
     public void testOutputSort() {
         System.out.println("outputSort");
-        ArrayList<Player> players = null;
-        int chosenOption = 0;
+        
         StatUtilities instance = new StatUtilities();
-        instance.outputSort(players, chosenOption);
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        ArrayList<Player> testPlayers = new ArrayList<Player>();
+        for(int i = 0; i < 10; i++)
+        {
+            testPlayers.add(players.get(i));
+        }
+        
+        int chosenOption = 0; //sort by balls bowled
+        String expResult = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n";
+        
+        String result = instance.outputSort(testPlayers, chosenOption);
+        assertEquals(expResult, result);
+        
+        int chosenOption2 = 1; //sort by bowling average
+        String expResult2 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n";
+        
+        String result2 = instance.outputSort(testPlayers, chosenOption2);
+        assertEquals(expResult2, result2);
+        
+        int chosenOption3 = 2; //sort by career span
+        String expResult3 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n";
+        
+        String result3 = instance.outputSort(testPlayers, chosenOption3);
+        assertEquals(expResult3, result3);
+        
+        int chosenOption4 = 3; //sort by country name
+        String expResult4 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n";
+        
+        String result4 = instance.outputSort(testPlayers, chosenOption4);
+        assertEquals(expResult4, result4);
+        
+        int chosenOption5 = 4; //sort by economy rate
+        String expResult5 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n";
+        
+        String result5 = instance.outputSort(testPlayers, chosenOption5);
+        assertEquals(expResult5, result5);
+        
+        int chosenOption6 = 5; //Sort by number of 5 wicket bags
+        String expResult6 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n";
+        
+        String result6 = instance.outputSort(testPlayers, chosenOption6);
+        assertEquals(expResult6, result6);
+        
+        int chosenOption7 = 6; //Sort by matches played
+        String expResult7 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n";
+        
+        String result7 = instance.outputSort(testPlayers, chosenOption7);
+        assertEquals(expResult7, result7);
+        
+        int chosenOption8 = 7; //Sort by innings played
+        String expResult8 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n";
+        
+        String result8 = instance.outputSort(testPlayers, chosenOption8);
+        assertEquals(expResult8, result8);
+        
+        int chosenOption9 = 8; //Sort by player name
+        String expResult9 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n";
+        
+        String result9 = instance.outputSort(testPlayers, chosenOption9);
+        assertEquals(expResult9, result9);
+        
+        int chosenOption10 = 9; //Sort by runs conceded
+        String expResult10 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n";
+        
+        String result10 = instance.outputSort(testPlayers, chosenOption10);
+        assertEquals(expResult10, result10);
+        
+        int chosenOption11 = 10; //Sort by strike rate
+        String expResult11 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n";
+        
+        String result11 = instance.outputSort(testPlayers, chosenOption11);
+        assertEquals(expResult11, result11);
+        
+        int chosenOption12 = 11; //Sort by wickets taken
+        String expResult12 = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
+"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10\n" +
+"2 | Wasim Akram | Pakistan | Career Span: 19 years | 356 | 351 | 18186 | 11812 | 502 | 23.52 | 3.89 | 36.2 | 6\n" +
+"3 | Waqar Younis | Pakistan | Career Span: 14 years | 262 | 258 | 12698 | 9919 | 416 | 23.84 | 4.68 | 30.5 | 13\n" +
+"4 | WPUJC Vaas | Sri Lanka | Career Span: 14 years | 322 | 320 | 15775 | 11014 | 400 | 27.53 | 4.18 | 39.4 | 4\n" +
+"5 | SM Pollock | South Africa | Career Span: 12 years | 303 | 297 | 15712 | 9631 | 393 | 24.5 | 3.67 | 39.9 | 5\n" +
+"6 | GD McGrath | Australia | Career Span: 14 years | 250 | 248 | 12970 | 8391 | 381 | 22.02 | 3.88 | 34.0 | 7\n" +
+"7 | B Lee | Australia | Career Span: 12 years | 221 | 217 | 11185 | 8877 | 380 | 23.36 | 4.76 | 29.4 | 9\n" +
+"8 | Shahid Afridi | Pakistan | Career Span: 17 years | 354 | 328 | 15498 | 11937 | 348 | 34.3 | 4.62 | 44.5 | 8\n" +
+"9 | A Kumble | India | Career Span: 17 years | 271 | 265 | 14496 | 10412 | 337 | 30.89 | 4.3 | 43.0 | 2\n" +
+"10 | ST Jayasuriya | Sri Lanka | Career Span: 22 years | 445 | 368 | 14874 | 11871 | 323 | 36.75 | 4.78 | 46.0 | 4\n";
+        
+        String result12 = instance.outputSort(testPlayers, chosenOption12);
+        assertEquals(expResult12, result12);
+        
     }
 
     /**

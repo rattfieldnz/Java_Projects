@@ -26,8 +26,8 @@ public class SortByInningsPlayed implements Comparator<Player> {
      */
     @Override
     public int compare(Player p1, Player p2) {
-        if (p1.getInningsPlayed() != 0 && p2.getInningsPlayed()!= 0) {
-            return p1.getInningsPlayed() - p2.getInningsPlayed();
+        if (p2.getInningsPlayed() != 0 && p1.getInningsPlayed()!= 0) {
+            return p2.getInningsPlayed() - p1.getInningsPlayed();
         } else {
             return 0;
         }

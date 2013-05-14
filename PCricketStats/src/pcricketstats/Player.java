@@ -89,6 +89,15 @@ public class Player {
     }
     
     /**
+     * This method returns the player's last name
+     * @return The player's last name
+     */
+    public String getPlayerLastName()
+    {
+        return this.playerName.substring(this.playerName.charAt(' ')+1);
+    }
+    
+    /**
      * The method which sets the country name, 
      * who a player plays for.
      * @param countryName The country's name.
