@@ -51,7 +51,7 @@ public class StatUtilitiesTest {
         ReadInStats worker = new ReadInStats();
         worker.load(players);
         ArrayList<Player> testPlayers = new ArrayList<Player>();
-        int noOfPlayers = 10;
+        int noOfPlayers = 5;
         
         for(int i = 0; i < noOfPlayers; i++)
         {
@@ -61,7 +61,7 @@ public class StatUtilitiesTest {
         StatUtilities instance = new StatUtilities();
         
         String expResult = instance.listNPlayers(players, noOfPlayers);
-        String result = csvHeader + "\n" + testPlayers.toString();
+        String result = instance.listNPlayers(testPlayers, noOfPlayers);
         
         
         assertEquals(expResult, result);

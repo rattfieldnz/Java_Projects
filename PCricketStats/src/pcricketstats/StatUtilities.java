@@ -11,6 +11,10 @@ import java.util.Set;
  * CSV file.The outputSort method handles the sorting - by providing the user
  * with options specified by an integer value.The sorting itself is handled by
  * the Comparator classes.
+ * 
+ * NOTE: Default sort of CSV file is for "wickets taken". Later on, I'll implement 
+ * code that sorts the output beforehand (specified by the user), then the user can 
+ * return list of players (or if a better idea is found, I'll implement that).
  *
  * @author Rob Attfield
  */
@@ -18,7 +22,6 @@ public class StatUtilities {
 
     private String csvHeader = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
             + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
-    private StringBuilder sb = new StringBuilder();
     private ArrayList<String> countries = new ArrayList<String>();
 
     /**
@@ -43,6 +46,7 @@ public class StatUtilities {
      * 'noOfPlayers'.
      */
     public String listNPlayers(ArrayList<Player> players, int noOfPlayers) {
+        StringBuilder sb = new StringBuilder();
         sb.append(csvHeader + "\n");
         for (int i = 0; i < noOfPlayers; i++) {
             sb.append(players.get(i).toString() + "\n");
@@ -63,6 +67,7 @@ public class StatUtilities {
     public String listNPlayers(ArrayList<Player> players, int start, int end) {
         //Some assistance and feedback for 'if' and 'for' loop from 
         //http://stackoverflow.com/questions/16411691/printing-out-values-between-two-indexes-in-for-loop/16412114
+        StringBuilder sb = new StringBuilder();
         sb.append(csvHeader + "\n");
         int i;
         if (start < 0) {
@@ -75,6 +80,23 @@ public class StatUtilities {
             }
         }
         return sb.toString();
+    }
+    
+    
+    public String listSinglePlayer(ArrayList<Player> players, int playerID)
+    {
+        if(playerID < players.size())
+        {
+            return "The player's I.D must be less than " + players.size() + ".";
+        }
+        else if(playerID > players.size())
+        {
+            return "The player's I.D must be greater than " + players.size() + ".";
+        }
+        else
+        {
+            return players.get(playerID).toString();
+        }
     }
 
     /**
@@ -400,7 +422,7 @@ public class StatUtilities {
      * @return The sorted list of players, according to the option chosen.
      */
     public String outputSort(ArrayList<Player> players, int chosenOption) {
-
+        StringBuilder sb = new StringBuilder();
         sb.append(csvHeader + "\n");
         switch (chosenOption) {
             case 0:
