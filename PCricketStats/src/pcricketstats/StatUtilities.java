@@ -129,7 +129,7 @@ public class StatUtilities {
      * @param playerName The player name to retrieve details for.
      * @return A String representing the player's details.
      */
-    public String listSinglePlayer(ArrayList<Player> players, String playerName, int playerID)
+    public String listSinglePlayer(ArrayList<Player> players, String playerName)
     {
        
        //this is a temporary Player ArrayList which will hold only 1 player
@@ -137,10 +137,6 @@ public class StatUtilities {
         
        for(Player p: players)
        {
-           if(playerID == 0)
-           {
-               
-           }
            if(p.getPlayerName().equalsIgnoreCase(playerName))
            {
                //add the matching player to the 'player' ArrayList
