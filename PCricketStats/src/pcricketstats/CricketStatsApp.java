@@ -34,5 +34,6 @@ public class CricketStatsApp {
         ReadInStats worker = new ReadInStats();
         worker.load(players);
         System.out.println(stats.listSinglePlayer(players,"Alan Harper"));
+        
     }
 }
