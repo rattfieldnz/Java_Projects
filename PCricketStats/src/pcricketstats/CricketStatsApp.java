@@ -33,19 +33,6 @@ public class CricketStatsApp {
         ArrayList<Player> players = new ArrayList<Player>();
         ReadInStats worker = new ReadInStats();
         worker.load(players);
-        System.out.println(stats.listPlayersCountry(players,"Morocco"));
-        
-        ArrayList<Player> testPlayers = new ArrayList<Player>();
-        for(int i = 0; i < 10; i++)
-        {
-            testPlayers.add(players.get(i));
-        }
-        
-        System.out.println(stats.outputSort(testPlayers, 11));
-//        String name = "Bob Robertson";
-//        
-//        String p1_lastName = name.substring(name.indexOf(' ')+1, name.length());
-//        
-//        System.out.println(p1_lastName);
+        System.out.println(stats.listSinglePlayer(players,"Alan Harper"));
     }
 }

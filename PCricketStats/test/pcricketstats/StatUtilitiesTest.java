@@ -599,4 +599,36 @@ public class StatUtilitiesTest {
         String result3 = instance.listSinglePlayer(players, playerID3);
         assertEquals(expResult3, result3);
     }
+
+    /**
+     * Test of listSinglePlayer method, of class StatUtilities.
+     */
+    @Test
+    public void testListSinglePlayer_ArrayList_int() {
+        System.out.println("listSinglePlayer");
+        ArrayList<Player> players = null;
+        int playerID = 0;
+        StatUtilities instance = new StatUtilities();
+        String expResult = "";
+        String result = instance.listSinglePlayer(players, playerID);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of listSinglePlayer method, of class StatUtilities.
+     */
+    @Test
+    public void testListSinglePlayer_ArrayList_String() {
+        System.out.println("listSinglePlayer");
+        ArrayList<Player> players = null;
+        String playerName = "";
+        StatUtilities instance = new StatUtilities();
+        String expResult = "";
+        String result = instance.listSinglePlayer(players, playerName);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

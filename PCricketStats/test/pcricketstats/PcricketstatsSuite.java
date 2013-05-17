@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
  * @author interkiwiwebdev
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({pcricketstats.ReadInStatsTest.class, pcricketstats.SortByEconomyRateTest.class, pcricketstats.SortByMatchesPlayedTest.class, pcricketstats.CricketStatsAppTest.class, pcricketstats.SortByCountryNameTest.class, pcricketstats.SortByBowlingAverageTest.class, pcricketstats.StatUtilitiesTest.class, pcricketstats.SortByStrikeRateTest.class, pcricketstats.SortByPlayerNameTest.class, pcricketstats.SortByWicketsTakenTest.class, pcricketstats.SortByInningsPlayedTest.class, pcricketstats.SortByFiveWicketsInnTest.class, pcricketstats.SortByRunsConcededTest.class, pcricketstats.SortByBallsBowledTest.class, pcricketstats.SortByCareerSpanTest.class, pcricketstats.PlayerTest.class})
+@Suite.SuiteClasses({pcricketstats.ReadInStatsTest.class, pcricketstats.CricketStatsAppTest.class, pcricketstats.StatUtilitiesTest.class, pcricketstats.PlayerTest.class})
 public class PcricketstatsSuite {
 
     @BeforeClass

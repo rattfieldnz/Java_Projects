@@ -456,4 +456,18 @@ public class PlayerTest {
         int result = instance.getPlayerID();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of getPlayerLastName method, of class Player.
+     */
+    @Test
+    public void testGetPlayerLastName() {
+        System.out.println("getPlayerLastName");
+        Player instance = null;
+        String expResult = "";
+        String result = instance.getPlayerLastName();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
 }

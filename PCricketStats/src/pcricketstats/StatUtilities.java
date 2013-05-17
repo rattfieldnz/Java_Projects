@@ -120,6 +120,48 @@ public class StatUtilities {
             return sb.append(players.get(playerID)).toString();
         }
     }
+    
+    /**
+     * This method retrieves all the details for a single player, 
+     * according to the name requested.
+     * 
+     * @param players The ArrayList of players to search through.
+     * @param playerName The player name to retrieve details for.
+     * @return A String representing the player's details.
+     */
+    public String listSinglePlayer(ArrayList<Player> players, String playerName, int playerID)
+    {
+       
+       //this is a temporary Player ArrayList which will hold only 1 player
+       ArrayList<Player> player = new ArrayList<Player>();
+        
+       for(Player p: players)
+       {
+           if(playerID == 0)
+           {
+               
+           }
+           if(p.getPlayerName().equalsIgnoreCase(playerName))
+           {
+               //add the matching player to the 'player' ArrayList
+               player.add(p);
+           }
+       }
+       
+       //return the matched player's details
+       if(player.size() == 1)
+       {
+           return player.get(0).toString();
+       }
+       else if(player.size() > 1)
+       {
+           return "Duplicate player has been found";
+       }
+       else
+       {
+           return "The player with the name \"" + playerName + "\" does not exist.";
+       }
+    }
 
     /**
      * This overloaded method calculates the average amount of innings per
