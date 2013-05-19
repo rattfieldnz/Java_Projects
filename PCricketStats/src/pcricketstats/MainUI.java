@@ -16,8 +16,6 @@ import java.awt.event.MouseMotionAdapter;
  */
 public class MainUI extends javax.swing.JFrame {
 
-    private static MainUI main = new MainUI();
-    
     /**
      * Creates new form MainUI
      */
@@ -47,7 +45,7 @@ public class MainUI extends javax.swing.JFrame {
                 setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
             }  
         }  
-    });
+    }); 
     }
 
     /**
@@ -120,7 +118,7 @@ public class MainUI extends javax.swing.JFrame {
         {
             SinglePlayerStatsUI singlePlayerUI = new SinglePlayerStatsUI();
             singlePlayerUI.setVisible(true);
-            main.setVisible(true);
+            new MainUI().setVisible(true);
             
         }
     }//GEN-LAST:event_singlePlayerStatsBtnActionPerformed
@@ -137,7 +135,7 @@ public class MainUI extends javax.swing.JFrame {
         {
             MultiplePlayerStatsUI multiplePlayersUI = new MultiplePlayerStatsUI();
             multiplePlayersUI.setVisible(true);
-            main.setVisible(true);
+            new MainUI().setVisible(true);
         }
     }//GEN-LAST:event_multiplePlayerStatsBtnActionPerformed
 
@@ -173,7 +171,7 @@ public class MainUI extends javax.swing.JFrame {
             @Override
             public void run() {
                 
-                main.setVisible(true);
+                new MainUI().setVisible(true);
             }
         });
     }
