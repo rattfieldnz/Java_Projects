@@ -4,6 +4,11 @@
  */
 package pcricketstats;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
 /**
  *
  * @author interkiwiwebdev
@@ -15,6 +20,31 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
      */
     public SinglePlayerStatsUI() {
         initComponents();
+        
+        /*
+         * Below code adapted from http://stackoverflow.com/questions/15867086/drag-undecorated-jdialog.
+         */
+        
+        final Point point = new Point(0,0);        // Why 'final' and not simply Point point?     
+    addMouseListener(new MouseAdapter() {  
+        @Override
+        public void mousePressed(MouseEvent e) {  
+            if(!e.isMetaDown()){  
+                point.x = e.getX();  
+                point.y = e.getY();
+            }  
+        }  
+    });
+    
+    addMouseMotionListener(new MouseMotionAdapter() {  
+        @Override
+        public void mouseDragged(MouseEvent e) {  
+            if(!e.isMetaDown() &&  point.y <= 1162){  //Coordinates of title bar, any X and up to 1162px from the top border
+                Point p = getLocation();  
+                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+            }  
+        }  
+    });
     }
 
     /**
@@ -65,8 +95,10 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
         chooseGraphOption = new javax.swing.JComboBox();
         confirmGraphBtn = new javax.swing.JButton();
         displayGraphPanel = new javax.swing.JPanel();
+        closeBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Single Player Stats");
@@ -391,6 +423,13 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        closeBtn.setText("Close");
+        closeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -398,18 +437,24 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(closeBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(closeBtn))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -423,6 +468,13 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
     private void confirmGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmGraphBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmGraphBtnActionPerformed
+
+    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        if(evt.getSource() == closeBtn)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_closeBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -453,6 +505,7 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new SinglePlayerStatsUI().setVisible(true);
             }
@@ -464,6 +517,7 @@ public class SinglePlayerStatsUI extends javax.swing.JFrame {
     private javax.swing.JLabel careerLength;
     private javax.swing.JLabel careerSpan;
     private javax.swing.JComboBox chooseGraphOption;
+    private javax.swing.JButton closeBtn;
     private javax.swing.JButton confirmGraphBtn;
     private javax.swing.JPanel countryFlagPanel;
     private javax.swing.JLabel countryName;

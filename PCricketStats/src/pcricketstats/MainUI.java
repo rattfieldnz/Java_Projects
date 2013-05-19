@@ -16,6 +16,8 @@ import java.awt.event.MouseMotionAdapter;
  */
 public class MainUI extends javax.swing.JFrame {
 
+    private static MainUI main = new MainUI();
+    
     /**
      * Creates new form MainUI
      */
@@ -45,7 +47,7 @@ public class MainUI extends javax.swing.JFrame {
                 setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
             }  
         }  
-    }); 
+    });
     }
 
     /**
@@ -114,7 +116,13 @@ public class MainUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void singlePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singlePlayerStatsBtnActionPerformed
-        // TODO add your handling code here:
+        if(evt.getSource() == singlePlayerStatsBtn)
+        {
+            SinglePlayerStatsUI singlePlayerUI = new SinglePlayerStatsUI();
+            singlePlayerUI.setVisible(true);
+            main.setVisible(true);
+            
+        }
     }//GEN-LAST:event_singlePlayerStatsBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -125,7 +133,12 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void multiplePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplePlayerStatsBtnActionPerformed
-        // TODO add your handling code here:
+        if(evt.getSource() == multiplePlayerStatsBtn)
+        {
+            MultiplePlayerStatsUI multiplePlayersUI = new MultiplePlayerStatsUI();
+            multiplePlayersUI.setVisible(true);
+            main.setVisible(true);
+        }
     }//GEN-LAST:event_multiplePlayerStatsBtnActionPerformed
 
     /**
@@ -160,7 +173,7 @@ public class MainUI extends javax.swing.JFrame {
             @Override
             public void run() {
                 
-                new MainUI().setVisible(true);
+                main.setVisible(true);
             }
         });
     }
