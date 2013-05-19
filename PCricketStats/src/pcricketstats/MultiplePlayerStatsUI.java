@@ -85,7 +85,7 @@ public class MultiplePlayerStatsUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         closeBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
 
