@@ -40,7 +40,7 @@ public class MainUI extends javax.swing.JFrame {
     addMouseMotionListener(new MouseMotionAdapter() {  
         @Override
         public void mouseDragged(MouseEvent e) {  
-            if(!e.isMetaDown() &&  point.y <= 400){  //Coordinates of title bar, any X and up to 17px from the top border
+            if(!e.isMetaDown() &&  point.y <= 400){  //Coordinates of title bar, any X and up to 400px from the top border
                 Point p = getLocation();  
                 setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
             }  
