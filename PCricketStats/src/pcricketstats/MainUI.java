@@ -4,6 +4,12 @@
  */
 package pcricketstats;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+
+
 /**
  *
  * @author interkiwiwebdev
@@ -15,6 +21,31 @@ public class MainUI extends javax.swing.JFrame {
      */
     public MainUI() {
         initComponents();
+        
+        /*
+         * Below code adapted from http://stackoverflow.com/questions/15867086/drag-undecorated-jdialog.
+         */
+        
+        final Point point = new Point(0,0);        // Why 'final' and not simply Point point?     
+    addMouseListener(new MouseAdapter() {  
+        @Override
+        public void mousePressed(MouseEvent e) {  
+            if(!e.isMetaDown()){  
+                point.x = e.getX();  
+                point.y = e.getY();
+            }  
+        }  
+    });
+    
+    addMouseMotionListener(new MouseMotionAdapter() {  
+        @Override
+        public void mouseDragged(MouseEvent e) {  
+            if(!e.isMetaDown() &&  point.y <= 400){  //Coordinates of title bar, any X and up to 17px from the top border
+                Point p = getLocation();  
+                setLocation(p.x + e.getX() - point.x, p.y + e.getY() - point.y);
+            }  
+        }  
+    }); 
     }
 
     /**
@@ -26,21 +57,76 @@ public class MainUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        singlePlayerStatsBtn = new javax.swing.JButton();
+        multiplePlayerStatsBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setFocusable(false);
+        setFocusableWindowState(false);
+        setMaximumSize(new java.awt.Dimension(500, 400));
+        setMinimumSize(new java.awt.Dimension(500, 400));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(500, 400));
+        setResizable(false);
+        getContentPane().setLayout(null);
+
+        singlePlayerStatsBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        singlePlayerStatsBtn.setText("Single Player Stats");
+        singlePlayerStatsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                singlePlayerStatsBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(singlePlayerStatsBtn);
+        singlePlayerStatsBtn.setBounds(170, 170, 170, 25);
+
+        multiplePlayerStatsBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        multiplePlayerStatsBtn.setText("Stats Involving Multiple Players");
+        multiplePlayerStatsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiplePlayerStatsBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(multiplePlayerStatsBtn);
+        multiplePlayerStatsBtn.setBounds(130, 200, 247, 25);
+
+        exitBtn.setText("Close");
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitBtn);
+        exitBtn.setBounds(420, 370, 73, 23);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pcricketstats/ballClub.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        jLabel2.setMaximumSize(new java.awt.Dimension(500, 400));
+        jLabel2.setMinimumSize(new java.awt.Dimension(500, 400));
+        jLabel2.setPreferredSize(new java.awt.Dimension(500, 400));
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 500, 400);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void singlePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singlePlayerStatsBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_singlePlayerStatsBtnActionPerformed
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        if(evt.getSource() == exitBtn)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_exitBtnActionPerformed
+
+    private void multiplePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiplePlayerStatsBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_multiplePlayerStatsBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -71,11 +157,17 @@ public class MainUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
+                
                 new MainUI().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton multiplePlayerStatsBtn;
+    private javax.swing.JButton singlePlayerStatsBtn;
     // End of variables declaration//GEN-END:variables
 }
