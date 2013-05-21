@@ -32,7 +32,7 @@ public class AppInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        mainAppTabPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         mainPanelPlayerStats = new javax.swing.JPanel();
@@ -128,12 +128,15 @@ public class AppInterface extends javax.swing.JFrame {
         sortBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1350, 671));
+        setMinimumSize(new java.awt.Dimension(1350, 671));
+        setResizable(false);
 
-        jTabbedPane1.setBackground(new java.awt.Color(0, 48, 88));
-        jTabbedPane1.setMaximumSize(new java.awt.Dimension(1350, 671));
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(1350, 671));
-        jTabbedPane1.setOpaque(true);
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1350, 671));
+        mainAppTabPane.setBackground(new java.awt.Color(0, 48, 88));
+        mainAppTabPane.setMaximumSize(new java.awt.Dimension(1350, 671));
+        mainAppTabPane.setMinimumSize(new java.awt.Dimension(1350, 671));
+        mainAppTabPane.setOpaque(true);
+        mainAppTabPane.setPreferredSize(new java.awt.Dimension(1350, 671));
 
         jPanel1.setBackground(new java.awt.Color(153, 153, 153));
         jPanel1.setMaximumSize(new java.awt.Dimension(1350, 643));
@@ -491,12 +494,11 @@ public class AppInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Single Player Stats", jPanel1);
+        mainAppTabPane.addTab("Single Player Stats", jPanel1);
 
         multiplePlayerStatsPanel.setBackground(new java.awt.Color(153, 153, 153));
         multiplePlayerStatsPanel.setMaximumSize(new java.awt.Dimension(1350, 643));
         multiplePlayerStatsPanel.setMinimumSize(new java.awt.Dimension(1350, 643));
-        multiplePlayerStatsPanel.setPreferredSize(new java.awt.Dimension(1350, 643));
 
         multiplePlayerStatsLabel.setFont(multiplePlayerStatsLabel.getFont().deriveFont(multiplePlayerStatsLabel.getFont().getStyle() | java.awt.Font.BOLD, multiplePlayerStatsLabel.getFont().getSize()+13));
         multiplePlayerStatsLabel.setText("Multiple Player Stats");
@@ -699,7 +701,7 @@ public class AppInterface extends javax.swing.JFrame {
         );
         graphDisplayPanelLayout.setVerticalGroup(
             graphDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 312, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout countryVsCountryPanelLayout = new javax.swing.GroupLayout(countryVsCountryPanel);
@@ -718,7 +720,7 @@ public class AppInterface extends javax.swing.JFrame {
                             .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
                                 .addGap(66, 66, 66)
                                 .addComponent(comparePlayerStatsLabel)))
-                        .addGap(0, 63, Short.MAX_VALUE))
+                        .addGap(0, 44, Short.MAX_VALUE))
                     .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(graphDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -935,25 +937,23 @@ public class AppInterface extends javax.swing.JFrame {
                         .addComponent(multiplePlayerStatsLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
                         .addComponent(getAllPlayersBtn)
-                        .addGap(376, 376, 376)
+                        .addGap(353, 353, 353)
                         .addComponent(sortByLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sortByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sortBtn)
-                        .addGap(19, 19, 19))
+                        .addGap(8, 8, 8))
+                    .addComponent(playersDataScrollTable)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
-                        .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(playersDataScrollTable, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
-                                .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(closeBtn1)
-                                    .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(closeBtn1)
+                            .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)))
+                .addGap(34, 34, 34))
         );
         multiplePlayerStatsPanelLayout.setVerticalGroup(
             multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -974,22 +974,22 @@ public class AppInterface extends javax.swing.JFrame {
                         .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                         .addComponent(closeBtn1))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
                     .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Stats Involving Multiple Players", multiplePlayerStatsPanel);
+        mainAppTabPane.addTab("Stats Involving Multiple Players", multiplePlayerStatsPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(mainAppTabPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(mainAppTabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -1052,10 +1052,6 @@ public class AppInterface extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
-        ArrayList<Player> players = new ArrayList<Player>();
-        ReadInStats worker = new ReadInStats();
-        worker.load(players);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             
@@ -1138,7 +1134,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane mainAppTabPane;
     private javax.swing.JPanel mainPanelPlayerStats;
     private javax.swing.JLabel matchesPlayed;
     private javax.swing.JLabel matchesPlayedLabel;
