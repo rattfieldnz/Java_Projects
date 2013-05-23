@@ -5,6 +5,8 @@
 package pcricketstats;
 
 import java.util.ArrayList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,6 +21,7 @@ public class AppInterface extends javax.swing.JFrame {
     public AppInterface(ArrayList<Player> players) {
         initComponents();
         this.players = players;
+        //getAllPlayersBtnActionPerformed(null);
         
         
     }
@@ -77,8 +80,6 @@ public class AppInterface extends javax.swing.JFrame {
         multiplePlayerStatsPanel = new javax.swing.JPanel();
         multiplePlayerStatsLabel = new javax.swing.JLabel();
         getAllPlayersBtn = new javax.swing.JButton();
-        playersDataScrollTable = new javax.swing.JScrollPane();
-        playersDataTable = new javax.swing.JTable();
         retrievePlayerDataPanel = new javax.swing.JPanel();
         playersFromLabel = new javax.swing.JLabel();
         getPlayerFrom = new javax.swing.JTextField();
@@ -126,6 +127,8 @@ public class AppInterface extends javax.swing.JFrame {
         sortByComboBox = new javax.swing.JComboBox();
         sortByLabel = new javax.swing.JLabel();
         sortBtn = new javax.swing.JButton();
+        tableScrollPane = new javax.swing.JScrollPane();
+        playersDataTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(1350, 671));
@@ -511,79 +514,6 @@ public class AppInterface extends javax.swing.JFrame {
             }
         });
 
-        playersDataTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-        playersDataTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        playersDataTable.setPreferredSize(new java.awt.Dimension(700, 160));
-        playersDataTable.getTableHeader().setReorderingAllowed(false);
-        playersDataScrollTable.setViewportView(playersDataTable);
-        playersDataTable.getColumnModel().getColumn(0).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-        playersDataTable.getColumnModel().getColumn(0).setHeaderValue("ID");
-        playersDataTable.getColumnModel().getColumn(1).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(1).setHeaderValue("Player Name");
-        playersDataTable.getColumnModel().getColumn(2).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(2).setHeaderValue("Country");
-        playersDataTable.getColumnModel().getColumn(3).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(3).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(3).setHeaderValue("Career Span");
-        playersDataTable.getColumnModel().getColumn(4).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(4).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(4).setHeaderValue("Matches Played");
-        playersDataTable.getColumnModel().getColumn(5).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(5).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(5).setHeaderValue("Innings Played");
-        playersDataTable.getColumnModel().getColumn(6).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(6).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(6).setHeaderValue("Balls Bowled");
-        playersDataTable.getColumnModel().getColumn(7).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(7).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(7).setHeaderValue("Runs Conceded");
-        playersDataTable.getColumnModel().getColumn(8).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(8).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(8).setHeaderValue("Wickets Taken");
-        playersDataTable.getColumnModel().getColumn(9).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(9).setPreferredWidth(55);
-        playersDataTable.getColumnModel().getColumn(9).setHeaderValue("Bowling Average");
-        playersDataTable.getColumnModel().getColumn(10).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(10).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(10).setHeaderValue("Economy Rate");
-        playersDataTable.getColumnModel().getColumn(11).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(11).setPreferredWidth(35);
-        playersDataTable.getColumnModel().getColumn(11).setHeaderValue("Strike Rate");
-        playersDataTable.getColumnModel().getColumn(12).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(12).setHeaderValue("5 Wickets/Innings");
-
         retrievePlayerDataPanel.setBackground(new java.awt.Color(211, 225, 255));
         retrievePlayerDataPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
@@ -926,33 +856,192 @@ public class AppInterface extends javax.swing.JFrame {
 
         sortBtn.setText("Go");
 
+        tableScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        tableScrollPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
+        playersDataTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
+        playersDataTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        playersDataTable.setPreferredSize(new java.awt.Dimension(700, 160));
+        playersDataTable.getTableHeader().setResizingAllowed(false);
+        playersDataTable.getTableHeader().setReorderingAllowed(false);
+        playersDataTable.setUpdateSelectionOnSort(false);
+        tableScrollPane.setViewportView(playersDataTable);
+        playersDataTable.getColumnModel().getColumn(0).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(0).setPreferredWidth(20);
+        playersDataTable.getColumnModel().getColumn(1).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(2).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(3).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(3).setPreferredWidth(50);
+        playersDataTable.getColumnModel().getColumn(4).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(4).setPreferredWidth(60);
+        playersDataTable.getColumnModel().getColumn(5).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(5).setPreferredWidth(60);
+        playersDataTable.getColumnModel().getColumn(6).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(6).setPreferredWidth(50);
+        playersDataTable.getColumnModel().getColumn(7).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(7).setPreferredWidth(60);
+        playersDataTable.getColumnModel().getColumn(8).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(8).setPreferredWidth(50);
+        playersDataTable.getColumnModel().getColumn(9).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(9).setPreferredWidth(55);
+        playersDataTable.getColumnModel().getColumn(10).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(10).setPreferredWidth(50);
+        playersDataTable.getColumnModel().getColumn(11).setResizable(false);
+        playersDataTable.getColumnModel().getColumn(11).setPreferredWidth(35);
+        playersDataTable.getColumnModel().getColumn(12).setResizable(false);
+
         javax.swing.GroupLayout multiplePlayerStatsPanelLayout = new javax.swing.GroupLayout(multiplePlayerStatsPanel);
         multiplePlayerStatsPanel.setLayout(multiplePlayerStatsPanelLayout);
         multiplePlayerStatsPanelLayout.setHorizontalGroup(
             multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
-                        .addComponent(multiplePlayerStatsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
-                        .addComponent(getAllPlayersBtn)
-                        .addGap(353, 353, 353)
-                        .addComponent(sortByLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(sortByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sortBtn)
-                        .addGap(8, 8, 8))
-                    .addComponent(playersDataScrollTable)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tableScrollPane))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(closeBtn1)
-                            .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)))
+                            .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
+                                .addComponent(multiplePlayerStatsLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                                .addComponent(getAllPlayersBtn)
+                                .addGap(353, 353, 353)
+                                .addComponent(sortByLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(sortByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sortBtn)
+                                .addGap(8, 8, 8))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                                .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(closeBtn1)
+                                    .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addGap(34, 34, 34))
         );
         multiplePlayerStatsPanelLayout.setVerticalGroup(
@@ -967,14 +1056,14 @@ public class AppInterface extends javax.swing.JFrame {
                         .addComponent(sortByLabel)
                         .addComponent(sortBtn)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(playersDataScrollTable, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
                         .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
                         .addComponent(closeBtn1))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1022,7 +1111,24 @@ public class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_getFromToPlayersBtnActionPerformed
 
     private void getAllPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAllPlayersBtnActionPerformed
-        // TODO add your handling code here:
+        
+            for(int i = 0; i < players.size(); i++)
+            {
+                playersDataTable.setValueAt(players.get(i).getPlayerID(), i, 0);
+                playersDataTable.setValueAt(players.get(i).getPlayerName(), i, 1);
+                playersDataTable.setValueAt(players.get(i).getCountryName(), i, 2);
+                playersDataTable.setValueAt(players.get(i).getCareerSpan(), i, 3);
+                playersDataTable.setValueAt(players.get(i).getMatchesPlayed(), i, 4);
+                playersDataTable.setValueAt(players.get(i).getInningsPlayed(), i, 5);
+                playersDataTable.setValueAt(players.get(i).getBallsBowled(), i, 6);
+                playersDataTable.setValueAt(players.get(i).getRunsConceded(), i, 7);
+                playersDataTable.setValueAt(players.get(i).getWicketsTaken(), i, 8);
+                playersDataTable.setValueAt(players.get(i).getBowlingAverage(), i, 9);
+                playersDataTable.setValueAt(players.get(i).getEconomyRate(), i, 10);
+                playersDataTable.setValueAt(players.get(i).getStrikeRate(), i, 11);
+                playersDataTable.setValueAt(players.get(i).getFiveWicketsInnings(), i, 12);
+            
+            }
     }//GEN-LAST:event_getAllPlayersBtnActionPerformed
 
     /**
@@ -1062,6 +1168,9 @@ public class AppInterface extends javax.swing.JFrame {
                 ReadInStats worker = new ReadInStats();
                 worker.load(players);
                 new AppInterface(players).setVisible(true);
+                
+                
+                
             }
         });
     }
@@ -1145,6 +1254,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JPanel playerStatsPanel;
     private javax.swing.JScrollPane playersDataScrollTable;
+    private javax.swing.JScrollPane playersDataScrollTable1;
     private javax.swing.JTable playersDataTable;
     private javax.swing.JLabel playersFromLabel;
     private javax.swing.JLabel playersToLabel;
@@ -1158,6 +1268,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel sortByLabel;
     private javax.swing.JLabel strikeRate;
     private javax.swing.JLabel strikeRateLabel;
+    private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JLabel wicketsTaken;
     private javax.swing.JLabel wicketsTakenLabel;
     // End of variables declaration//GEN-END:variables
