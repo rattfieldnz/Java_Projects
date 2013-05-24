@@ -7,6 +7,7 @@ package pcricketstats;
 import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,15 +16,50 @@ import javax.swing.JTable;
 public class AppInterface extends javax.swing.JFrame {
 
     private ArrayList<Player> players;
+    
+    DefaultTableModel tableModel = new DefaultTableModel(
+        new Object [][] {
+ 
+        },
+        new String [] {
+            "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
+        }
+    );
+    
     /**
      * Creates new form AppInterface
      */
     public AppInterface(ArrayList<Player> players) {
         initComponents();
         this.players = players;
+        playersDataTable.setModel(tableModel);
         //getAllPlayersBtnActionPerformed(null);
         
         
+    }
+    
+     /**
+     * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
+     */
+    public void drawTable() {
+        tableModel.setRowCount(0);
+        for (int i = 0; i < players.size(); i++) {
+            Object[] object = new Object[13];
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            tableModel.addRow(object);
+        }
     }
 
     /**
@@ -862,106 +898,7 @@ public class AppInterface extends javax.swing.JFrame {
         playersDataTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
         playersDataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
@@ -1112,23 +1049,7 @@ public class AppInterface extends javax.swing.JFrame {
 
     private void getAllPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAllPlayersBtnActionPerformed
         
-            for(int i = 0; i < players.size(); i++)
-            {
-                playersDataTable.setValueAt(players.get(i).getPlayerID(), i, 0);
-                playersDataTable.setValueAt(players.get(i).getPlayerName(), i, 1);
-                playersDataTable.setValueAt(players.get(i).getCountryName(), i, 2);
-                playersDataTable.setValueAt(players.get(i).getCareerSpan(), i, 3);
-                playersDataTable.setValueAt(players.get(i).getMatchesPlayed(), i, 4);
-                playersDataTable.setValueAt(players.get(i).getInningsPlayed(), i, 5);
-                playersDataTable.setValueAt(players.get(i).getBallsBowled(), i, 6);
-                playersDataTable.setValueAt(players.get(i).getRunsConceded(), i, 7);
-                playersDataTable.setValueAt(players.get(i).getWicketsTaken(), i, 8);
-                playersDataTable.setValueAt(players.get(i).getBowlingAverage(), i, 9);
-                playersDataTable.setValueAt(players.get(i).getEconomyRate(), i, 10);
-                playersDataTable.setValueAt(players.get(i).getStrikeRate(), i, 11);
-                playersDataTable.setValueAt(players.get(i).getFiveWicketsInnings(), i, 12);
-            
-            }
+            drawTable();
     }//GEN-LAST:event_getAllPlayersBtnActionPerformed
 
     /**
@@ -1253,8 +1174,6 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel playerName;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JPanel playerStatsPanel;
-    private javax.swing.JScrollPane playersDataScrollTable;
-    private javax.swing.JScrollPane playersDataScrollTable1;
     private javax.swing.JTable playersDataTable;
     private javax.swing.JLabel playersFromLabel;
     private javax.swing.JLabel playersToLabel;
