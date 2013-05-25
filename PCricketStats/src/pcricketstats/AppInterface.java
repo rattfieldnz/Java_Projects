@@ -5,13 +5,8 @@
 package pcricketstats;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-=======
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,19 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class AppInterface extends javax.swing.JFrame {
 
     private ArrayList<Player> players;
-<<<<<<< HEAD
     Object[] object;
-=======
-    
-    DefaultTableModel tableModel = new DefaultTableModel(
-        new Object [][] {
- 
-        },
-        new String [] {
-            "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
-        }
-    );
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
     
     /**
      * Creates new form AppInterface
@@ -47,7 +30,6 @@ public class AppInterface extends javax.swing.JFrame {
         
     }
     
-<<<<<<< HEAD
         DefaultTableModel tableModel = new DefaultTableModel(
             new Object [][] {
 
@@ -57,15 +39,12 @@ public class AppInterface extends javax.swing.JFrame {
             }
         );
     
-=======
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
      /**
      * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
      */
     public void drawTable() {
         tableModel.setRowCount(0);
         for (int i = 0; i < players.size(); i++) {
-<<<<<<< HEAD
             object = new Object[13];
             object[0] = players.get(i).getPlayerID();
             object[1] = players.get(i).getPlayerName();
@@ -206,9 +185,6 @@ public class AppInterface extends javax.swing.JFrame {
             if(players.get(i).getCountryName().equalsIgnoreCase(country))
             {
             object = new Object[13];
-=======
-            Object[] object = new Object[13];
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
             object[0] = players.get(i).getPlayerID();
             object[1] = players.get(i).getPlayerName();
             object[2] = players.get(i).getCountryName();
@@ -223,7 +199,6 @@ public class AppInterface extends javax.swing.JFrame {
             object[11] = players.get(i).getStrikeRate();
             object[12] = players.get(i).getFiveWicketsInnings();
             tableModel.addRow(object);
-<<<<<<< HEAD
             
             tableModel.fireTableDataChanged();
             }
@@ -265,10 +240,6 @@ public class AppInterface extends javax.swing.JFrame {
       }
       return null; // or throw an exception
     }
-=======
-        }
-    }
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1330,7 +1301,6 @@ public class AppInterface extends javax.swing.JFrame {
         
             drawTable();
     }//GEN-LAST:event_getAllPlayersBtnActionPerformed
-<<<<<<< HEAD
 
     private void getPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerStatsBtnActionPerformed
         
@@ -1424,8 +1394,6 @@ public class AppInterface extends javax.swing.JFrame {
         String country = String.valueOf(fromCountryOption.getSelectedItem());
         drawTable(country);
     }//GEN-LAST:event_getPlayersFromCountryBtnActionPerformed
-=======
->>>>>>> 7be2ea07255883b14ded3aadff9b973b624a2ef2
 
     /**
      * @param args the command line arguments
