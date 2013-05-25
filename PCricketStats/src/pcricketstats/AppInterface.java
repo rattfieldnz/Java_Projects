@@ -5,8 +5,9 @@
 package pcricketstats;
 
 import java.util.ArrayList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,15 +16,229 @@ import javax.swing.JTable;
 public class AppInterface extends javax.swing.JFrame {
 
     private ArrayList<Player> players;
+    Object[] object;
+    
     /**
      * Creates new form AppInterface
      */
     public AppInterface(ArrayList<Player> players) {
         initComponents();
         this.players = players;
+        playersDataTable.setModel(tableModel);
         //getAllPlayersBtnActionPerformed(null);
         
         
+    }
+    
+        DefaultTableModel tableModel = new DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
+            }
+        );
+    
+     /**
+     * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
+     */
+    public void drawTable() {
+        tableModel.setRowCount(0);
+        for (int i = 0; i < players.size(); i++) {
+            object = new Object[13];
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            tableModel.addRow(object);
+            
+            tableModel.fireTableDataChanged();
+        }
+    }
+    
+    /**
+     * This is an overloaded method to display players 
+     * between a starting and ending index in the table.
+     * @param start The starting index.
+     * @param end The ending index.
+     */
+    public void drawTable(int start, int end) {
+        
+        if(start < 0)
+        {
+            JOptionPane.showMessageDialog(this,"Starting value must be greater than 0");
+        }
+        else if(end > players.size())
+        {
+            JOptionPane.showMessageDialog(this,"Starting value must be less than or equal to " + players.size());
+        }
+        else
+        {
+        tableModel.setRowCount(0);
+        for (int i = start; i <= end; i++) {
+            object = new Object[13];
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            tableModel.addRow(object);
+            
+            tableModel.fireTableDataChanged();
+        }
+        }
+    }
+    
+    /**
+     * This is an overloaded method to display the first N players in 
+     * the table
+     * @param firstNPlayers The number of players to be listed.
+     */
+    public void drawTable(int firstNPlayers) {
+        
+        if(firstNPlayers > players.size())
+        {
+            JOptionPane.showMessageDialog(this,"Value must be less than or equal to" + players.size() + ".");
+        }
+        else
+        {
+        tableModel.setRowCount(0);
+        for (int i = 0; i < firstNPlayers; i++) {
+            object = new Object[13];
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            tableModel.addRow(object);
+            
+            tableModel.fireTableDataChanged();
+        }
+        }
+    }
+    
+    /**
+     * This method displays the last n players in the table 
+     * (in reverse order).
+     * @param lastXPlayers The amount of players to display.
+     */
+    public void drawReverseTable(int lastXPlayers) {
+        
+        if(lastXPlayers > players.size())
+        {
+            JOptionPane.showMessageDialog(this,"Value must be less than or equal to" + players.size() + ".");
+        }
+        else
+        {
+        tableModel.setRowCount(0);
+        for (int i = players.size(); i > ((lastXPlayers - players.size()) * -1); i--) {
+            object = new Object[13];
+            object[0] = players.get(i - 1).getPlayerID();
+            object[1] = players.get(i - 1).getPlayerName();
+            object[2] = players.get(i - 1).getCountryName();
+            object[3] = players.get(i - 1).getCareerSpan();
+            object[4] = players.get(i - 1).getMatchesPlayed();
+            object[5] = players.get(i - 1).getInningsPlayed();
+            object[6] = players.get(i - 1).getBallsBowled();
+            object[7] = players.get(i - 1).getRunsConceded();
+            object[8] = players.get(i - 1).getWicketsTaken();
+            object[9] = players.get(i - 1).getBowlingAverage();
+            object[10] = players.get(i - 1).getEconomyRate();
+            object[11] = players.get(i - 1).getStrikeRate();
+            object[12] = players.get(i - 1).getFiveWicketsInnings();
+            tableModel.addRow(object);
+            
+            tableModel.fireTableDataChanged();
+        }
+        }
+    }
+    
+    public void drawTable(String country) {
+        
+        tableModel.setRowCount(0);
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getCountryName().equalsIgnoreCase(country))
+            {
+            object = new Object[13];
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            tableModel.addRow(object);
+            
+            tableModel.fireTableDataChanged();
+            }
+        }
+    }
+    
+    
+    public Object getValueAt(int row, int col) {
+      if (row > tableModel.getRowCount()) {
+         // throw an exception
+      }
+      switch (col) {
+      case 0:
+         return players.get(row).getPlayerID();
+      case 1:
+         return players.get(row).getPlayerName();
+      case 2:
+         return players.get(row).getCountryName();
+      case 3:
+         return players.get(row).getCareerSpan();
+      case 4:
+         return players.get(row).getMatchesPlayed();
+      case 5:
+         return players.get(row).getInningsPlayed();
+      case 6:
+         return players.get(row).getBallsBowled();
+      case 7:
+         return players.get(row).getRunsConceded();
+      case 8:
+         return players.get(row).getWicketsTaken();
+      case 9:
+         return players.get(row).getBowlingAverage();
+      case 10:
+         return players.get(row).getEconomyRate();
+      case 11:
+         return players.get(row).getStrikeRate();
+      case 12:
+         return players.get(row).getFiveWicketsInnings();
+      }
+      return null; // or throw an exception
     }
 
     /**
@@ -37,7 +252,7 @@ public class AppInterface extends javax.swing.JFrame {
 
         mainAppTabPane = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        singlePlayerStatsLabel = new javax.swing.JLabel();
         mainPanelPlayerStats = new javax.swing.JPanel();
         searchPlayerNameLabel = new javax.swing.JLabel();
         getPlayerName = new javax.swing.JTextField();
@@ -70,6 +285,8 @@ public class AppInterface extends javax.swing.JFrame {
         fiveWicketsInningsLabel = new javax.swing.JLabel();
         fiveWicketsPerInnings = new javax.swing.JLabel();
         countryFlagPanel = new javax.swing.JPanel();
+        flagImageLabel = new javax.swing.JLabel();
+        resetPlayerStatsBtn = new javax.swing.JButton();
         compareStatsPanel = new javax.swing.JPanel();
         compareStatsLabel = new javax.swing.JLabel();
         chooseGraphLabel = new javax.swing.JLabel();
@@ -89,20 +306,21 @@ public class AppInterface extends javax.swing.JFrame {
         getFirstLabel = new javax.swing.JLabel();
         firstNPlayers = new javax.swing.JTextField();
         nPlayersLabel = new javax.swing.JLabel();
-        getNPlayersBtn = new javax.swing.JButton();
+        getFirstNPlayersBtn = new javax.swing.JButton();
         getPlayersFromLabel = new javax.swing.JLabel();
         fromCountryOption = new javax.swing.JComboBox();
         getPlayersFromCountryBtn = new javax.swing.JButton();
+        getLastLabel = new javax.swing.JLabel();
+        lastNPlayers = new javax.swing.JTextField();
+        nPlayersLabel1 = new javax.swing.JLabel();
+        getLastNPlayersBtn = new javax.swing.JButton();
         countryVsCountryPanel = new javax.swing.JPanel();
         compareStatsComboBox = new javax.swing.JComboBox();
         comparePlayerStatsLabel = new javax.swing.JLabel();
         comparePlayerStatsBtn = new javax.swing.JButton();
         graphDisplayPanel = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        displayPlayerAveragesBtn = new javax.swing.JButton();
         promptLabel = new javax.swing.JLabel();
-        aveCareerSpanLabel = new javax.swing.JLabel();
-        aveCareerSpan = new javax.swing.JLabel();
         aveCareerLengthLabel = new javax.swing.JLabel();
         aveCareerLength = new javax.swing.JLabel();
         aveMatchesPlayedLabel = new javax.swing.JLabel();
@@ -123,6 +341,7 @@ public class AppInterface extends javax.swing.JFrame {
         aveStrikeRate = new javax.swing.JLabel();
         ave5wicketsInningsLabel = new javax.swing.JLabel();
         aveFiveWicketsPerInnings = new javax.swing.JLabel();
+        playerAveStatsLabel = new javax.swing.JLabel();
         closeBtn1 = new javax.swing.JButton();
         sortByComboBox = new javax.swing.JComboBox();
         sortByLabel = new javax.swing.JLabel();
@@ -131,8 +350,10 @@ public class AppInterface extends javax.swing.JFrame {
         playersDataTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("CricStats App");
         setMaximumSize(new java.awt.Dimension(1350, 671));
         setMinimumSize(new java.awt.Dimension(1350, 671));
+        setName("cricStatsFrame"); // NOI18N
         setResizable(false);
 
         mainAppTabPane.setBackground(new java.awt.Color(0, 48, 88));
@@ -146,8 +367,8 @@ public class AppInterface extends javax.swing.JFrame {
         jPanel1.setMinimumSize(new java.awt.Dimension(1350, 643));
         jPanel1.setPreferredSize(new java.awt.Dimension(1350, 643));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Single Player Stats");
+        singlePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        singlePlayerStatsLabel.setText("Single Player Stats");
 
         mainPanelPlayerStats.setBackground(new java.awt.Color(211, 225, 255));
         mainPanelPlayerStats.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
@@ -162,6 +383,11 @@ public class AppInterface extends javax.swing.JFrame {
 
         getPlayerStatsBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getPlayerStatsBtn.setText("Get Player Stats");
+        getPlayerStatsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getPlayerStatsBtnActionPerformed(evt);
+            }
+        });
 
         playerStatsPanel.setBackground(new java.awt.Color(255, 255, 255));
         playerStatsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
@@ -246,20 +472,25 @@ public class AppInterface extends javax.swing.JFrame {
 
         countryFlagPanel.setBackground(new java.awt.Color(211, 225, 255));
         countryFlagPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-        countryFlagPanel.setMaximumSize(new java.awt.Dimension(155, 117));
-        countryFlagPanel.setMinimumSize(new java.awt.Dimension(155, 117));
+        countryFlagPanel.setMaximumSize(new java.awt.Dimension(230, 181));
+        countryFlagPanel.setMinimumSize(new java.awt.Dimension(230, 181));
+        countryFlagPanel.setPreferredSize(new java.awt.Dimension(230, 181));
         countryFlagPanel.setRequestFocusEnabled(false);
         countryFlagPanel.setVerifyInputWhenFocusTarget(false);
+
+        flagImageLabel.setMaximumSize(new java.awt.Dimension(230, 175));
+        flagImageLabel.setMinimumSize(new java.awt.Dimension(230, 175));
+        flagImageLabel.setPreferredSize(new java.awt.Dimension(230, 175));
 
         javax.swing.GroupLayout countryFlagPanelLayout = new javax.swing.GroupLayout(countryFlagPanel);
         countryFlagPanel.setLayout(countryFlagPanelLayout);
         countryFlagPanelLayout.setHorizontalGroup(
             countryFlagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 151, Short.MAX_VALUE)
+            .addComponent(flagImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         countryFlagPanelLayout.setVerticalGroup(
             countryFlagPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 113, Short.MAX_VALUE)
+            .addComponent(flagImageLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout playerStatsPanelLayout = new javax.swing.GroupLayout(playerStatsPanel);
@@ -284,33 +515,28 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(careerSpanLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(playerStatsPanelLayout.createSequentialGroup()
-                        .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(countryName)
-                            .addComponent(playerName)
-                            .addComponent(careerSpan)
-                            .addComponent(careerLength)
-                            .addComponent(matchesPlayed))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(countryFlagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(playerStatsPanelLayout.createSequentialGroup()
-                        .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inningsPlayed)
-                            .addComponent(ballsBowled)
-                            .addComponent(runsConceded)
-                            .addComponent(wicketsTaken)
-                            .addComponent(bowlingAverage)
-                            .addComponent(economyRate)
-                            .addComponent(strikeRate)
-                            .addComponent(fiveWicketsPerInnings))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(countryName)
+                    .addComponent(playerName)
+                    .addComponent(careerSpan)
+                    .addComponent(careerLength)
+                    .addComponent(matchesPlayed)
+                    .addComponent(inningsPlayed)
+                    .addComponent(ballsBowled)
+                    .addComponent(runsConceded)
+                    .addComponent(wicketsTaken)
+                    .addComponent(bowlingAverage)
+                    .addComponent(economyRate)
+                    .addComponent(strikeRate)
+                    .addComponent(fiveWicketsPerInnings))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(countryFlagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         playerStatsPanelLayout.setVerticalGroup(
             playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(playerStatsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(playerStatsPanelLayout.createSequentialGroup()
                         .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(playerNameLabel)
@@ -338,13 +564,15 @@ public class AppInterface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ballsBowledLabel)
-                            .addComponent(ballsBowled)))
-                    .addComponent(countryFlagPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(runsConcededLabel)
-                    .addComponent(runsConceded))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(ballsBowled))
+                        .addGap(8, 8, 8)
+                        .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(runsConcededLabel)
+                            .addComponent(runsConceded))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, playerStatsPanelLayout.createSequentialGroup()
+                        .addComponent(countryFlagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)))
                 .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(wicketsTakenLabel)
                     .addComponent(wicketsTaken))
@@ -364,8 +592,16 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fiveWicketsInningsLabel)
                     .addComponent(fiveWicketsPerInnings))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
+
+        resetPlayerStatsBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        resetPlayerStatsBtn.setText("Reset");
+        resetPlayerStatsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetPlayerStatsBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout mainPanelPlayerStatsLayout = new javax.swing.GroupLayout(mainPanelPlayerStats);
         mainPanelPlayerStats.setLayout(mainPanelPlayerStatsLayout);
@@ -375,13 +611,15 @@ public class AppInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelPlayerStatsLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(getPlayerStatsBtn))
                     .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
                         .addComponent(searchPlayerNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(getPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)))
+                        .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
+                                .addComponent(getPlayerStatsBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(resetPlayerStatsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(getPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         mainPanelPlayerStatsLayout.setVerticalGroup(
@@ -392,7 +630,9 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(searchPlayerNameLabel)
                     .addComponent(getPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(getPlayerStatsBtn)
+                .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(getPlayerStatsBtn)
+                    .addComponent(resetPlayerStatsBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -478,7 +718,7 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(closeBtn)
-                    .addComponent(jLabel1))
+                    .addComponent(singlePlayerStatsLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addComponent(compareStatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -487,7 +727,7 @@ public class AppInterface extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(singlePlayerStatsLabel)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(compareStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -520,12 +760,14 @@ public class AppInterface extends javax.swing.JFrame {
         playersFromLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         playersFromLabel.setText("Get player/s");
 
-        getPlayerFrom.setText("jTextField1");
+        getPlayerFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getPlayerFromActionPerformed(evt);
+            }
+        });
 
         playersToLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         playersToLabel.setText("to");
-
-        getPlayerTo.setText("jTextField2");
 
         getFromToPlayersBtn.setText("Get Players");
         getFromToPlayersBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -537,12 +779,15 @@ public class AppInterface extends javax.swing.JFrame {
         getFirstLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getFirstLabel.setText("Get first");
 
-        firstNPlayers.setText("jTextField3");
-
         nPlayersLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         nPlayersLabel.setText("players");
 
-        getNPlayersBtn.setText("Get Players");
+        getFirstNPlayersBtn.setText("Get Players");
+        getFirstNPlayersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getFirstNPlayersBtnActionPerformed(evt);
+            }
+        });
 
         getPlayersFromLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getPlayersFromLabel.setText("Get players from");
@@ -555,6 +800,24 @@ public class AppInterface extends javax.swing.JFrame {
         });
 
         getPlayersFromCountryBtn.setText("Get Players");
+        getPlayersFromCountryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getPlayersFromCountryBtnActionPerformed(evt);
+            }
+        });
+
+        getLastLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        getLastLabel.setText("Get last");
+
+        nPlayersLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nPlayersLabel1.setText("players");
+
+        getLastNPlayersBtn.setText("Get Players");
+        getLastNPlayersBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                getLastNPlayersBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout retrievePlayerDataPanelLayout = new javax.swing.GroupLayout(retrievePlayerDataPanel);
         retrievePlayerDataPanel.setLayout(retrievePlayerDataPanelLayout);
@@ -563,51 +826,75 @@ public class AppInterface extends javax.swing.JFrame {
             .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(playersFromLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(getFirstLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(getPlayersFromLabel, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
-                        .addComponent(getPlayerFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playersFromLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(getFirstLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(getPlayersFromLabel, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(playersToLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(getPlayerTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fromCountryOption, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
-                        .addComponent(firstNPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nPlayersLabel))
-                    .addComponent(fromCountryOption, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 60, Short.MAX_VALUE)
+                        .addComponent(getLastLabel)
+                        .addGap(18, 18, 18)
+                        .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(getPlayerFrom)
+                            .addComponent(firstNPlayers)
+                            .addComponent(lastNPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(10, 10, 10)
+                        .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nPlayersLabel)
+                            .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
+                                .addComponent(playersToLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(getPlayerTo, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(nPlayersLabel1))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(getFromToPlayersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                    .addComponent(getNPlayersBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(getPlayersFromCountryBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(getPlayersFromCountryBtn, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getFirstNPlayersBtn, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(getFromToPlayersBtn, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, retrievePlayerDataPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(getLastNPlayersBtn)))
                 .addContainerGap())
         );
+
+        retrievePlayerDataPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {firstNPlayers, getPlayerFrom, getPlayerTo, lastNPlayers});
+
         retrievePlayerDataPanelLayout.setVerticalGroup(
             retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(19, 19, 19)
+                .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
+                        .addComponent(getFromToPlayersBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(getFirstNPlayersBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(retrievePlayerDataPanelLayout.createSequentialGroup()
+                        .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(playersFromLabel)
+                            .addComponent(getPlayerFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(playersToLabel)
+                            .addComponent(getPlayerTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(getFirstLabel)
+                            .addComponent(firstNPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nPlayersLabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(playersFromLabel)
-                    .addComponent(getPlayerFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(playersToLabel)
-                    .addComponent(getPlayerTo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(getFromToPlayersBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(getFirstLabel)
-                    .addComponent(firstNPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nPlayersLabel)
-                    .addComponent(getNPlayersBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(getLastLabel)
+                    .addComponent(lastNPlayers, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nPlayersLabel1)
+                    .addComponent(getLastNPlayersBtn))
+                .addGap(5, 5, 5)
                 .addGroup(retrievePlayerDataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(getPlayersFromLabel)
                     .addComponent(fromCountryOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(getPlayersFromCountryBtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(44, 44, 44))
         );
 
         countryVsCountryPanel.setBackground(new java.awt.Color(211, 225, 255));
@@ -639,22 +926,20 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanelLayout.setHorizontalGroup(
             countryVsCountryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(graphDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
                 .addGroup(countryVsCountryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
-                        .addGroup(countryVsCountryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(compareStatsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(comparePlayerStatsBtn))
-                            .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
-                                .addGap(66, 66, 66)
-                                .addComponent(comparePlayerStatsLabel)))
-                        .addGap(0, 44, Short.MAX_VALUE))
+                        .addComponent(compareStatsComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comparePlayerStatsBtn))
                     .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(graphDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(38, 38, 38)
+                        .addComponent(comparePlayerStatsLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         countryVsCountryPanelLayout.setVerticalGroup(
             countryVsCountryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -674,16 +959,7 @@ public class AppInterface extends javax.swing.JFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
         jPanel8.setMaximumSize(new java.awt.Dimension(469, 392));
 
-        displayPlayerAveragesBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        displayPlayerAveragesBtn.setText("Display Player Data Averages");
-
         promptLabel.setText("(from selection in table above)");
-
-        aveCareerSpanLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        aveCareerSpanLabel.setText("Career Span:");
-
-        aveCareerSpan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        aveCareerSpan.setName("careerSpan"); // NOI18N
 
         aveCareerLengthLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         aveCareerLengthLabel.setText("Career Length:");
@@ -745,101 +1021,100 @@ public class AppInterface extends javax.swing.JFrame {
         aveFiveWicketsPerInnings.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         aveFiveWicketsPerInnings.setName("5wicketsPerInnings"); // NOI18N
 
+        playerAveStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        playerAveStatsLabel.setText("Overall Player Average Stats");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(displayPlayerAveragesBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(promptLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel8Layout.createSequentialGroup()
-                    .addGap(97, 97, 97)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(aveCareerLengthLabel)
-                        .addComponent(aveMatchesPlayedLabel)
-                        .addComponent(aveInningsPlayedLabel)
-                        .addComponent(aveBallsBowledLabel)
-                        .addComponent(aveRunsConcededLabel)
-                        .addComponent(aveWicketsTakenLabel)
-                        .addComponent(aveBowlingAverageLabel)
-                        .addComponent(aveEconomyRateLabel)
-                        .addComponent(aveStrikeRateLabel)
-                        .addComponent(ave5wicketsInningsLabel)
-                        .addComponent(aveCareerSpanLabel))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(aveInningsPlayed)
-                        .addComponent(aveBallsBowled)
-                        .addComponent(aveRunsConceded)
-                        .addComponent(aveWicketsTaken)
-                        .addComponent(aveBowlingAverage)
-                        .addComponent(aveEconomyRate)
-                        .addComponent(aveStrikeRate)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(34, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(aveCareerLengthLabel)
+                            .addComponent(aveMatchesPlayedLabel)
+                            .addComponent(aveInningsPlayedLabel)
+                            .addComponent(aveBallsBowledLabel)
+                            .addComponent(aveRunsConcededLabel)
+                            .addComponent(aveWicketsTakenLabel)
+                            .addComponent(aveBowlingAverageLabel)
+                            .addComponent(aveEconomyRateLabel)
+                            .addComponent(aveStrikeRateLabel)
+                            .addComponent(ave5wicketsInningsLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aveInningsPlayed)
+                            .addComponent(aveBallsBowled)
+                            .addComponent(aveRunsConceded)
+                            .addComponent(aveWicketsTaken)
+                            .addComponent(aveBowlingAverage)
+                            .addComponent(aveEconomyRate)
+                            .addComponent(aveStrikeRate)
+                            .addComponent(aveCareerLength)
+                            .addComponent(aveMatchesPlayed)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playerAveStatsLabel)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(promptLabel))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(aveFiveWicketsPerInnings)
-                        .addComponent(aveCareerSpan)
-                        .addComponent(aveCareerLength)
-                        .addComponent(aveMatchesPlayed))
-                    .addContainerGap(97, Short.MAX_VALUE)))
+                        .addGap(49, 49, 49)))
+                .addGap(18, 18, 18))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(playerAveStatsLabel)
+                .addGap(4, 4, 4)
+                .addComponent(promptLabel)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(displayPlayerAveragesBtn)
-                    .addComponent(promptLabel))
+                    .addComponent(aveCareerLengthLabel)
+                    .addComponent(aveCareerLength))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveMatchesPlayedLabel)
+                    .addComponent(aveMatchesPlayed))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveInningsPlayedLabel)
+                    .addComponent(aveInningsPlayed))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveBallsBowledLabel)
+                    .addComponent(aveBallsBowled))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveRunsConcededLabel)
+                    .addComponent(aveRunsConceded))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveWicketsTakenLabel)
+                    .addComponent(aveWicketsTaken))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(aveBowlingAverageLabel)
+                    .addComponent(aveBowlingAverage))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aveEconomyRateLabel)
+                    .addComponent(aveEconomyRate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aveStrikeRateLabel)
+                    .addComponent(aveStrikeRate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ave5wicketsInningsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(aveFiveWicketsPerInnings)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel8Layout.createSequentialGroup()
-                    .addGap(56, 56, 56)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveCareerSpanLabel)
-                        .addComponent(aveCareerSpan, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveCareerLengthLabel)
-                        .addComponent(aveCareerLength))
-                    .addGap(13, 13, 13)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveMatchesPlayedLabel)
-                        .addComponent(aveMatchesPlayed))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveInningsPlayedLabel)
-                        .addComponent(aveInningsPlayed))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveBallsBowledLabel)
-                        .addComponent(aveBallsBowled))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveRunsConcededLabel)
-                        .addComponent(aveRunsConceded))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveWicketsTakenLabel)
-                        .addComponent(aveWicketsTaken))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(aveBowlingAverageLabel)
-                        .addComponent(aveBowlingAverage))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(aveEconomyRateLabel)
-                        .addComponent(aveEconomyRate))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(aveStrikeRateLabel)
-                        .addComponent(aveStrikeRate))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ave5wicketsInningsLabel)
-                        .addComponent(aveFiveWicketsPerInnings))
-                    .addContainerGap(57, Short.MAX_VALUE)))
         );
 
         closeBtn1.setText("Close Application");
@@ -862,106 +1137,7 @@ public class AppInterface extends javax.swing.JFrame {
         playersDataTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
         playersDataTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
@@ -1017,15 +1193,12 @@ public class AppInterface extends javax.swing.JFrame {
             multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
                 .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(tableScrollPane))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                    .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
                         .addGap(7, 7, 7)
                         .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
                                 .addComponent(multiplePlayerStatsLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 316, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
                                 .addComponent(getAllPlayersBtn)
                                 .addGap(353, 353, 353)
                                 .addComponent(sortByLabel)
@@ -1033,16 +1206,19 @@ public class AppInterface extends javax.swing.JFrame {
                                 .addComponent(sortByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(sortBtn)
-                                .addGap(8, 8, 8))
+                                .addGap(27, 27, 27))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, multiplePlayerStatsPanelLayout.createSequentialGroup()
                                 .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(closeBtn1)
                                     .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(34, 34, 34))
+                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(tableScrollPane)))
+                .addContainerGap())
         );
         multiplePlayerStatsPanelLayout.setVerticalGroup(
             multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1061,7 +1237,7 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(multiplePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(multiplePlayerStatsPanelLayout.createSequentialGroup()
                         .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeBtn1))
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -1080,6 +1256,8 @@ public class AppInterface extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(mainAppTabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        getAccessibleContext().setAccessibleName("cricStatsFrame");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1107,29 +1285,115 @@ public class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_fromCountryOptionActionPerformed
 
     private void getFromToPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFromToPlayersBtnActionPerformed
-        // TODO add your handling code here:
+        try{
+            int start = Integer.parseInt(getPlayerFrom.getText()) - 1;
+            int end = Integer.parseInt(getPlayerTo.getText()) - 1;
+            
+            drawTable(start, end);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this,"Both field inputs must be integers (e.g 1, 287, 489, ...).");
+        }
     }//GEN-LAST:event_getFromToPlayersBtnActionPerformed
 
     private void getAllPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAllPlayersBtnActionPerformed
         
-            for(int i = 0; i < players.size(); i++)
-            {
-                playersDataTable.setValueAt(players.get(i).getPlayerID(), i, 0);
-                playersDataTable.setValueAt(players.get(i).getPlayerName(), i, 1);
-                playersDataTable.setValueAt(players.get(i).getCountryName(), i, 2);
-                playersDataTable.setValueAt(players.get(i).getCareerSpan(), i, 3);
-                playersDataTable.setValueAt(players.get(i).getMatchesPlayed(), i, 4);
-                playersDataTable.setValueAt(players.get(i).getInningsPlayed(), i, 5);
-                playersDataTable.setValueAt(players.get(i).getBallsBowled(), i, 6);
-                playersDataTable.setValueAt(players.get(i).getRunsConceded(), i, 7);
-                playersDataTable.setValueAt(players.get(i).getWicketsTaken(), i, 8);
-                playersDataTable.setValueAt(players.get(i).getBowlingAverage(), i, 9);
-                playersDataTable.setValueAt(players.get(i).getEconomyRate(), i, 10);
-                playersDataTable.setValueAt(players.get(i).getStrikeRate(), i, 11);
-                playersDataTable.setValueAt(players.get(i).getFiveWicketsInnings(), i, 12);
-            
-            }
+            drawTable();
     }//GEN-LAST:event_getAllPlayersBtnActionPerformed
+
+    private void getPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerStatsBtnActionPerformed
+        
+        String calcCareerSpan = "";
+        String matches = "";
+        String innings = "";
+        String balls = "";
+        String runs = "";
+        String wickets = "";
+        String bowling = "";
+        String econRate = "";
+        String strRate = "";
+        String fiveWickets = "";
+        
+        for (int i = 0; i< players.size(); i++){
+            if(getPlayerName.getText().equalsIgnoreCase(players.get(i).getPlayerName()))
+            {
+                playerName.setText(players.get(i).getPlayerName());
+                countryName.setText(players.get(i).getCountryName());
+                careerSpan.setText(players.get(i).getCareerSpan());
+                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years");
+                matchesPlayed.setText(matches += players.get(i).getMatchesPlayed());
+                inningsPlayed.setText(innings += players.get(i).getInningsPlayed());
+                ballsBowled.setText(balls += players.get(i).getBallsBowled());
+                runsConceded.setText(runs += players.get(i).getRunsConceded());
+                wicketsTaken.setText(wickets += players.get(i).getWicketsTaken());
+                bowlingAverage.setText(bowling += players.get(i).getBowlingAverage());
+                economyRate.setText(econRate += players.get(i).getEconomyRate());
+                strikeRate.setText(strRate += players.get(i).getStrikeRate());
+                fiveWicketsPerInnings.setText(fiveWickets += players.get(i).getFiveWicketsInnings());
+                
+                
+                String countryPath = "country-flags/" + players.get(i).getCountryName().toLowerCase().replaceAll("\\s","") + ".png";
+                flagImageLabel.setIcon(new ImageIcon(countryPath));
+                        
+            }
+            
+        }
+    }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
+
+    private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
+        playerName.setText("");
+        countryName.setText("");
+        careerSpan.setText("");
+        careerLength.setText("");
+        matchesPlayed.setText("");
+        inningsPlayed.setText("");
+        ballsBowled.setText("");
+        runsConceded.setText("");
+        wicketsTaken.setText("");
+        bowlingAverage.setText("");
+        economyRate.setText("");
+        strikeRate.setText("");
+        fiveWicketsPerInnings.setText("");
+        
+        flagImageLabel.setIcon(null);
+    }//GEN-LAST:event_resetPlayerStatsBtnActionPerformed
+
+    private void getFirstNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFirstNPlayersBtnActionPerformed
+        
+        try
+        {
+            int playerList = Integer.parseInt(firstNPlayers.getText());
+
+            drawTable(playerList);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this,"The field input must be an integer (e.g 1, 287, 489,...).");
+        }
+    }//GEN-LAST:event_getFirstNPlayersBtnActionPerformed
+
+    private void getPlayerFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getPlayerFromActionPerformed
+
+    private void getLastNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLastNPlayersBtnActionPerformed
+        try
+        {
+            int playerList = Integer.parseInt(lastNPlayers.getText());
+
+            drawReverseTable(playerList);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this,"The field input must be an integer (e.g 1, 287, 489,...).");
+        }
+    }//GEN-LAST:event_getLastNPlayersBtnActionPerformed
+
+    private void getPlayersFromCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayersFromCountryBtnActionPerformed
+        String country = String.valueOf(fromCountryOption.getSelectedItem());
+        drawTable(country);
+    }//GEN-LAST:event_getPlayersFromCountryBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1182,8 +1446,6 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel aveBowlingAverageLabel;
     private javax.swing.JLabel aveCareerLength;
     private javax.swing.JLabel aveCareerLengthLabel;
-    private javax.swing.JLabel aveCareerSpan;
-    private javax.swing.JLabel aveCareerSpanLabel;
     private javax.swing.JLabel aveEconomyRate;
     private javax.swing.JLabel aveEconomyRateLabel;
     private javax.swing.JLabel aveFiveWicketsPerInnings;
@@ -1220,17 +1482,19 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel countryNameLabel;
     private javax.swing.JPanel countryVsCountryPanel;
     private javax.swing.JPanel displayGraphPanel;
-    private javax.swing.JButton displayPlayerAveragesBtn;
     private javax.swing.JLabel economyRate;
     private javax.swing.JLabel economyRateLabel;
     private javax.swing.JTextField firstNPlayers;
     private javax.swing.JLabel fiveWicketsInningsLabel;
     private javax.swing.JLabel fiveWicketsPerInnings;
+    private javax.swing.JLabel flagImageLabel;
     private javax.swing.JComboBox fromCountryOption;
     private javax.swing.JButton getAllPlayersBtn;
     private javax.swing.JLabel getFirstLabel;
+    private javax.swing.JButton getFirstNPlayersBtn;
     private javax.swing.JButton getFromToPlayersBtn;
-    private javax.swing.JButton getNPlayersBtn;
+    private javax.swing.JLabel getLastLabel;
+    private javax.swing.JButton getLastNPlayersBtn;
     private javax.swing.JTextField getPlayerFrom;
     private javax.swing.JTextField getPlayerName;
     private javax.swing.JButton getPlayerStatsBtn;
@@ -1240,9 +1504,9 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JPanel graphDisplayPanel;
     private javax.swing.JLabel inningsPlayed;
     private javax.swing.JLabel inningsPlayedLabel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel8;
+    private javax.swing.JTextField lastNPlayers;
     private javax.swing.JTabbedPane mainAppTabPane;
     private javax.swing.JPanel mainPanelPlayerStats;
     private javax.swing.JLabel matchesPlayed;
@@ -1250,19 +1514,21 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel multiplePlayerStatsLabel;
     private javax.swing.JPanel multiplePlayerStatsPanel;
     private javax.swing.JLabel nPlayersLabel;
+    private javax.swing.JLabel nPlayersLabel1;
+    private javax.swing.JLabel playerAveStatsLabel;
     private javax.swing.JLabel playerName;
     private javax.swing.JLabel playerNameLabel;
     private javax.swing.JPanel playerStatsPanel;
-    private javax.swing.JScrollPane playersDataScrollTable;
-    private javax.swing.JScrollPane playersDataScrollTable1;
     private javax.swing.JTable playersDataTable;
     private javax.swing.JLabel playersFromLabel;
     private javax.swing.JLabel playersToLabel;
     private javax.swing.JLabel promptLabel;
+    private javax.swing.JButton resetPlayerStatsBtn;
     private javax.swing.JPanel retrievePlayerDataPanel;
     private javax.swing.JLabel runsConceded;
     private javax.swing.JLabel runsConcededLabel;
     private javax.swing.JLabel searchPlayerNameLabel;
+    private javax.swing.JLabel singlePlayerStatsLabel;
     private javax.swing.JButton sortBtn;
     private javax.swing.JComboBox sortByComboBox;
     private javax.swing.JLabel sortByLabel;
