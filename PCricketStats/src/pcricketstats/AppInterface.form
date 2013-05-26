@@ -160,15 +160,18 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="playerStatsPanel" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="searchPlayerNameLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="searchPlayerNameLabel" min="-2" max="-2" attributes="0"/>
+                                      <Component id="infoLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="getPlayerStatsBtn" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="resetPlayerStatsBtn" max="32767" attributes="0"/>
+                                          <Component id="resetPlayerStatsBtn" pref="103" max="32767" attributes="0"/>
                                       </Group>
-                                      <Component id="getPlayerName" pref="252" max="32767" attributes="0"/>
+                                      <Component id="getPlayerName" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -188,6 +191,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="getPlayerStatsBtn" min="-2" max="-2" attributes="0"/>
                               <Component id="resetPlayerStatsBtn" min="-2" max="-2" attributes="0"/>
+                              <Component id="infoLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="playerStatsPanel" max="32767" attributes="0"/>
@@ -632,6 +636,11 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetPlayerStatsBtnActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="infoLabel">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="* If player has been knighted, add a space then (Sir)"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>

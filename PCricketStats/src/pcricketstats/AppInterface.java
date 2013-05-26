@@ -451,6 +451,7 @@ public class AppInterface extends javax.swing.JFrame {
         countryFlagPanel = new javax.swing.JPanel();
         flagImageLabel = new javax.swing.JLabel();
         resetPlayerStatsBtn = new javax.swing.JButton();
+        infoLabel = new javax.swing.JLabel();
         compareStatsPanel = new javax.swing.JPanel();
         compareStatsLabel = new javax.swing.JLabel();
         chooseGraphLabel = new javax.swing.JLabel();
@@ -767,6 +768,8 @@ public class AppInterface extends javax.swing.JFrame {
             }
         });
 
+        infoLabel.setText("* If player has been knighted, add a space then (Sir)");
+
         javax.swing.GroupLayout mainPanelPlayerStatsLayout = new javax.swing.GroupLayout(mainPanelPlayerStats);
         mainPanelPlayerStats.setLayout(mainPanelPlayerStatsLayout);
         mainPanelPlayerStatsLayout.setHorizontalGroup(
@@ -776,14 +779,16 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
-                        .addComponent(searchPlayerNameLabel)
+                        .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(searchPlayerNameLabel)
+                            .addComponent(infoLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
                                 .addComponent(getPlayerStatsBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(resetPlayerStatsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(getPlayerName, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE))))
+                                .addComponent(resetPlayerStatsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                            .addComponent(getPlayerName))))
                 .addContainerGap())
         );
         mainPanelPlayerStatsLayout.setVerticalGroup(
@@ -796,7 +801,8 @@ public class AppInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(getPlayerStatsBtn)
-                    .addComponent(resetPlayerStatsBtn))
+                    .addComponent(resetPlayerStatsBtn)
+                    .addComponent(infoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -1664,6 +1670,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JButton getPlayersFromCountryBtn;
     private javax.swing.JLabel getPlayersFromLabel;
     private javax.swing.JPanel graphDisplayPanel;
+    private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel inningsPlayed;
     private javax.swing.JLabel inningsPlayedLabel;
     private javax.swing.JPanel jPanel1;
