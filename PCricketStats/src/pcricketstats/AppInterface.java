@@ -16,7 +16,8 @@ import javax.swing.table.DefaultTableModel;
 public class AppInterface extends javax.swing.JFrame {
 
     private ArrayList<Player> players;
-    Object[] object;
+    private Object[] object;
+    private StatUtilities stats;
     
     /**
      * Creates new form AppInterface
@@ -24,25 +25,56 @@ public class AppInterface extends javax.swing.JFrame {
     public AppInterface(ArrayList<Player> players) {
         initComponents();
         this.players = players;
+        stats = new StatUtilities();
         playersDataTable.setModel(tableModel);
         //getAllPlayersBtnActionPerformed(null);
         
         
     }
     
-        DefaultTableModel tableModel = new DefaultTableModel(
-            new Object [][] {
+    DefaultTableModel tableModel = new DefaultTableModel(
+        new Object [][] {
 
-            },
-            new String [] {
-                "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
-            }
-        );
+        },
+        new String [] {
+            "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
+        }
+    );
     
-     /**
-     * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
+    /**
+     * This method resets the overall average statistics
+     * (for the table data on the Multiple Player Stats tab).
      */
+    public void resetOverallAverages()
+    {
+        aveCareerLength.setText("");
+        aveMatchesPlayed.setText("");
+        aveInningsPlayed.setText("");
+        aveBallsBowled.setText("");
+        aveRunsConceded.setText("");
+        aveWicketsTaken.setText("");
+        aveBowlingAverage.setText("");
+        aveEconomyRate.setText("");
+        aveStrikeRate.setText("");
+        aveFiveWicketsPerInnings.setText("");
+    }
+    
+    /**
+    * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
+    */
     public void drawTable() {
+        
+        String averageCareerLength = "";
+        String averageMatchesPlayed = "";
+        String averageInningsPlayed = "";
+        String averageBallsBowled = "";
+        String averageRunsConceded = "";
+        String averageWicketsTaken = "";
+        String averageBowlingAverage = "";
+        String averageEconomyRate = "";
+        String averageStrikeRate = "";
+        String aveFiveWicketsInns = "";
+        
         tableModel.setRowCount(0);
         for (int i = 0; i < players.size(); i++) {
             object = new Object[13];
@@ -60,9 +92,22 @@ public class AppInterface extends javax.swing.JFrame {
             object[11] = players.get(i).getStrikeRate();
             object[12] = players.get(i).getFiveWicketsInnings();
             tableModel.addRow(object);
-            
-            tableModel.fireTableDataChanged();
         }
+        
+        tableModel.fireTableDataChanged();
+        
+        aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " years");
+        aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(players));
+        aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(players));
+        aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(players));
+        aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(players));
+        aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(players));
+        aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(players));
+        aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(players));
+        aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(players));
+        aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(players));
+        
+        
     }
     
     /**
@@ -75,34 +120,85 @@ public class AppInterface extends javax.swing.JFrame {
         
         if(start < 0)
         {
+            resetOverallAverages();
             JOptionPane.showMessageDialog(this,"Starting value must be greater than 0");
         }
         else if(end > players.size())
         {
+            resetOverallAverages();
             JOptionPane.showMessageDialog(this,"Starting value must be less than or equal to " + players.size());
+        }
+        else if(start > end)
+        {
+            resetOverallAverages();
+            JOptionPane.showMessageDialog(this,"Starting \"from\" value must be less than the end \"to\" value.");
         }
         else
         {
-        tableModel.setRowCount(0);
-        for (int i = start; i <= end; i++) {
-            object = new Object[13];
-            object[0] = players.get(i).getPlayerID();
-            object[1] = players.get(i).getPlayerName();
-            object[2] = players.get(i).getCountryName();
-            object[3] = players.get(i).getCareerSpan();
-            object[4] = players.get(i).getMatchesPlayed();
-            object[5] = players.get(i).getInningsPlayed();
-            object[6] = players.get(i).getBallsBowled();
-            object[7] = players.get(i).getRunsConceded();
-            object[8] = players.get(i).getWicketsTaken();
-            object[9] = players.get(i).getBowlingAverage();
-            object[10] = players.get(i).getEconomyRate();
-            object[11] = players.get(i).getStrikeRate();
-            object[12] = players.get(i).getFiveWicketsInnings();
-            tableModel.addRow(object);
+            
+            String averageCareerLength = "";
+            String averageMatchesPlayed = "";
+            String averageInningsPlayed = "";
+            String averageBallsBowled = "";
+            String averageRunsConceded = "";
+            String averageWicketsTaken = "";
+            String averageBowlingAverage = "";
+            String averageEconomyRate = "";
+            String averageStrikeRate = "";
+            String aveFiveWicketsInns = "";
+            
+            ArrayList<Player> tempPlayers = new ArrayList<Player>();
+            
+            tableModel.setRowCount(0);
+            for (int i = start; i <= end; i++) {
+                object = new Object[13];
+                object[0] = players.get(i).getPlayerID();
+                object[1] = players.get(i).getPlayerName();
+                object[2] = players.get(i).getCountryName();
+                object[3] = players.get(i).getCareerSpan();
+                object[4] = players.get(i).getMatchesPlayed();
+                object[5] = players.get(i).getInningsPlayed();
+                object[6] = players.get(i).getBallsBowled();
+                object[7] = players.get(i).getRunsConceded();
+                object[8] = players.get(i).getWicketsTaken();
+                object[9] = players.get(i).getBowlingAverage();
+                object[10] = players.get(i).getEconomyRate();
+                object[11] = players.get(i).getStrikeRate();
+                object[12] = players.get(i).getFiveWicketsInnings();
+                
+                tempPlayers.add(
+                        new Player(
+                        players.get(i).getPlayerID(), 
+                        players.get(i).getPlayerName(), 
+                        players.get(i).getCountryName(), 
+                        players.get(i).getCareerSpan(), 
+                        players.get(i).getMatchesPlayed(), 
+                        players.get(i).getInningsPlayed(), 
+                        players.get(i).getBallsBowled(), 
+                        players.get(i).getRunsConceded(), 
+                        players.get(i).getWicketsTaken(), 
+                        players.get(i).getBowlingAverage(), 
+                        players.get(i).getEconomyRate(), 
+                        players.get(i).getStrikeRate(), 
+                        players.get(i).getFiveWicketsInnings()));
+                
+                tableModel.addRow(object);
+
+            }
             
             tableModel.fireTableDataChanged();
-        }
+        
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
+            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
+            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
+            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
+            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
+            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
+            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
+            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
+            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
+            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
+            
         }
     }
     
@@ -115,30 +211,71 @@ public class AppInterface extends javax.swing.JFrame {
         
         if(firstNPlayers > players.size())
         {
+            resetOverallAverages();
             JOptionPane.showMessageDialog(this,"Value must be less than or equal to" + players.size() + ".");
         }
         else
         {
-        tableModel.setRowCount(0);
-        for (int i = 0; i < firstNPlayers; i++) {
-            object = new Object[13];
-            object[0] = players.get(i).getPlayerID();
-            object[1] = players.get(i).getPlayerName();
-            object[2] = players.get(i).getCountryName();
-            object[3] = players.get(i).getCareerSpan();
-            object[4] = players.get(i).getMatchesPlayed();
-            object[5] = players.get(i).getInningsPlayed();
-            object[6] = players.get(i).getBallsBowled();
-            object[7] = players.get(i).getRunsConceded();
-            object[8] = players.get(i).getWicketsTaken();
-            object[9] = players.get(i).getBowlingAverage();
-            object[10] = players.get(i).getEconomyRate();
-            object[11] = players.get(i).getStrikeRate();
-            object[12] = players.get(i).getFiveWicketsInnings();
-            tableModel.addRow(object);
+            String averageCareerLength = "";
+            String averageMatchesPlayed = "";
+            String averageInningsPlayed = "";
+            String averageBallsBowled = "";
+            String averageRunsConceded = "";
+            String averageWicketsTaken = "";
+            String averageBowlingAverage = "";
+            String averageEconomyRate = "";
+            String averageStrikeRate = "";
+            String aveFiveWicketsInns = "";
             
+            ArrayList<Player> tempPlayers = new ArrayList<Player>();
+            
+            tableModel.setRowCount(0);
+            for (int i = 0; i < firstNPlayers; i++) {
+                object = new Object[13];
+                object[0] = players.get(i).getPlayerID();
+                object[1] = players.get(i).getPlayerName();
+                object[2] = players.get(i).getCountryName();
+                object[3] = players.get(i).getCareerSpan();
+                object[4] = players.get(i).getMatchesPlayed();
+                object[5] = players.get(i).getInningsPlayed();
+                object[6] = players.get(i).getBallsBowled();
+                object[7] = players.get(i).getRunsConceded();
+                object[8] = players.get(i).getWicketsTaken();
+                object[9] = players.get(i).getBowlingAverage();
+                object[10] = players.get(i).getEconomyRate();
+                object[11] = players.get(i).getStrikeRate();
+                object[12] = players.get(i).getFiveWicketsInnings();
+                
+                tempPlayers.add(
+                        new Player(
+                        players.get(i).getPlayerID(), 
+                        players.get(i).getPlayerName(), 
+                        players.get(i).getCountryName(), 
+                        players.get(i).getCareerSpan(), 
+                        players.get(i).getMatchesPlayed(), 
+                        players.get(i).getInningsPlayed(), 
+                        players.get(i).getBallsBowled(), 
+                        players.get(i).getRunsConceded(), 
+                        players.get(i).getWicketsTaken(), 
+                        players.get(i).getBowlingAverage(), 
+                        players.get(i).getEconomyRate(), 
+                        players.get(i).getStrikeRate(), 
+                        players.get(i).getFiveWicketsInnings()));
+                
+                tableModel.addRow(object);
+            }
             tableModel.fireTableDataChanged();
-        }
+            
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
+            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
+            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
+            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
+            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
+            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
+            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
+            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
+            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
+            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
         }
     }
     
@@ -151,30 +288,71 @@ public class AppInterface extends javax.swing.JFrame {
         
         if(lastXPlayers > players.size())
         {
+            resetOverallAverages();
             JOptionPane.showMessageDialog(this,"Value must be less than or equal to" + players.size() + ".");
         }
         else
         {
-        tableModel.setRowCount(0);
-        for (int i = players.size(); i > ((lastXPlayers - players.size()) * -1); i--) {
-            object = new Object[13];
-            object[0] = players.get(i - 1).getPlayerID();
-            object[1] = players.get(i - 1).getPlayerName();
-            object[2] = players.get(i - 1).getCountryName();
-            object[3] = players.get(i - 1).getCareerSpan();
-            object[4] = players.get(i - 1).getMatchesPlayed();
-            object[5] = players.get(i - 1).getInningsPlayed();
-            object[6] = players.get(i - 1).getBallsBowled();
-            object[7] = players.get(i - 1).getRunsConceded();
-            object[8] = players.get(i - 1).getWicketsTaken();
-            object[9] = players.get(i - 1).getBowlingAverage();
-            object[10] = players.get(i - 1).getEconomyRate();
-            object[11] = players.get(i - 1).getStrikeRate();
-            object[12] = players.get(i - 1).getFiveWicketsInnings();
-            tableModel.addRow(object);
+            String averageCareerLength = "";
+            String averageMatchesPlayed = "";
+            String averageInningsPlayed = "";
+            String averageBallsBowled = "";
+            String averageRunsConceded = "";
+            String averageWicketsTaken = "";
+            String averageBowlingAverage = "";
+            String averageEconomyRate = "";
+            String averageStrikeRate = "";
+            String aveFiveWicketsInns = "";
             
+            ArrayList<Player> tempPlayers = new ArrayList<Player>();
+            
+            tableModel.setRowCount(0);
+            for (int i = players.size(); i > ((lastXPlayers - players.size()) * -1); i--) {
+                object = new Object[13];
+                object[0] = players.get(i - 1).getPlayerID();
+                object[1] = players.get(i - 1).getPlayerName();
+                object[2] = players.get(i - 1).getCountryName();
+                object[3] = players.get(i - 1).getCareerSpan();
+                object[4] = players.get(i - 1).getMatchesPlayed();
+                object[5] = players.get(i - 1).getInningsPlayed();
+                object[6] = players.get(i - 1).getBallsBowled();
+                object[7] = players.get(i - 1).getRunsConceded();
+                object[8] = players.get(i - 1).getWicketsTaken();
+                object[9] = players.get(i - 1).getBowlingAverage();
+                object[10] = players.get(i - 1).getEconomyRate();
+                object[11] = players.get(i - 1).getStrikeRate();
+                object[12] = players.get(i - 1).getFiveWicketsInnings();
+                
+                tempPlayers.add(
+                        new Player(
+                        players.get(i - 1).getPlayerID(), 
+                        players.get(i - 1).getPlayerName(), 
+                        players.get(i - 1).getCountryName(), 
+                        players.get(i - 1).getCareerSpan(), 
+                        players.get(i - 1).getMatchesPlayed(), 
+                        players.get(i - 1).getInningsPlayed(), 
+                        players.get(i - 1).getBallsBowled(), 
+                        players.get(i - 1).getRunsConceded(), 
+                        players.get(i - 1).getWicketsTaken(), 
+                        players.get(i - 1).getBowlingAverage(), 
+                        players.get(i - 1).getEconomyRate(), 
+                        players.get(i - 1).getStrikeRate(), 
+                        players.get(i - 1).getFiveWicketsInnings()));
+                
+                tableModel.addRow(object);
+            }
             tableModel.fireTableDataChanged();
-        }
+            
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
+            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
+            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
+            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
+            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
+            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
+            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
+            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
+            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
+            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
         }
     }
     
@@ -319,7 +497,7 @@ public class AppInterface extends javax.swing.JFrame {
         comparePlayerStatsLabel = new javax.swing.JLabel();
         comparePlayerStatsBtn = new javax.swing.JButton();
         graphDisplayPanel = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
+        overallPlayerAverages = new javax.swing.JPanel();
         promptLabel = new javax.swing.JLabel();
         aveCareerLengthLabel = new javax.swing.JLabel();
         aveCareerLength = new javax.swing.JLabel();
@@ -955,9 +1133,9 @@ public class AppInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel8.setBackground(new java.awt.Color(211, 225, 255));
-        jPanel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-        jPanel8.setMaximumSize(new java.awt.Dimension(469, 392));
+        overallPlayerAverages.setBackground(new java.awt.Color(211, 225, 255));
+        overallPlayerAverages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
+        overallPlayerAverages.setMaximumSize(new java.awt.Dimension(469, 392));
 
         promptLabel.setText("(from selection in table above)");
 
@@ -1018,33 +1196,43 @@ public class AppInterface extends javax.swing.JFrame {
         ave5wicketsInningsLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ave5wicketsInningsLabel.setText("5 Wickets / Innings:");
 
-        aveFiveWicketsPerInnings.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        aveFiveWicketsPerInnings.setName("5wicketsPerInnings"); // NOI18N
-
         playerAveStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         playerAveStatsLabel.setText("Overall Player Average Stats");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(aveCareerLengthLabel)
-                            .addComponent(aveMatchesPlayedLabel)
-                            .addComponent(aveInningsPlayedLabel)
-                            .addComponent(aveBallsBowledLabel)
-                            .addComponent(aveRunsConcededLabel)
-                            .addComponent(aveWicketsTakenLabel)
-                            .addComponent(aveBowlingAverageLabel)
-                            .addComponent(aveEconomyRateLabel)
-                            .addComponent(aveStrikeRateLabel)
-                            .addComponent(ave5wicketsInningsLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout overallPlayerAveragesLayout = new javax.swing.GroupLayout(overallPlayerAverages);
+        overallPlayerAverages.setLayout(overallPlayerAveragesLayout);
+        overallPlayerAveragesLayout.setHorizontalGroup(
+            overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(playerAveStatsLabel)
+                            .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(promptLabel))))
+                    .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                        .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(aveCareerLengthLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveMatchesPlayedLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveInningsPlayedLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveBallsBowledLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveRunsConcededLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveWicketsTakenLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveBowlingAverageLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveEconomyRateLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(aveStrikeRateLabel, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(ave5wicketsInningsLabel)))
+                        .addGap(10, 10, 10)
+                        .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(aveCareerLength)
+                            .addComponent(aveMatchesPlayed)
                             .addComponent(aveInningsPlayed)
                             .addComponent(aveBallsBowled)
                             .addComponent(aveRunsConceded)
@@ -1052,68 +1240,56 @@ public class AppInterface extends javax.swing.JFrame {
                             .addComponent(aveBowlingAverage)
                             .addComponent(aveEconomyRate)
                             .addComponent(aveStrikeRate)
-                            .addComponent(aveCareerLength)
-                            .addComponent(aveMatchesPlayed)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(playerAveStatsLabel)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(23, 23, 23)
-                                .addComponent(promptLabel))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(aveFiveWicketsPerInnings)
-                        .addGap(49, 49, 49)))
-                .addGap(18, 18, 18))
+                            .addComponent(aveFiveWicketsPerInnings))))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        overallPlayerAveragesLayout.setVerticalGroup(
+            overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(overallPlayerAveragesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(playerAveStatsLabel)
                 .addGap(4, 4, 4)
                 .addComponent(promptLabel)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveCareerLengthLabel)
                     .addComponent(aveCareerLength))
                 .addGap(13, 13, 13)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveMatchesPlayedLabel)
                     .addComponent(aveMatchesPlayed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveInningsPlayedLabel)
                     .addComponent(aveInningsPlayed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveBallsBowledLabel)
                     .addComponent(aveBallsBowled))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveRunsConcededLabel)
                     .addComponent(aveRunsConceded))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveWicketsTakenLabel)
                     .addComponent(aveWicketsTaken))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aveBowlingAverageLabel)
                     .addComponent(aveBowlingAverage))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aveEconomyRateLabel)
                     .addComponent(aveEconomyRate))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aveStrikeRateLabel)
                     .addComponent(aveStrikeRate))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ave5wicketsInningsLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(aveFiveWicketsPerInnings)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(aveFiveWicketsPerInnings)
+                    .addComponent(ave5wicketsInningsLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1214,7 +1390,7 @@ public class AppInterface extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(overallPlayerAverages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, multiplePlayerStatsPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(tableScrollPane)))
@@ -1239,7 +1415,7 @@ public class AppInterface extends javax.swing.JFrame {
                         .addComponent(retrievePlayerDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(closeBtn1))
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(overallPlayerAverages, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(countryVsCountryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1505,7 +1681,6 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel inningsPlayed;
     private javax.swing.JLabel inningsPlayedLabel;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JTextField lastNPlayers;
     private javax.swing.JTabbedPane mainAppTabPane;
     private javax.swing.JPanel mainPanelPlayerStats;
@@ -1515,6 +1690,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JPanel multiplePlayerStatsPanel;
     private javax.swing.JLabel nPlayersLabel;
     private javax.swing.JLabel nPlayersLabel1;
+    private javax.swing.JPanel overallPlayerAverages;
     private javax.swing.JLabel playerAveStatsLabel;
     private javax.swing.JLabel playerName;
     private javax.swing.JLabel playerNameLabel;

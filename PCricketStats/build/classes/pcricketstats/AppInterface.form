@@ -811,7 +811,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="countryVsCountryPanel" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jPanel8" min="-2" max="-2" attributes="0"/>
+                                      <Component id="overallPlayerAverages" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -846,7 +846,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="closeBtn1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jPanel8" alignment="0" max="32767" attributes="0"/>
+                          <Component id="overallPlayerAverages" alignment="0" max="32767" attributes="0"/>
                           <Component id="countryVsCountryPanel" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1231,7 +1231,7 @@
                 </Container>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel8">
+            <Container class="javax.swing.JPanel" name="overallPlayerAverages">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="e1" red="d3" type="rgb"/>
@@ -1251,37 +1251,10 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="34" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="aveCareerLengthLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveMatchesPlayedLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveInningsPlayedLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveBallsBowledLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveRunsConcededLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveWicketsTakenLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveBowlingAverageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveEconomyRateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveStrikeRateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="ave5wicketsInningsLabel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="aveInningsPlayed" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveBallsBowled" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveRunsConceded" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveWicketsTaken" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveBowlingAverage" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveEconomyRate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveStrikeRate" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveCareerLength" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="aveMatchesPlayed" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                                  <EmptySpace min="59" pref="59" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="playerAveStatsLabel" min="-2" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
@@ -1290,13 +1263,43 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace pref="170" max="-2" attributes="0"/>
-                                  <Component id="aveFiveWicketsPerInnings" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="aveCareerLengthLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveMatchesPlayedLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveInningsPlayedLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveBallsBowledLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveRunsConcededLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveWicketsTakenLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveBowlingAverageLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveEconomyRateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                              <Component id="aveStrikeRateLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="ave5wicketsInningsLabel" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="aveCareerLength" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveMatchesPlayed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveInningsPlayed" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveBallsBowled" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveRunsConceded" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveWicketsTaken" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveBowlingAverage" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveEconomyRate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveStrikeRate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="aveFiveWicketsPerInnings" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1352,10 +1355,11 @@
                               <Component id="aveStrikeRateLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="aveStrikeRate" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="ave5wicketsInningsLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="aveFiveWicketsPerInnings" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="aveFiveWicketsPerInnings" min="-2" max="-2" attributes="0"/>
+                              <Component id="ave5wicketsInningsLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1520,12 +1524,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="aveFiveWicketsPerInnings">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="12" style="0"/>
-                    </Property>
-                    <Property name="name" type="java.lang.String" value="5wicketsPerInnings" noResource="true"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="playerAveStatsLabel">
                   <Properties>

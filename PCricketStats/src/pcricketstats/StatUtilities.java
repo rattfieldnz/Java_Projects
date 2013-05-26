@@ -30,7 +30,7 @@ public class StatUtilities {
      * @param value The double number to be formatted.
      * @return The double value, formatted to 2 decimal places.
      */
-    private double toDoubleTwoDP(double value) {
+    public double toDoubleTwoDP(double value) {
         //This will round calculation results to 2 decimal places
         DecimalFormat toTwoDP = new DecimalFormat("#.##");
 
@@ -215,6 +215,74 @@ public class StatUtilities {
 
         double aveInningsPerPlayer = (inningsPlayed * 1.0) / players.size();
         return toDoubleTwoDP(aveInningsPerPlayer);
+    }
+    
+    /**
+     * This method gets the average matches played by each player, over the
+     * whole data set.
+     *
+     * @param players The list of players to perform the calculation.
+     * @return The average matches played per player.
+     */
+    public double aveMatchesPerPlayer(ArrayList<Player> players) {
+        int matchesPlayed = 0;
+        for (int i = 0; i < players.size(); i++) {
+            matchesPlayed += players.get(i).getMatchesPlayed();
+        }
+
+        double aveMatchesPerPlayer = (matchesPlayed * 1.0) / players.size();
+        return toDoubleTwoDP(aveMatchesPerPlayer);
+    }
+    
+    /**
+     * This method gets the average runs conceded by each player, over the
+     * whole data set.
+     *
+     * @param players The list of players to perform the calculation.
+     * @return The average matches played per player.
+     */
+    public double aveRunsConceded(ArrayList<Player> players) {
+        int runsConceded = 0;
+        for (int i = 0; i < players.size(); i++) {
+            runsConceded += players.get(i).getRunsConceded();
+        }
+
+        double aveRunsConceded = (runsConceded * 1.0) / players.size();
+        return toDoubleTwoDP(aveRunsConceded);
+    }
+    
+    /**
+     * This method gets the average of each player's bowling average, over the
+     * whole data set.
+     *
+     * @param players The list of players to perform the calculation.
+     * @return The average matches played per player.
+     */
+    public double aveBowlingAverage(ArrayList<Player> players) {
+        double bowlingAverage = 0;
+        for (int i = 0; i < players.size(); i++) {
+            bowlingAverage += players.get(i).getBowlingAverage();
+        }
+
+        double aveBowlingAverage = bowlingAverage / players.size();
+        return toDoubleTwoDP(aveBowlingAverage);
+    }
+    
+    /**
+     * This method gets the average number of 5 wicket hauls 
+     * per ODI per player, over the whole data set.
+     *
+     * @param players The list of players to perform the calculation.
+     * @return The average number of 5 wickets hauls per player.
+     */
+    public double aveFiveWicketsInns(ArrayList<Player> players) {
+        double fiveWickets = 0;
+        for (int i = 0; i < players.size(); i++) {
+            fiveWickets += players.get(i).getFiveWicketsInnings();
+        }
+
+        double aveFiveWickets = fiveWickets / players.size();
+        return toDoubleTwoDP(aveFiveWickets);
     }
 
     /**
@@ -424,6 +492,17 @@ public class StatUtilities {
         } else {
             return 0;
         }
+    }
+    
+    public double aveCareerLength(ArrayList<Player> players)
+    {
+        int totalCareerLength = 0;
+        for(int i = 0; i < players.size(); i++)
+        {
+            totalCareerLength += players.get(i).calcCareerSpan();
+        }
+        
+        return toDoubleTwoDP((totalCareerLength * 1.0)/players.size());
     }
 
     /**
