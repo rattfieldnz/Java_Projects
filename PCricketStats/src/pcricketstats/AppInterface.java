@@ -60,10 +60,12 @@ public class AppInterface extends javax.swing.JFrame {
     }
     
     /**
-    * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
-    */
-    public void drawTable() {
-        
+     * This method is used with the drawTable() methods to display
+     * averages from data displayed in the table.
+     * @param players The players for which averages data is to be displayed.
+     */
+    public void addStatsToAveragesPanel(ArrayList<Player> players)
+    {
         String averageCareerLength = "";
         String averageMatchesPlayed = "";
         String averageInningsPlayed = "";
@@ -74,6 +76,32 @@ public class AppInterface extends javax.swing.JFrame {
         String averageEconomyRate = "";
         String averageStrikeRate = "";
         String aveFiveWicketsInns = "";
+        
+        if(stats.aveCareerLength(players) == 1)
+        {
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " year");
+        }
+        else if(stats.aveCareerLength(players) < 1 || stats.aveCareerLength(players) > 1)
+        {
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " years");
+        }
+        
+        
+        aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(players));
+        aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(players));
+        aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(players));
+        aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(players));
+        aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(players));
+        aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(players));
+        aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(players));
+        aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(players));
+        aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(players));
+    }
+    
+    /**
+    * Re-draws the Table on the first tab by erasing the model and writing personArray to it again
+    */
+    public void drawTable() {
         
         tableModel.setRowCount(0);
         for (int i = 0; i < players.size(); i++) {
@@ -96,16 +124,7 @@ public class AppInterface extends javax.swing.JFrame {
         
         tableModel.fireTableDataChanged();
         
-        aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " years");
-        aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(players));
-        aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(players));
-        aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(players));
-        aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(players));
-        aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(players));
-        aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(players));
-        aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(players));
-        aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(players));
-        aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(players));
+        addStatsToAveragesPanel(players);
         
         
     }
@@ -135,17 +154,6 @@ public class AppInterface extends javax.swing.JFrame {
         }
         else
         {
-            
-            String averageCareerLength = "";
-            String averageMatchesPlayed = "";
-            String averageInningsPlayed = "";
-            String averageBallsBowled = "";
-            String averageRunsConceded = "";
-            String averageWicketsTaken = "";
-            String averageBowlingAverage = "";
-            String averageEconomyRate = "";
-            String averageStrikeRate = "";
-            String aveFiveWicketsInns = "";
             
             ArrayList<Player> tempPlayers = new ArrayList<Player>();
             
@@ -188,16 +196,7 @@ public class AppInterface extends javax.swing.JFrame {
             
             tableModel.fireTableDataChanged();
         
-            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
-            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
-            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
-            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
-            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
-            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
-            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
-            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
-            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
-            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
+            addStatsToAveragesPanel(tempPlayers);
             
         }
     }
@@ -216,17 +215,6 @@ public class AppInterface extends javax.swing.JFrame {
         }
         else
         {
-            String averageCareerLength = "";
-            String averageMatchesPlayed = "";
-            String averageInningsPlayed = "";
-            String averageBallsBowled = "";
-            String averageRunsConceded = "";
-            String averageWicketsTaken = "";
-            String averageBowlingAverage = "";
-            String averageEconomyRate = "";
-            String averageStrikeRate = "";
-            String aveFiveWicketsInns = "";
-            
             ArrayList<Player> tempPlayers = new ArrayList<Player>();
             
             tableModel.setRowCount(0);
@@ -266,16 +254,7 @@ public class AppInterface extends javax.swing.JFrame {
             }
             tableModel.fireTableDataChanged();
             
-            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
-            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
-            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
-            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
-            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
-            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
-            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
-            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
-            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
-            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
+            addStatsToAveragesPanel(tempPlayers);
         }
     }
     
@@ -291,19 +270,13 @@ public class AppInterface extends javax.swing.JFrame {
             resetOverallAverages();
             JOptionPane.showMessageDialog(this,"Value must be less than or equal to" + players.size() + ".");
         }
+        else if(lastXPlayers < 1)
+        {
+            resetOverallAverages();
+            JOptionPane.showMessageDialog(this,"Value must be greater than or equal to 1.");
+        }
         else
         {
-            String averageCareerLength = "";
-            String averageMatchesPlayed = "";
-            String averageInningsPlayed = "";
-            String averageBallsBowled = "";
-            String averageRunsConceded = "";
-            String averageWicketsTaken = "";
-            String averageBowlingAverage = "";
-            String averageEconomyRate = "";
-            String averageStrikeRate = "";
-            String aveFiveWicketsInns = "";
-            
             ArrayList<Player> tempPlayers = new ArrayList<Player>();
             
             tableModel.setRowCount(0);
@@ -343,32 +316,12 @@ public class AppInterface extends javax.swing.JFrame {
             }
             tableModel.fireTableDataChanged();
             
-            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers) + " years");
-            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
-            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
-            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
-            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
-            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
-            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
-            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
-            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
-            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
+            addStatsToAveragesPanel(tempPlayers);
         }
     }
     
     public void drawTable(String country) {
         
-        String averageCareerLength = "";
-        String averageMatchesPlayed = "";
-        String averageInningsPlayed = "";
-        String averageBallsBowled = "";
-        String averageRunsConceded = "";
-        String averageWicketsTaken = "";
-        String averageBowlingAverage = "";
-        String averageEconomyRate = "";
-        String averageStrikeRate = "";
-        String aveFiveWicketsInns = "";
-
         ArrayList<Player> tempPlayers = new ArrayList<Player>();
         
         tableModel.setRowCount(0);
@@ -413,16 +366,7 @@ public class AppInterface extends javax.swing.JFrame {
             
         }
         
-            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers));
-            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
-            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
-            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
-            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
-            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
-            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
-            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
-            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
-            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
+            addStatsToAveragesPanel(tempPlayers);
     }
     
     
