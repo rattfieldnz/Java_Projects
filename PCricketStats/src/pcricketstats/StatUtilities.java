@@ -276,12 +276,12 @@ public class StatUtilities {
      * @return The average number of 5 wickets hauls per player.
      */
     public double aveFiveWicketsInns(ArrayList<Player> players) {
-        double fiveWickets = 0;
+        int fiveWickets = 0;
         for (int i = 0; i < players.size(); i++) {
             fiveWickets += players.get(i).getFiveWicketsInnings();
         }
 
-        double aveFiveWickets = fiveWickets / players.size();
+        double aveFiveWickets = (fiveWickets * 1.0) / players.size();
         return toDoubleTwoDP(aveFiveWickets);
     }
 

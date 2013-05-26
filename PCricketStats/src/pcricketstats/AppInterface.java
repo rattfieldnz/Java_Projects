@@ -358,6 +358,19 @@ public class AppInterface extends javax.swing.JFrame {
     
     public void drawTable(String country) {
         
+        String averageCareerLength = "";
+        String averageMatchesPlayed = "";
+        String averageInningsPlayed = "";
+        String averageBallsBowled = "";
+        String averageRunsConceded = "";
+        String averageWicketsTaken = "";
+        String averageBowlingAverage = "";
+        String averageEconomyRate = "";
+        String averageStrikeRate = "";
+        String aveFiveWicketsInns = "";
+
+        ArrayList<Player> tempPlayers = new ArrayList<Player>();
+        
         tableModel.setRowCount(0);
         for (int i = 0; i < players.size(); i++) {
             if(players.get(i).getCountryName().equalsIgnoreCase(country))
@@ -376,11 +389,40 @@ public class AppInterface extends javax.swing.JFrame {
             object[10] = players.get(i).getEconomyRate();
             object[11] = players.get(i).getStrikeRate();
             object[12] = players.get(i).getFiveWicketsInnings();
-            tableModel.addRow(object);
+            
+            tempPlayers.add(
+                        new Player(
+                        players.get(i).getPlayerID(), 
+                        players.get(i).getPlayerName(), 
+                        players.get(i).getCountryName(), 
+                        players.get(i).getCareerSpan(), 
+                        players.get(i).getMatchesPlayed(), 
+                        players.get(i).getInningsPlayed(), 
+                        players.get(i).getBallsBowled(), 
+                        players.get(i).getRunsConceded(), 
+                        players.get(i).getWicketsTaken(), 
+                        players.get(i).getBowlingAverage(), 
+                        players.get(i).getEconomyRate(), 
+                        players.get(i).getStrikeRate(), 
+                        players.get(i).getFiveWicketsInnings()));
+                
+                tableModel.addRow(object);
+            }
             
             tableModel.fireTableDataChanged();
-            }
+            
         }
+        
+            aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(tempPlayers));
+            aveMatchesPlayed.setText(averageMatchesPlayed += stats.aveMatchesPerPlayer(tempPlayers));
+            aveInningsPlayed.setText(averageInningsPlayed += stats.aveInningsPerPlayer(tempPlayers));
+            aveBallsBowled.setText(averageBallsBowled += stats.aveBallsBowled(tempPlayers));
+            aveRunsConceded.setText(averageRunsConceded += stats.aveRunsConceded(tempPlayers));
+            aveWicketsTaken.setText(averageWicketsTaken += stats.aveWickets(tempPlayers));
+            aveBowlingAverage.setText(averageBowlingAverage += stats.aveBowlingAverage(tempPlayers));
+            aveEconomyRate.setText(averageEconomyRate += stats.aveEconRate(tempPlayers));
+            aveStrikeRate.setText(averageStrikeRate += stats.aveStrikeRate(tempPlayers));
+            aveFiveWicketsPerInnings.setText(aveFiveWicketsInns += stats.aveFiveWicketsInns(tempPlayers));
     }
     
     
@@ -1567,7 +1609,7 @@ public class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_getLastNPlayersBtnActionPerformed
 
     private void getPlayersFromCountryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayersFromCountryBtnActionPerformed
-        String country = String.valueOf(fromCountryOption.getSelectedItem());
+        String country = String.valueOf(fromCountryOption.getSelectedItem()).toString();
         drawTable(country);
     }//GEN-LAST:event_getPlayersFromCountryBtnActionPerformed
 
