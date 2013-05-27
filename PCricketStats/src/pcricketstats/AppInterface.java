@@ -18,7 +18,7 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
-    private String[] compareStatsOptions;
+    public String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
     /**
      * Creates new form AppInterface
      */
@@ -27,8 +27,6 @@ public class AppInterface extends javax.swing.JFrame {
         this.players = players;
         stats = new StatUtilities();
         playersDataTable.setModel(tableModel);
-        compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
-        //getAllPlayersBtnActionPerformed(null);
         
         /*
          * This class is borrowed from http://tips4java.wordpress.com/2008/11/10/table-column-adjuster/. I couldn't 
@@ -1085,7 +1083,7 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanel.setBackground(new java.awt.Color(211, 225, 255));
         countryVsCountryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
-        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" }));
+        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(compareStatsOptions));
 
         comparePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         comparePlayerStatsLabel.setText("Compare Player Stats - Country vs Country");
