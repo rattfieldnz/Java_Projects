@@ -18,10 +18,10 @@ public class CricketStatsApp {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        ArrayList<Player> players = new ArrayList<Player>();
-//        
-//        ReadInStats worker = new ReadInStats();
-//        worker.load(players);
+        ArrayList<Player> players = new ArrayList<Player>();
+        
+        ReadInStats worker = new ReadInStats();
+        worker.load(players);
 //        
         StatUtilities stats = new StatUtilities();
 //        
@@ -30,9 +30,11 @@ public class CricketStatsApp {
 //        
 //        System.out.println(stats.aveInningsPerCountry(players, ""));
         
-        ArrayList<Player> players = new ArrayList<Player>();
-        ReadInStats worker = new ReadInStats();
-        worker.load(players);
-        System.out.println(stats.listSinglePlayer(players,"Alan Harper"));
+//        ArrayList<Player> players = new ArrayList<Player>();
+//        ReadInStats worker = new ReadInStats();
+//        worker.load(players);
+//        System.out.println(stats.listSinglePlayer(players,"Alan Harper"));
+        
+        System.out.println(stats.listPlayersCountry(players, "Bermuda"));
     }
 }

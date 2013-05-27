@@ -4,6 +4,7 @@
  */
 package pcricketstats;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -17,12 +18,16 @@ import org.jfree.util.Rotation;
  *
  * @author attfire1
  */
-public class DataPieChart extends JFrame
+public class CountryVsCountryChart extends JFrame
 {
     private static final long serialVersionUID = 1L;
+    private ArrayList<Player> players;
 
-	public DataPieChart(String applicationTitle, String chartTitle) {
+	public CountryVsCountryChart(String applicationTitle, String chartTitle, ArrayList<Player> players) {
         super(applicationTitle);
+        
+        this.players = players;
+        
         // This will create the dataset 
         PieDataset dataset = createDataset();
         // based on the dataset we create the chart

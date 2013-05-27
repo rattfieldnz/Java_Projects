@@ -506,13 +506,13 @@ public class StatUtilities {
     }
 
     /**
-     * This method gets a list of players from a particular country.
+     * This method returns a list of players from a particular country.
      *
      * @param players The list of players to perform the calculation.
      * @param country The country where the players would be from.
      * @return The player's name and country they play for.
      */
-    public String listPlayersCountry(ArrayList<Player> players, String country) {
+    public ArrayList<Player> listPlayersCountry(ArrayList<Player> players, String country) {
 
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -521,20 +521,33 @@ public class StatUtilities {
 
         //this is used to get a unique list of countries (i.e no repeating values)
         Set<String> countryNames = new HashSet<String>(countries);
-        /*End code fragment */
-        StringBuilder sb = new StringBuilder();
-        sb.append(csvHeader + "\n");
+        
+        ArrayList<Player> playersCountry = new ArrayList<Player>();
+        
         if (countryNames.contains(country)) {
 
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
-                    sb.append(players.get(i).toString() + "\n");
+                    playersCountry.add(new Player(
+                            players.get(i).getPlayerID(),
+                            players.get(i).getPlayerName(),
+                            players.get(i).getCountryName(),
+                            players.get(i).getCareerSpan(),
+                            players.get(i).getMatchesPlayed(),
+                            players.get(i).getInningsPlayed(),
+                            players.get(i).getBallsBowled(),
+                            players.get(i).getRunsConceded(),
+                            players.get(i).getWicketsTaken(),
+                            players.get(i).getBowlingAverage(),
+                            players.get(i).getEconomyRate(),
+                            players.get(i).getStrikeRate(),
+                            players.get(i).getFiveWicketsInnings()
+                    ));
+                    
                 }
             }
-            return sb.toString();
-        } else {
-            return "There are no players from the country '" + country + "'.";
-        }
+        } 
+         return playersCountry;
     }
 
     /**

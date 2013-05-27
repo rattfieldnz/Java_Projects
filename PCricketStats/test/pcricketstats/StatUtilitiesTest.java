@@ -341,19 +341,37 @@ public class StatUtilitiesTest {
         ArrayList<Player> players = new ArrayList<Player>();
         worker.load(players);
         
-        String country = "Afghanistan";
-        String expResult = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
-"357 | Samiullah Shenwari | Afghanistan | Career Span: 4 years | 25 | 24 | 1143 | 827 | 31 | 26.67 | 4.34 | 36.8 | 0\n" +
-"387 | Hamid Hassan | Afghanistan | Career Span: 4 years | 16 | 16 | 788 | 607 | 27 | 22.48 | 4.62 | 29.1 | 0\n" +
-"432 | Shapoor Zadran | Afghanistan | Career Span: 3 years | 16 | 16 | 761 | 600 | 22 | 27.27 | 4.73 | 34.5 | 0\n" +
-"445 | Mohammad Nabi | Afghanistan | Career Span: 4 years | 25 | 24 | 1140 | 813 | 21 | 38.71 | 4.27 | 54.2 | 0\n";
+        ArrayList<Player> expResult = new ArrayList<Player>();
         
-        String result = instance.listPlayersCountry(players, country);
+        String country = "Afghanistan";
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).getCountryName().equalsIgnoreCase(country))
+            {
+                expResult.add(new Player(
+                            players.get(i).getPlayerID(),
+                            players.get(i).getPlayerName(),
+                            players.get(i).getCountryName(),
+                            players.get(i).getCareerSpan(),
+                            players.get(i).getMatchesPlayed(),
+                            players.get(i).getInningsPlayed(),
+                            players.get(i).getBallsBowled(),
+                            players.get(i).getRunsConceded(),
+                            players.get(i).getWicketsTaken(),
+                            players.get(i).getBowlingAverage(),
+                            players.get(i).getEconomyRate(),
+                            players.get(i).getStrikeRate(),
+                            players.get(i).getFiveWicketsInnings()
+                    ));
+            }
+        }
+        
+        ArrayList<Player> result = instance.listPlayersCountry(players, country);
         assertEquals(expResult, result);
         
         String country2 = "Morocco";
-        String expResult2 = "There are no players from the country 'Morocco'.";
-        String result2 = instance.listPlayersCountry(players, country2);
+        String expResult2 = null;
+        ArrayList<Player> result2 = instance.listPlayersCountry(players, country2);
         assertEquals(expResult2, result2);
     }
 
