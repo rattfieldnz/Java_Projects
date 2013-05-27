@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -29,7 +30,20 @@ public class AppInterface extends javax.swing.JFrame {
         playersDataTable.setModel(tableModel);
         //getAllPlayersBtnActionPerformed(null);
         
+        /*
+         * This class is borrowed from http://tips4java.wordpress.com/2008/11/10/table-column-adjuster/. I couldn't 
+         * find a way to resize certain columns, given the creation of the custom table model (tableModel). When I 
+         * have time, I'll create a better table model (create an external class that can be instantiated).
+         */
+        TableColumnAdjuster columnAdjuster = new TableColumnAdjuster(playersDataTable);
         
+//        for(int i = 0; i < tableModel.getColumnCount(); i++)
+//        {
+//            columnAdjuster.adjustColumn(i);
+//        }
+        
+        columnAdjuster.adjustColumns();
+        columnAdjuster.adjustColumn(0);
     }
     
     DefaultTableModel tableModel = new DefaultTableModel(
@@ -38,7 +52,7 @@ public class AppInterface extends javax.swing.JFrame {
         },
         new String [] {
             "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
-        }
+        }  
     );
     
     /**
@@ -123,6 +137,7 @@ public class AppInterface extends javax.swing.JFrame {
         }
         
         tableModel.fireTableDataChanged();
+        
         
         addStatsToAveragesPanel(players);
         
@@ -415,7 +430,7 @@ public class AppInterface extends javax.swing.JFrame {
     private void initComponents() {
 
         mainAppTabPane = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        singlePlayerStatsPanel = new javax.swing.JPanel();
         singlePlayerStatsLabel = new javax.swing.JLabel();
         mainPanelPlayerStats = new javax.swing.JPanel();
         searchPlayerNameLabel = new javax.swing.JLabel();
@@ -527,10 +542,10 @@ public class AppInterface extends javax.swing.JFrame {
         mainAppTabPane.setOpaque(true);
         mainAppTabPane.setPreferredSize(new java.awt.Dimension(1350, 671));
 
-        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel1.setMaximumSize(new java.awt.Dimension(1350, 643));
-        jPanel1.setMinimumSize(new java.awt.Dimension(1350, 643));
-        jPanel1.setPreferredSize(new java.awt.Dimension(1350, 643));
+        singlePlayerStatsPanel.setBackground(new java.awt.Color(153, 153, 153));
+        singlePlayerStatsPanel.setMaximumSize(new java.awt.Dimension(1350, 643));
+        singlePlayerStatsPanel.setMinimumSize(new java.awt.Dimension(1350, 643));
+        singlePlayerStatsPanel.setPreferredSize(new java.awt.Dimension(1350, 643));
 
         singlePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         singlePlayerStatsLabel.setText("Single Player Stats");
@@ -879,13 +894,13 @@ public class AppInterface extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout singlePlayerStatsPanelLayout = new javax.swing.GroupLayout(singlePlayerStatsPanel);
+        singlePlayerStatsPanel.setLayout(singlePlayerStatsPanelLayout);
+        singlePlayerStatsPanelLayout.setHorizontalGroup(
+            singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(closeBtn)
                     .addComponent(singlePlayerStatsLabel))
@@ -893,13 +908,13 @@ public class AppInterface extends javax.swing.JFrame {
                 .addComponent(compareStatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        singlePlayerStatsPanelLayout.setVerticalGroup(
+            singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(singlePlayerStatsLabel)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(compareStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
@@ -907,7 +922,7 @@ public class AppInterface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        mainAppTabPane.addTab("Single Player Stats", jPanel1);
+        mainAppTabPane.addTab("Single Player Stats", singlePlayerStatsPanel);
 
         multiplePlayerStatsPanel.setBackground(new java.awt.Color(153, 153, 153));
         multiplePlayerStatsPanel.setMaximumSize(new java.awt.Dimension(1350, 643));
@@ -1326,6 +1341,7 @@ public class AppInterface extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        playersDataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         playersDataTable.setPreferredSize(new java.awt.Dimension(700, 160));
         playersDataTable.getTableHeader().setResizingAllowed(false);
         playersDataTable.getTableHeader().setReorderingAllowed(false);
@@ -1430,120 +1446,12 @@ public class AppInterface extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
-        if(evt.getSource() == closeBtn)
-        {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_closeBtnActionPerformed
-
-    private void confirmGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmGraphBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmGraphBtnActionPerformed
-
     private void closeBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtn1ActionPerformed
         if(evt.getSource() == closeBtn1)
         {
             System.exit(0);
         }
     }//GEN-LAST:event_closeBtn1ActionPerformed
-
-    private void fromCountryOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromCountryOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fromCountryOptionActionPerformed
-
-    private void getFromToPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFromToPlayersBtnActionPerformed
-        try{
-            int start = Integer.parseInt(getPlayerFrom.getText()) - 1;
-            int end = Integer.parseInt(getPlayerTo.getText()) - 1;
-            
-            drawTable(start, end);
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,"Both field inputs must be integers (e.g 1, 287, 489, ...).");
-        }
-    }//GEN-LAST:event_getFromToPlayersBtnActionPerformed
-
-    private void getAllPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAllPlayersBtnActionPerformed
-        
-            drawTable();
-    }//GEN-LAST:event_getAllPlayersBtnActionPerformed
-
-    private void getPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerStatsBtnActionPerformed
-        
-        String calcCareerSpan = "";
-        String matches = "";
-        String innings = "";
-        String balls = "";
-        String runs = "";
-        String wickets = "";
-        String bowling = "";
-        String econRate = "";
-        String strRate = "";
-        String fiveWickets = "";
-        
-        for (int i = 0; i< players.size(); i++){
-            if(getPlayerName.getText().equalsIgnoreCase(players.get(i).getPlayerName()))
-            {
-                playerName.setText(players.get(i).getPlayerName());
-                countryName.setText(players.get(i).getCountryName());
-                careerSpan.setText(players.get(i).getCareerSpan());
-                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years");
-                matchesPlayed.setText(matches += players.get(i).getMatchesPlayed());
-                inningsPlayed.setText(innings += players.get(i).getInningsPlayed());
-                ballsBowled.setText(balls += players.get(i).getBallsBowled());
-                runsConceded.setText(runs += players.get(i).getRunsConceded());
-                wicketsTaken.setText(wickets += players.get(i).getWicketsTaken());
-                bowlingAverage.setText(bowling += players.get(i).getBowlingAverage());
-                economyRate.setText(econRate += players.get(i).getEconomyRate());
-                strikeRate.setText(strRate += players.get(i).getStrikeRate());
-                fiveWicketsPerInnings.setText(fiveWickets += players.get(i).getFiveWicketsInnings());
-                
-                
-                String countryPath = "country-flags/" + players.get(i).getCountryName().toLowerCase().replaceAll("\\s","") + ".png";
-                flagImageLabel.setIcon(new ImageIcon(countryPath));
-                        
-            }
-            
-        }
-    }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
-
-    private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
-        playerName.setText("");
-        countryName.setText("");
-        careerSpan.setText("");
-        careerLength.setText("");
-        matchesPlayed.setText("");
-        inningsPlayed.setText("");
-        ballsBowled.setText("");
-        runsConceded.setText("");
-        wicketsTaken.setText("");
-        bowlingAverage.setText("");
-        economyRate.setText("");
-        strikeRate.setText("");
-        fiveWicketsPerInnings.setText("");
-        
-        flagImageLabel.setIcon(null);
-    }//GEN-LAST:event_resetPlayerStatsBtnActionPerformed
-
-    private void getFirstNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFirstNPlayersBtnActionPerformed
-        
-        try
-        {
-            int playerList = Integer.parseInt(firstNPlayers.getText());
-
-            drawTable(playerList);
-        }
-        catch(NumberFormatException e)
-        {
-            JOptionPane.showMessageDialog(this,"The field input must be an integer (e.g 1, 287, 489,...).");
-        }
-    }//GEN-LAST:event_getFirstNPlayersBtnActionPerformed
-
-    private void getPlayerFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerFromActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_getPlayerFromActionPerformed
 
     private void getLastNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLastNPlayersBtnActionPerformed
         try
@@ -1562,6 +1470,113 @@ public class AppInterface extends javax.swing.JFrame {
         String country = String.valueOf(fromCountryOption.getSelectedItem()).toString();
         drawTable(country);
     }//GEN-LAST:event_getPlayersFromCountryBtnActionPerformed
+
+    private void fromCountryOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fromCountryOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fromCountryOptionActionPerformed
+
+    private void getFirstNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFirstNPlayersBtnActionPerformed
+
+        try
+        {
+            int playerList = Integer.parseInt(firstNPlayers.getText());
+
+            drawTable(playerList);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this,"The field input must be an integer (e.g 1, 287, 489,...).");
+        }
+    }//GEN-LAST:event_getFirstNPlayersBtnActionPerformed
+
+    private void getFromToPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getFromToPlayersBtnActionPerformed
+        try{
+            int start = Integer.parseInt(getPlayerFrom.getText()) - 1;
+            int end = Integer.parseInt(getPlayerTo.getText()) - 1;
+
+            drawTable(start, end);
+        }
+        catch(NumberFormatException e)
+        {
+            JOptionPane.showMessageDialog(this,"Both field inputs must be integers (e.g 1, 287, 489, ...).");
+        }
+    }//GEN-LAST:event_getFromToPlayersBtnActionPerformed
+
+    private void getPlayerFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerFromActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_getPlayerFromActionPerformed
+
+    private void getAllPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getAllPlayersBtnActionPerformed
+
+        drawTable();
+    }//GEN-LAST:event_getAllPlayersBtnActionPerformed
+
+    private void closeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeBtnActionPerformed
+        if(evt.getSource() == closeBtn)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_closeBtnActionPerformed
+
+    private void confirmGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmGraphBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_confirmGraphBtnActionPerformed
+
+    private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
+        playerName.setText("");
+        countryName.setText("");
+        careerSpan.setText("");
+        careerLength.setText("");
+        matchesPlayed.setText("");
+        inningsPlayed.setText("");
+        ballsBowled.setText("");
+        runsConceded.setText("");
+        wicketsTaken.setText("");
+        bowlingAverage.setText("");
+        economyRate.setText("");
+        strikeRate.setText("");
+        fiveWicketsPerInnings.setText("");
+
+        flagImageLabel.setIcon(null);
+    }//GEN-LAST:event_resetPlayerStatsBtnActionPerformed
+
+    private void getPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getPlayerStatsBtnActionPerformed
+
+        String calcCareerSpan = "";
+        String matches = "";
+        String innings = "";
+        String balls = "";
+        String runs = "";
+        String wickets = "";
+        String bowling = "";
+        String econRate = "";
+        String strRate = "";
+        String fiveWickets = "";
+
+        for (int i = 0; i< players.size(); i++){
+            if(getPlayerName.getText().equalsIgnoreCase(players.get(i).getPlayerName()))
+            {
+                playerName.setText(players.get(i).getPlayerName());
+                countryName.setText(players.get(i).getCountryName());
+                careerSpan.setText(players.get(i).getCareerSpan());
+                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years");
+                matchesPlayed.setText(matches += players.get(i).getMatchesPlayed());
+                inningsPlayed.setText(innings += players.get(i).getInningsPlayed());
+                ballsBowled.setText(balls += players.get(i).getBallsBowled());
+                runsConceded.setText(runs += players.get(i).getRunsConceded());
+                wicketsTaken.setText(wickets += players.get(i).getWicketsTaken());
+                bowlingAverage.setText(bowling += players.get(i).getBowlingAverage());
+                economyRate.setText(econRate += players.get(i).getEconomyRate());
+                strikeRate.setText(strRate += players.get(i).getStrikeRate());
+                fiveWicketsPerInnings.setText(fiveWickets += players.get(i).getFiveWicketsInnings());
+
+                String countryPath = "country-flags/" + players.get(i).getCountryName().toLowerCase().replaceAll("\\s","") + ".png";
+                flagImageLabel.setIcon(new ImageIcon(countryPath));
+
+            }
+
+        }
+    }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1673,7 +1688,6 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel infoLabel;
     private javax.swing.JLabel inningsPlayed;
     private javax.swing.JLabel inningsPlayedLabel;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField lastNPlayers;
     private javax.swing.JTabbedPane mainAppTabPane;
     private javax.swing.JPanel mainPanelPlayerStats;
@@ -1698,6 +1712,7 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel runsConcededLabel;
     private javax.swing.JLabel searchPlayerNameLabel;
     private javax.swing.JLabel singlePlayerStatsLabel;
+    private javax.swing.JPanel singlePlayerStatsPanel;
     private javax.swing.JButton sortBtn;
     private javax.swing.JComboBox sortByComboBox;
     private javax.swing.JLabel sortByLabel;
