@@ -18,7 +18,7 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
-    
+    private String[] compareStatsOptions;
     /**
      * Creates new form AppInterface
      */
@@ -27,6 +27,7 @@ public class AppInterface extends javax.swing.JFrame {
         this.players = players;
         stats = new StatUtilities();
         playersDataTable.setModel(tableModel);
+        compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
         //getAllPlayersBtnActionPerformed(null);
         
         /*

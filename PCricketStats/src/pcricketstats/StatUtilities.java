@@ -235,6 +235,26 @@ public class StatUtilities {
     }
     
     /**
+     * This method gets the average matches played by each player, 
+     * in a particular country.
+     *
+     * @param players The list of players to perform the calculation.
+     * @param country The country to get the stats from.
+     * @return The average matches played per player.
+     */
+    public double aveMatchesPerPlayer(ArrayList<Player> players, String country) {
+        int matchesPlayed = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getCountryName().compareTo(country) == 0) {
+                matchesPlayed += players.get(i).getMatchesPlayed();
+            }
+        }
+
+        double aveMatchesPerPlayer = (matchesPlayed * 1.0) / players.size();
+        return toDoubleTwoDP(aveMatchesPerPlayer);
+    }
+    
+    /**
      * This method gets the average runs conceded by each player, over the
      * whole data set.
      *
@@ -245,6 +265,26 @@ public class StatUtilities {
         int runsConceded = 0;
         for (int i = 0; i < players.size(); i++) {
             runsConceded += players.get(i).getRunsConceded();
+        }
+
+        double aveRunsConceded = (runsConceded * 1.0) / players.size();
+        return toDoubleTwoDP(aveRunsConceded);
+    }
+    
+    /**
+     * This method gets the average runs conceded by each player, for
+     * a given country.
+     *
+     * @param players The list of players to perform the calculation.
+     * @param country The country to get the stats for.
+     * @return The average matches played per player, from h=the country parsed through.
+     */
+    public double aveRunsConceded(ArrayList<Player> players, String country) {
+        int runsConceded = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getCountryName().compareTo(country) == 0) {
+                runsConceded += players.get(i).getRunsConceded();
+            }
         }
 
         double aveRunsConceded = (runsConceded * 1.0) / players.size();
@@ -269,6 +309,26 @@ public class StatUtilities {
     }
     
     /**
+     * This method gets the average of each player's bowling average, over the
+     * whole data set.
+     *
+     * @param players The list of players to perform the calculation.
+     * @param country The country to get the statistics from.
+     * @return The average matches played per player.
+     */
+    public double aveBowlingAverage(ArrayList<Player> players, String country) {
+        double bowlingAverage = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getCountryName().compareTo(country) == 0) {
+                bowlingAverage += players.get(i).getBowlingAverage();
+            }
+        }
+
+        double aveBowlingAverage = bowlingAverage / players.size();
+        return toDoubleTwoDP(aveBowlingAverage);
+    }
+    
+    /**
      * This method gets the average number of 5 wicket hauls 
      * per ODI per player, over the whole data set.
      *
@@ -279,6 +339,26 @@ public class StatUtilities {
         int fiveWickets = 0;
         for (int i = 0; i < players.size(); i++) {
             fiveWickets += players.get(i).getFiveWicketsInnings();
+        }
+
+        double aveFiveWickets = (fiveWickets * 1.0) / players.size();
+        return toDoubleTwoDP(aveFiveWickets);
+    }
+    
+    /**
+     * This method gets the average number of 5 wicket hauls 
+     * per ODI per player, for a particular country.
+     *
+     * @param players The list of players to perform the calculation.
+     * @param country The country to get the statistics from.
+     * @return The average number of 5 wickets hauls per player.
+     */
+    public double aveFiveWicketsInns(ArrayList<Player> players, String country) {
+        int fiveWickets = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getCountryName().compareTo(country) == 0) {
+                fiveWickets += players.get(i).getFiveWicketsInnings();
+            }
         }
 
         double aveFiveWickets = (fiveWickets * 1.0) / players.size();
@@ -494,12 +574,37 @@ public class StatUtilities {
         }
     }
     
+    /**
+     * This method returns the average career length for 
+     * the specified players parsed through.
+     * @param players The players to get the stats from.
+     * @return The average career length of the players parsed through.
+     */
     public double aveCareerLength(ArrayList<Player> players)
     {
         int totalCareerLength = 0;
         for(int i = 0; i < players.size(); i++)
         {
             totalCareerLength += players.get(i).calcCareerSpan();
+        }
+        
+        return toDoubleTwoDP((totalCareerLength * 1.0)/players.size());
+    }
+    
+    /**
+     * This method returns the average career length for 
+     * the specified players parsed through, given their country.
+     * @param players The players to get the stats from.
+     * @return The average career length of the players parsed through.
+     */
+    public double aveCareerLength(ArrayList<Player> players, String country)
+    {
+        int totalCareerLength = 0;
+        for(int i = 0; i < players.size(); i++)
+        {
+            if (players.get(i).getCountryName().compareTo(country) == 0) {
+                totalCareerLength += players.get(i).calcCareerSpan();
+            }
         }
         
         return toDoubleTwoDP((totalCareerLength * 1.0)/players.size());
