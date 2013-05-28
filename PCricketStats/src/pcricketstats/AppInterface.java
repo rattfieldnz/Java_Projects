@@ -18,7 +18,9 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
-    public String[] compareStatsOptions = { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
+    String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    private ArrayList<String> options;
     /**
      * Creates new form AppInterface
      */
@@ -27,6 +29,9 @@ public class AppInterface extends javax.swing.JFrame {
         this.players = players;
         stats = new StatUtilities();
         playersDataTable.setModel(tableModel);
+        
+        options = new ArrayList<String>();
+        options.addAll(Arrays.asList(compareStatsOptions));
         
         /*
          * This class is borrowed from http://tips4java.wordpress.com/2008/11/10/table-column-adjuster/. I couldn't 
@@ -41,7 +46,7 @@ public class AppInterface extends javax.swing.JFrame {
 //        }
         
         columnAdjuster.adjustColumns();
-        columnAdjuster.adjustColumn(1);
+        //columnAdjuster.adjustColumn(1);
     }
     
     DefaultTableModel tableModel = new DefaultTableModel(
@@ -49,7 +54,7 @@ public class AppInterface extends javax.swing.JFrame {
 
         },
         new String [] {
-            "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
+            "ID", "     Player's Name     ", "      Country      ", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
         }  
     );
     
@@ -987,7 +992,7 @@ public class AppInterface extends javax.swing.JFrame {
         getPlayersFromLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getPlayersFromLabel.setText("Get players from");
 
-        fromCountryOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" }));
+        fromCountryOption.setModel(new javax.swing.DefaultComboBoxModel(countryOptions));
         fromCountryOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fromCountryOptionActionPerformed(evt);
@@ -1095,7 +1100,7 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanel.setBackground(new java.awt.Color(211, 225, 255));
         countryVsCountryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
-        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" }));
+        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(compareStatsOptions));
 
         comparePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         comparePlayerStatsLabel.setText("Compare Player Stats - Country vs Country");
@@ -1585,14 +1590,86 @@ public class AppInterface extends javax.swing.JFrame {
 
     private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
         
-        /*
-         * Include below information in a loop to generate chart, based on option selected.
-         */
-        CountryVsCountryChart chart = new CountryVsCountryChart("Test Chart", "A Test Chart", players, 1);
-        /**/
+        String selectedOption = String.valueOf(compareStatsComboBox.getSelectedItem()).toString();
+        CountryVsCountryChart chart;
+        String title;
+        String versus = " - Country vs Country";
+        switch(options.indexOf(selectedOption))
+        {
+            case 0:
+                title = options.get(0).substring(options.get(0).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 1);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 1:
+                title = options.get(1).substring(options.get(1).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 2);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 2:
+                title = options.get(2).substring(options.get(2).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 3);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 3:
+                title = options.get(3).substring(options.get(3).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 4);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 4:
+                title = options.get(4).substring(options.get(4).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 5);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 5:
+                title = options.get(5).substring(options.get(5).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 6);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 6:
+                title = options.get(6).substring(options.get(6).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 7);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 7:
+                title = options.get(7).substring(options.get(7).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 8);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 8:
+                title = options.get(8).substring(options.get(8).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 9);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            case 9:
+                title = options.get(9).substring(options.get(9).indexOf(' '));
+                chart = new CountryVsCountryChart(title + versus, "", players, 10);
+                
+                graphDisplayPanel.add(chart);
+                repaint();
+                break;
+            default:
+                repaint();
+        }
         
-        graphDisplayPanel.add(chart);
-        repaint();
     }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
 
     /**

@@ -169,7 +169,7 @@ public class StatUtilities {
      */
     public double aveInningsPerCountry(ArrayList<Player> players, String country) {
         int inningsByCountry = 0;
-        int noOfPlayers = 0;
+        int playersFromCountry = 0;
 
         /*
          * The following code fragment gets all the country names 
@@ -189,11 +189,11 @@ public class StatUtilities {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
                     inningsByCountry += players.get(i).getInningsPlayed();
-                    noOfPlayers++;
+                    playersFromCountry++;
                 }
             }
 
-            double aveInningsByCountry = (inningsByCountry * 1.0) / noOfPlayers;
+            double aveInningsByCountry = (inningsByCountry * 1.0) / playersFromCountry;
             return toDoubleTwoDP(aveInningsByCountry);
         } else {
             return 0.0;
@@ -244,13 +244,15 @@ public class StatUtilities {
      */
     public double aveMatchesPerPlayer(ArrayList<Player> players, String country) {
         int matchesPlayed = 0;
+        int playersFromCountry = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
+                playersFromCountry++;
                 matchesPlayed += players.get(i).getMatchesPlayed();
             }
         }
 
-        double aveMatchesPerPlayer = (matchesPlayed * 1.0) / players.size();
+        double aveMatchesPerPlayer = (matchesPlayed * 1.0) / playersFromCountry;
         return toDoubleTwoDP(aveMatchesPerPlayer);
     }
     
@@ -281,13 +283,15 @@ public class StatUtilities {
      */
     public double aveRunsConceded(ArrayList<Player> players, String country) {
         int runsConceded = 0;
+        int playersFromCountry = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
+                playersFromCountry++;
                 runsConceded += players.get(i).getRunsConceded();
             }
         }
 
-        double aveRunsConceded = (runsConceded * 1.0) / players.size();
+        double aveRunsConceded = (runsConceded * 1.0) / playersFromCountry;
         return toDoubleTwoDP(aveRunsConceded);
     }
     
@@ -317,14 +321,16 @@ public class StatUtilities {
      * @return The average matches played per player.
      */
     public double aveBowlingAverage(ArrayList<Player> players, String country) {
-        double bowlingAverage = 0;
+        double bowlingAverage = 0.0;
+        int playersFromCountry = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
+                playersFromCountry++;
                 bowlingAverage += players.get(i).getBowlingAverage();
             }
         }
 
-        double aveBowlingAverage = bowlingAverage / players.size();
+        double aveBowlingAverage = bowlingAverage / playersFromCountry;
         return toDoubleTwoDP(aveBowlingAverage);
     }
     
@@ -355,13 +361,15 @@ public class StatUtilities {
      */
     public double aveFiveWicketsInns(ArrayList<Player> players, String country) {
         int fiveWickets = 0;
+        int playersFromCountry = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
+                playersFromCountry++;
                 fiveWickets += players.get(i).getFiveWicketsInnings();
             }
         }
 
-        double aveFiveWickets = (fiveWickets * 1.0) / players.size();
+        double aveFiveWickets = (fiveWickets * 1.0) / playersFromCountry;
         return toDoubleTwoDP(aveFiveWickets);
     }
 
@@ -392,7 +400,7 @@ public class StatUtilities {
      */
     public double aveWickets(ArrayList<Player> players, String country) {
         double totalWicketsTaken = 0.0;
-        int noOfPlayers = 0;
+        int playersFromCountry = 0;
 
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -406,11 +414,11 @@ public class StatUtilities {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
                     totalWicketsTaken += players.get(i).getWicketsTaken();
-                    noOfPlayers++;
+                    playersFromCountry++;
                 }
             }
 
-            double aveWicketsTaken = (totalWicketsTaken * 1.0) / noOfPlayers;
+            double aveWicketsTaken = (totalWicketsTaken * 1.0) / playersFromCountry;
             return toDoubleTwoDP(aveWicketsTaken);
         } else {
             return 0;
@@ -443,7 +451,7 @@ public class StatUtilities {
      */
     public double aveEconRate(ArrayList<Player> players, String country) {
         double totalEconRate = 0.0;
-        int noOfPlayers = 0;
+        int playersFromCountry = 0;
 
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -457,11 +465,11 @@ public class StatUtilities {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
                     totalEconRate += players.get(i).getEconomyRate();
-                    noOfPlayers++;
+                    playersFromCountry++;
                 }
             }
 
-            double aveEconRate = (totalEconRate * 1.0) / noOfPlayers;
+            double aveEconRate = (totalEconRate * 1.0) / playersFromCountry;
             return toDoubleTwoDP(aveEconRate);
         } else {
             return 0;
@@ -549,7 +557,7 @@ public class StatUtilities {
      */
     public double aveStrikeRate(ArrayList<Player> players, String country) {
         double totalStrikeRate = 0.0;
-        int noOfPlayers = 0;
+        int playersFromCountry = 0;
 
         for (Player p : players) {
             countries.add(p.getCountryName());
@@ -563,11 +571,11 @@ public class StatUtilities {
             for (int i = 0; i < players.size(); i++) {
                 if (players.get(i).getCountryName().compareTo(country) == 0) {
                     totalStrikeRate += players.get(i).getStrikeRate();
-                    noOfPlayers++;
+                    playersFromCountry++;
                 }
             }
 
-            double aveStrikeRate = (totalStrikeRate * 1.0) / noOfPlayers;
+            double aveStrikeRate = (totalStrikeRate * 1.0) / playersFromCountry;
             return toDoubleTwoDP(aveStrikeRate);
         } else {
             return 0;
@@ -600,14 +608,16 @@ public class StatUtilities {
     public double aveCareerLength(ArrayList<Player> players, String country)
     {
         int totalCareerLength = 0;
+        int playersFromCountry = 0;
         for(int i = 0; i < players.size(); i++)
         {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
+                playersFromCountry++;
                 totalCareerLength += players.get(i).calcCareerSpan();
             }
         }
         
-        return toDoubleTwoDP((totalCareerLength * 1.0)/players.size());
+        return toDoubleTwoDP((totalCareerLength * 1.0)/playersFromCountry);
     }
 
     /**

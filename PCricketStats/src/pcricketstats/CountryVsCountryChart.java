@@ -5,6 +5,9 @@
 package pcricketstats;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GradientPaint;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,10 +15,14 @@ import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
+import org.jfree.chart.axis.CategoryAxis;
+import org.jfree.chart.axis.CategoryLabelPositions;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.BarRenderer;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -26,19 +33,24 @@ public class CountryVsCountryChart extends JPanel
     private static final long serialVersionUID = 1L;
     private ArrayList<Player> players;
     private StatUtilities stats;
-
+    public String yAxisLabel = "";
+    public String[] compareStatsOptions = { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    ;
+    
 	public CountryVsCountryChart(String applicationTitle, String chartTitle, ArrayList<Player> players, int option) {
         //super(applicationTitle);
         
         this.players = players;
         stats = new StatUtilities();
 
-        // This will create the dataset 
-        PieDataset dataset = createDataset(option);
+        final CategoryDataset dataset = createDataset(option);
+        
         // based on the dataset we create the chart
-        JFreeChart chart = createChart(dataset, chartTitle);
+        final JFreeChart chart = createChart(dataset, applicationTitle);
+        
         // we put the chart into a panel
-        ChartPanel chartPanel = new ChartPanel(chart);
+        final ChartPanel chartPanel = new ChartPanel(chart);
+        chartPanel.setPreferredSize(new Dimension(500, 270));
 
         // Don't forget me...
         setLayout(new BorderLayout());
@@ -49,7 +61,7 @@ public class CountryVsCountryChart extends JPanel
     
 /** * Creates a sample dataset */
 
-    private  PieDataset createDataset(int graphDisplayOption) {
+    private  CategoryDataset createDataset(int graphDisplayOption) {
         
         ArrayList<String> countries = new ArrayList<String>();
         for (Player p : players) {
@@ -58,7 +70,7 @@ public class CountryVsCountryChart extends JPanel
         
         Set<String> countryNames = new HashSet<String>(countries);
         
-        DefaultPieDataset result = new DefaultPieDataset();
+        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         
         /*
          * The below code block uses a switch statement to determine
@@ -82,59 +94,109 @@ public class CountryVsCountryChart extends JPanel
             switch(graphDisplayOption)
             {
                 case 1:
-                    result.setValue(c, stats.aveBallsBowled(players, c));
+                    yAxisLabel = compareStatsOptions[0].substring(compareStatsOptions[0].indexOf(' '));
+                    dataset.addValue(stats.aveBallsBowled(players, c), c, "");
                     break;
                 case 2:
-                    result.setValue(c, stats.aveBowlingAverage(players, c));
+                    yAxisLabel = compareStatsOptions[1].substring(compareStatsOptions[1].indexOf(' '));
+                    dataset.addValue(stats.aveBowlingAverage(players, c), c, "");
                     break;
                 case 3:
-                    result.setValue(c, stats.aveCareerLength(players, c));
+                    yAxisLabel = compareStatsOptions[2].substring(compareStatsOptions[2].indexOf(' '));
+                    dataset.addValue(stats.aveCareerLength(players, c), c, "");
                     break;
                 case 4:
-                    result.setValue(c, stats.aveEconRate(players, c));
+                    yAxisLabel = compareStatsOptions[3].substring(compareStatsOptions[3].indexOf(' '));
+                    dataset.addValue(stats.aveEconRate(players, c), c, "");
                     break;
                 case 5:
-                    result.setValue(c, stats.aveFiveWicketsInns(players, c));
+                    yAxisLabel = compareStatsOptions[4].substring(compareStatsOptions[4].indexOf(' '));
+                    dataset.addValue(stats.aveFiveWicketsInns(players, c), c, "");
                     break;
                 case 6:
-                    result.setValue(c, stats.aveInningsPerCountry(players, c));
+                    yAxisLabel = compareStatsOptions[5].substring(compareStatsOptions[5].indexOf(' '));
+                    dataset.addValue(stats.aveInningsPerCountry(players, c), c, "");
                     break;
                 case 7:
-                    result.setValue(c, stats.aveMatchesPerPlayer(players, c));
+                    yAxisLabel = compareStatsOptions[6].substring(compareStatsOptions[6].indexOf(' '));
+                    dataset.addValue(stats.aveMatchesPerPlayer(players, c), c, "");
                     break;
                 case 8:
-                    result.setValue(c, stats.aveRunsConceded(players, c));
+                    yAxisLabel = compareStatsOptions[7].substring(compareStatsOptions[7].indexOf(' '));
+                    dataset.addValue(stats.aveRunsConceded(players, c), c, "");
                     break;
                 case 9:
-                    result.setValue(c, stats.aveStrikeRate(players, c));
+                    yAxisLabel = compareStatsOptions[8].substring(compareStatsOptions[8].indexOf(' '));
+                    dataset.addValue(stats.aveStrikeRate(players, c), c, "");
                     break;
                 case 10:
-                    result.setValue(c, stats.aveWickets(players, c));
+                    yAxisLabel = compareStatsOptions[9].substring(compareStatsOptions[9].indexOf(' '));
+                    dataset.addValue(stats.aveWickets(players, c), c, "");
                     break;
             }
         }
         
-        return result;
+        return dataset;
         
     }
     
     
 /** * Creates a chart */
 
-    private JFreeChart createChart(PieDataset dataset, String title) {
+    private JFreeChart createChart(CategoryDataset dataset, String title) {
         
-        JFreeChart chart = ChartFactory.createPieChart3D(
-            title,  				// chart title
-            dataset,                // data
-            true,                   // include legend
-            true,
-            false
+        // create the chart...
+        final JFreeChart chart = ChartFactory.createBarChart(
+            title,         // chart title
+            "Countries",               // domain axis label
+            yAxisLabel,                  // range axis label
+            dataset,                  // data
+            PlotOrientation.VERTICAL, // orientation
+            true,                     // include legend
+            true,                     // tooltips?
+            false                     // URLs?
         );
 
-        PiePlot3D plot = (PiePlot3D) chart.getPlot();
-        plot.setStartAngle(290);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.5f);
+        // NOW DO SOME OPTIONAL CUSTOMISATION OF THE CHART...
+
+        // set the background color for the chart...
+        chart.setBackgroundPaint(Color.white);
+
+        // get a reference to the plot for further customisation...
+        final CategoryPlot plot = chart.getCategoryPlot();
+        plot.setBackgroundPaint(Color.lightGray);
+        plot.setDomainGridlinePaint(Color.white);
+        plot.setRangeGridlinePaint(Color.white);
+
+        // set the range axis to display integers only...
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+
+        // disable bar outlines...
+        final BarRenderer renderer = (BarRenderer) plot.getRenderer();
+        renderer.setDrawBarOutline(false);
+        
+        // set up gradient paints for series...
+        final GradientPaint gp0 = new GradientPaint(
+            0.0f, 0.0f, Color.blue, 
+            0.0f, 0.0f, Color.lightGray
+        );
+        final GradientPaint gp1 = new GradientPaint(
+            0.0f, 0.0f, Color.green, 
+            0.0f, 0.0f, Color.lightGray
+        );
+        final GradientPaint gp2 = new GradientPaint(
+            0.0f, 0.0f, Color.red, 
+            0.0f, 0.0f, Color.lightGray
+        );
+        renderer.setSeriesPaint(0, gp0);
+
+        final CategoryAxis domainAxis = plot.getDomainAxis();
+        domainAxis.setCategoryLabelPositions(
+            CategoryLabelPositions.createUpRotationLabelPositions(Math.PI / 6.0)
+        );
+        // OPTIONAL CUSTOMISATION COMPLETED.
+        
         return chart;
         
     }
