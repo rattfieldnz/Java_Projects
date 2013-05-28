@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GradientPaint;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JPanel;
@@ -55,7 +56,24 @@ public class CountryVsCountryChart extends JPanel
         // Don't forget me...
         setLayout(new BorderLayout());
         add(chartPanel); 
-}
+    }
+    
+    /**
+     * This method returns the nth occurrence of a 
+     * character in a given string.
+     * 
+     * Sourced from http://stackoverflow.com/questions/3976616/how-to-find-nth-occurrence-of-character-in-a-string.
+     * @param str The string to get the index of a character from.
+     * @param c The character to get the index of.
+     * @param n What occurrence of character to retrieve.
+     * @return The nth occurrence of a character.
+     */
+    public static int nthOccurrence(String str, char c, int n) {
+        int pos = str.indexOf(c, 0);
+        while (n-- > 0 && pos != -1)
+            pos = str.indexOf(c, pos+1);
+        return pos;
+    }
         
     
     
@@ -94,43 +112,43 @@ public class CountryVsCountryChart extends JPanel
             switch(graphDisplayOption)
             {
                 case 1:
-                    yAxisLabel = compareStatsOptions[0].substring(compareStatsOptions[0].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[0].substring(nthOccurrence(compareStatsOptions[0], ' ', 1));
                     dataset.addValue(stats.aveBallsBowled(players, c), c, "");
                     break;
                 case 2:
-                    yAxisLabel = compareStatsOptions[1].substring(compareStatsOptions[1].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[1].substring(nthOccurrence(compareStatsOptions[1], ' ', 1));
                     dataset.addValue(stats.aveBowlingAverage(players, c), c, "");
                     break;
                 case 3:
-                    yAxisLabel = compareStatsOptions[2].substring(compareStatsOptions[2].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[2].substring(nthOccurrence(compareStatsOptions[2], ' ', 1));
                     dataset.addValue(stats.aveCareerLength(players, c), c, "");
                     break;
                 case 4:
-                    yAxisLabel = compareStatsOptions[3].substring(compareStatsOptions[3].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[3].substring(nthOccurrence(compareStatsOptions[3], ' ', 1));
                     dataset.addValue(stats.aveEconRate(players, c), c, "");
                     break;
                 case 5:
-                    yAxisLabel = compareStatsOptions[4].substring(compareStatsOptions[4].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[4].substring(nthOccurrence(compareStatsOptions[4], ' ', 1));
                     dataset.addValue(stats.aveFiveWicketsInns(players, c), c, "");
                     break;
                 case 6:
-                    yAxisLabel = compareStatsOptions[5].substring(compareStatsOptions[5].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[5].substring(nthOccurrence(compareStatsOptions[5], ' ', 1));
                     dataset.addValue(stats.aveInningsPerCountry(players, c), c, "");
                     break;
                 case 7:
-                    yAxisLabel = compareStatsOptions[6].substring(compareStatsOptions[6].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[6].substring(nthOccurrence(compareStatsOptions[6], ' ', 1));
                     dataset.addValue(stats.aveMatchesPerPlayer(players, c), c, "");
                     break;
                 case 8:
-                    yAxisLabel = compareStatsOptions[7].substring(compareStatsOptions[7].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[7].substring(nthOccurrence(compareStatsOptions[7], ' ', 1));
                     dataset.addValue(stats.aveRunsConceded(players, c), c, "");
                     break;
                 case 9:
-                    yAxisLabel = compareStatsOptions[8].substring(compareStatsOptions[8].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[8].substring(nthOccurrence(compareStatsOptions[8], ' ', 1));
                     dataset.addValue(stats.aveStrikeRate(players, c), c, "");
                     break;
                 case 10:
-                    yAxisLabel = compareStatsOptions[9].substring(compareStatsOptions[9].indexOf(' '));
+                    yAxisLabel = compareStatsOptions[9].substring(nthOccurrence(compareStatsOptions[9], ' ', 1));
                     dataset.addValue(stats.aveWickets(players, c), c, "");
                     break;
             }

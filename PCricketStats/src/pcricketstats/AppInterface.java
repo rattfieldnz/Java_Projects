@@ -434,6 +434,22 @@ public class AppInterface extends javax.swing.JFrame {
       }
       return null; // or throw an exception
     }
+    
+    /**
+     * This method processes the chart for the "Country vs Country" 
+     * player stats, in the "Multi Player Stats" tab.
+     * @param option The option for which stats to display.
+     */
+    public void processCvCchart(int option)
+    {
+      
+        String title = options.get(option).substring(options.get(option).indexOf(' '));
+        String versus = " - Country vs Country";
+        CountryVsCountryChart chart = new CountryVsCountryChart(title, "", players, option + 1);
+        graphDisplayPanel.add(chart);
+        repaint();
+        
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1591,84 +1607,9 @@ public class AppInterface extends javax.swing.JFrame {
     private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
         
         String selectedOption = String.valueOf(compareStatsComboBox.getSelectedItem()).toString();
-        CountryVsCountryChart chart;
-        String title;
-        String versus = " - Country vs Country";
-        switch(options.indexOf(selectedOption))
-        {
-            case 0:
-                title = options.get(0).substring(options.get(0).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 1);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 1:
-                title = options.get(1).substring(options.get(1).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 2);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 2:
-                title = options.get(2).substring(options.get(2).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 3);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 3:
-                title = options.get(3).substring(options.get(3).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 4);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 4:
-                title = options.get(4).substring(options.get(4).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 5);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 5:
-                title = options.get(5).substring(options.get(5).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 6);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 6:
-                title = options.get(6).substring(options.get(6).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 7);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 7:
-                title = options.get(7).substring(options.get(7).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 8);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 8:
-                title = options.get(8).substring(options.get(8).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 9);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            case 9:
-                title = options.get(9).substring(options.get(9).indexOf(' '));
-                chart = new CountryVsCountryChart(title + versus, "", players, 10);
-                
-                graphDisplayPanel.add(chart);
-                repaint();
-                break;
-            default:
-                repaint();
-        }
+        int statsOption = options.indexOf(selectedOption);
+        
+        processCvCchart(statsOption);
         
     }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
 
