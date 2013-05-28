@@ -1595,7 +1595,13 @@ public class AppInterface extends javax.swing.JFrame {
 
     private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
         
+        /*
+         * Include below information in a loop to generate chart, based on option selected.
+         */
         CountryVsCountryChart chart = new CountryVsCountryChart("Test Chart", "A Test Chart", players, 1);
+        /**/
+        
+        graphDisplayPanel.add(chart);
     }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
 
     /**
