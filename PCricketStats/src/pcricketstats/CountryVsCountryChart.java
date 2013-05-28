@@ -4,6 +4,7 @@
  */
 package pcricketstats;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,15 +32,17 @@ public class CountryVsCountryChart extends JPanel
         
         this.players = players;
         stats = new StatUtilities();
-        
+
         // This will create the dataset 
         PieDataset dataset = createDataset(option);
         // based on the dataset we create the chart
         JFreeChart chart = createChart(dataset, chartTitle);
         // we put the chart into a panel
         ChartPanel chartPanel = new ChartPanel(chart);
-        // default size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+
+        // Don't forget me...
+        setLayout(new BorderLayout());
+        add(chartPanel); 
 }
         
     

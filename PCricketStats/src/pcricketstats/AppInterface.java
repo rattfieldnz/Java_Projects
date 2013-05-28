@@ -41,7 +41,7 @@ public class AppInterface extends javax.swing.JFrame {
 //        }
         
         columnAdjuster.adjustColumns();
-        columnAdjuster.adjustColumn(0);
+        columnAdjuster.adjustColumn(1);
     }
     
     DefaultTableModel tableModel = new DefaultTableModel(
@@ -1109,17 +1109,7 @@ public class AppInterface extends javax.swing.JFrame {
 
         graphDisplayPanel.setBackground(new java.awt.Color(255, 255, 255));
         graphDisplayPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-
-        javax.swing.GroupLayout graphDisplayPanelLayout = new javax.swing.GroupLayout(graphDisplayPanel);
-        graphDisplayPanel.setLayout(graphDisplayPanelLayout);
-        graphDisplayPanelLayout.setHorizontalGroup(
-            graphDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        graphDisplayPanelLayout.setVerticalGroup(
-            graphDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 312, Short.MAX_VALUE)
-        );
+        graphDisplayPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout countryVsCountryPanelLayout = new javax.swing.GroupLayout(countryVsCountryPanel);
         countryVsCountryPanel.setLayout(countryVsCountryPanelLayout);
@@ -1312,7 +1302,7 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(overallPlayerAveragesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(aveFiveWicketsPerInnings)
                     .addComponent(ave5wicketsInningsLabel))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
 
         closeBtn1.setText("Close Application");
@@ -1602,6 +1592,7 @@ public class AppInterface extends javax.swing.JFrame {
         /**/
         
         graphDisplayPanel.add(chart);
+        repaint();
     }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
 
     /**
