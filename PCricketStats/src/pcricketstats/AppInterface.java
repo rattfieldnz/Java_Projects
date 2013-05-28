@@ -4,7 +4,7 @@
  */
 package pcricketstats;
 
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +18,7 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
-    public String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    public String[] compareStatsOptions = { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
     /**
      * Creates new form AppInterface
      */
@@ -69,6 +69,18 @@ public class AppInterface extends javax.swing.JFrame {
         aveEconomyRate.setText("");
         aveStrikeRate.setText("");
         aveFiveWicketsPerInnings.setText("");
+    }
+    
+    /**
+     * This method returns the index of a string, in an array of strings.
+     * @param options The array of strings
+     * @param option The string to find the index of.
+     * @return The index of @option in the array @options.
+     */
+    public int getIndexOf(String[] options, String option)
+    {
+        List<String> optionsList = Arrays.asList(options);
+        return optionsList.indexOf(options);
     }
     
     /**
@@ -1083,12 +1095,17 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanel.setBackground(new java.awt.Color(211, 225, 255));
         countryVsCountryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
-        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(compareStatsOptions));
+        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" }));
 
         comparePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         comparePlayerStatsLabel.setText("Compare Player Stats - Country vs Country");
 
         comparePlayerStatsBtn.setText("Display Graph");
+        comparePlayerStatsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comparePlayerStatsBtnActionPerformed(evt);
+            }
+        });
 
         graphDisplayPanel.setBackground(new java.awt.Color(255, 255, 255));
         graphDisplayPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
@@ -1575,6 +1592,11 @@ public class AppInterface extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
+
+    private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
+        
+        CountryVsCountryChart chart = new CountryVsCountryChart("Test Chart", "A Test Chart", players, 1);
+    }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
 
     /**
      * @param args the command line arguments

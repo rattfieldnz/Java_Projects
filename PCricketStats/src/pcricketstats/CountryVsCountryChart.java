@@ -7,7 +7,7 @@ package pcricketstats;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -20,15 +20,14 @@ import org.jfree.util.Rotation;
  *
  * @author attfire1
  */
-public class CountryVsCountryChart extends JFrame
+public class CountryVsCountryChart extends JPanel
 {
     private static final long serialVersionUID = 1L;
     private ArrayList<Player> players;
-    private String country;
     private StatUtilities stats;
 
 	public CountryVsCountryChart(String applicationTitle, String chartTitle, ArrayList<Player> players, int option) {
-        super(applicationTitle);
+        //super(applicationTitle);
         
         this.players = players;
         stats = new StatUtilities();
@@ -41,8 +40,6 @@ public class CountryVsCountryChart extends JFrame
         ChartPanel chartPanel = new ChartPanel(chart);
         // default size
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-        // add it to our application
-        setContentPane(chartPanel);
 }
         
     
