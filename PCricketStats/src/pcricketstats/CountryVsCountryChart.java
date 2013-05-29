@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.JPanel;
-import org.jfree.chart.ChartFactory;
+import org.jfree.chart.*;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;

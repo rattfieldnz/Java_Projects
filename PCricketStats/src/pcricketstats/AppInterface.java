@@ -500,7 +500,6 @@ public class AppInterface extends javax.swing.JFrame {
         infoLabel = new javax.swing.JLabel();
         compareStatsPanel = new javax.swing.JPanel();
         compareStatsLabel = new javax.swing.JLabel();
-        chooseGraphLabel = new javax.swing.JLabel();
         chooseGraphOption = new javax.swing.JComboBox();
         confirmGraphBtn = new javax.swing.JButton();
         displayGraphPanel = new javax.swing.JPanel();
@@ -860,10 +859,7 @@ public class AppInterface extends javax.swing.JFrame {
         compareStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         compareStatsLabel.setText("Compare Stats - Player vs Country vs Overall");
 
-        chooseGraphLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        chooseGraphLabel.setText("Choose Graph:");
-
-        chooseGraphOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        chooseGraphOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Average Balls Bowled", "Average of Bowling Averages", "Average Career Length", "Average Economy Rate", "Average Number of Five Wicket Innings", "Average Innings Played", "Average Matches Played", "Average Runs Conceded", "Average Strike Rate", "Average Wickets Taken" }));
 
         confirmGraphBtn.setText("Go");
         confirmGraphBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -883,7 +879,7 @@ public class AppInterface extends javax.swing.JFrame {
         );
         displayGraphPanelLayout.setVerticalGroup(
             displayGraphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 373, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout compareStatsPanelLayout = new javax.swing.GroupLayout(compareStatsPanel);
@@ -896,10 +892,8 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(displayGraphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(compareStatsPanelLayout.createSequentialGroup()
                         .addComponent(compareStatsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
-                        .addComponent(chooseGraphLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chooseGraphOption, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addComponent(chooseGraphOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(confirmGraphBtn)))
                 .addContainerGap())
@@ -910,7 +904,6 @@ public class AppInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(compareStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(compareStatsLabel)
-                    .addComponent(chooseGraphLabel)
                     .addComponent(chooseGraphOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmGraphBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1008,7 +1001,7 @@ public class AppInterface extends javax.swing.JFrame {
         getPlayersFromLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getPlayersFromLabel.setText("Get players from");
 
-        fromCountryOption.setModel(new javax.swing.DefaultComboBoxModel(countryOptions));
+        fromCountryOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" }));
         fromCountryOption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fromCountryOptionActionPerformed(evt);
@@ -1116,7 +1109,7 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanel.setBackground(new java.awt.Color(211, 225, 255));
         countryVsCountryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
-        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(compareStatsOptions));
+        compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" }));
 
         comparePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         comparePlayerStatsLabel.setText("Compare Player Stats - Country vs Country");
@@ -1150,7 +1143,7 @@ public class AppInterface extends javax.swing.JFrame {
                     .addGroup(countryVsCountryPanelLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(comparePlayerStatsLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(135, Short.MAX_VALUE))
         );
         countryVsCountryPanelLayout.setVerticalGroup(
             countryVsCountryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1685,7 +1678,6 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel careerLengthLabel;
     private javax.swing.JLabel careerSpan;
     private javax.swing.JLabel careerSpanLabel;
-    private javax.swing.JLabel chooseGraphLabel;
     private javax.swing.JComboBox chooseGraphOption;
     private javax.swing.JButton closeBtn;
     private javax.swing.JButton closeBtn1;

@@ -667,10 +667,8 @@
                               <Component id="displayGraphPanel" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="compareStatsLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="56" max="32767" attributes="0"/>
-                                  <Component id="chooseGraphLabel" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="chooseGraphOption" min="-2" pref="149" max="-2" attributes="0"/>
+                                  <EmptySpace pref="89" max="32767" attributes="0"/>
+                                  <Component id="chooseGraphOption" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="confirmGraphBtn" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -685,7 +683,6 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="compareStatsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="chooseGraphLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="chooseGraphOption" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="confirmGraphBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -705,22 +702,20 @@
                     <Property name="text" type="java.lang.String" value="Compare Stats - Player vs Country vs Overall"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="chooseGraphLabel">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="12" style="1"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Choose Graph:"/>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JComboBox" name="chooseGraphOption">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
+                      <StringArray count="10">
+                        <StringItem index="0" value="Average Balls Bowled"/>
+                        <StringItem index="1" value="Average of Bowling Averages"/>
+                        <StringItem index="2" value="Average Career Length"/>
+                        <StringItem index="3" value="Average Economy Rate"/>
+                        <StringItem index="4" value="Average Number of Five Wicket Innings"/>
+                        <StringItem index="5" value="Average Innings Played"/>
+                        <StringItem index="6" value="Average Matches Played"/>
+                        <StringItem index="7" value="Average Runs Conceded"/>
+                        <StringItem index="8" value="Average Strike Rate"/>
+                        <StringItem index="9" value="Average Wickets Taken"/>
                       </StringArray>
                     </Property>
                   </Properties>
@@ -755,7 +750,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="373" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -1158,7 +1153,7 @@
                                   <Component id="comparePlayerStatsLabel" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="135" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
