@@ -20,7 +20,10 @@ public class AppInterface extends javax.swing.JFrame {
     private StatUtilities stats;
     public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
     String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    String[] pVcVoOptions = new String[] { "Average Balls Bowled", "Average of Bowling Averages", "Average Career Length", "Average Economy Rate", "Average Number of Five Wicket Innings", "Average Innings Played", "Average Matches Played", "Average Runs Conceded", "Average Strike Rate", "Average Wickets Taken" };
+    ;
     private ArrayList<String> options;
+    private ArrayList<String> pVcVo; //"player v country v overall"
     /**
      * Creates new form AppInterface
      */
@@ -32,6 +35,9 @@ public class AppInterface extends javax.swing.JFrame {
         
         options = new ArrayList<String>();
         options.addAll(Arrays.asList(compareStatsOptions));
+        
+        pVcVo = new ArrayList<String>();
+        pVcVo.addAll(Arrays.asList(pVcVoOptions));
         
         /*
          * This class is borrowed from http://tips4java.wordpress.com/2008/11/10/table-column-adjuster/. I couldn't 
@@ -442,11 +448,24 @@ public class AppInterface extends javax.swing.JFrame {
      */
     public void processCvCchart(int option)
     {
-      
         String title = options.get(option).substring(options.get(option).indexOf(' '));
         String versus = " - Country vs Country";
         CountryVsCountryChart chart = new CountryVsCountryChart(title, "", players, option + 1);
         graphDisplayPanel.add(chart);
+        repaint();
+    }
+    
+    /**
+     * This method processes the chart for the "Player vs Country vs Overall" 
+     * player stats, in the "Single Player Stats" tab.
+     * @param option The option for which stats to display.
+     */
+    public void processCvPvOchart(int option)
+    {
+        //pVcVo = "Player vs Country vs Overall"
+        String title = pVcVo.get(option);
+        PlayerVsCountryVsOverallChart chart = new PlayerVsCountryVsOverallChart(title, "", players, option + 1, getPlayerName.getText());
+        displayGraphPanel.add(chart);
         repaint();
         
     }
@@ -1538,7 +1557,10 @@ public class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_closeBtnActionPerformed
 
     private void confirmGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmGraphBtnActionPerformed
-        // TODO add your handling code here:
+        String selectedOption = String.valueOf(chooseGraphOption.getSelectedItem()).toString();
+        int statsOption = options.indexOf(selectedOption);
+        
+        processCvPvOchart(statsOption);
     }//GEN-LAST:event_confirmGraphBtnActionPerformed
 
     private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
