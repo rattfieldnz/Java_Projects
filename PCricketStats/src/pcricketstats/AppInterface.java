@@ -878,7 +878,12 @@ public class AppInterface extends javax.swing.JFrame {
         compareStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         compareStatsLabel.setText("Compare Stats - Player vs Country vs Overall");
 
-        chooseGraphOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Average Balls Bowled", "Average of Bowling Averages", "Average Career Length", "Average Economy Rate", "Average Number of Five Wicket Innings", "Average Innings Played", "Average Matches Played", "Average Runs Conceded", "Average Strike Rate", "Average Wickets Taken" }));
+        chooseGraphOption.setModel(new javax.swing.DefaultComboBoxModel(pVcVoOptions));
+        chooseGraphOption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chooseGraphOptionActionPerformed(evt);
+            }
+        });
 
         confirmGraphBtn.setText("Go");
         confirmGraphBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -1561,6 +1566,7 @@ public class AppInterface extends javax.swing.JFrame {
         int statsOption = options.indexOf(selectedOption);
         
         processCvPvOchart(statsOption);
+        repaint();
     }//GEN-LAST:event_confirmGraphBtnActionPerformed
 
     private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
@@ -1627,6 +1633,10 @@ public class AppInterface extends javax.swing.JFrame {
         processCvCchart(statsOption);
         
     }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
+
+    private void chooseGraphOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphOptionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_chooseGraphOptionActionPerformed
 
     /**
      * @param args the command line arguments

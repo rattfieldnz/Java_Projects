@@ -91,7 +91,7 @@ public class PlayerVsCountryVsOverallChart extends JPanel
     
 /** * Creates a sample dataset */
 
-    private  CategoryDataset createDataset(int graphDisplayOption, String playerChosen) {
+    private  CategoryDataset createDataset(int graphDisplayOption, String chosenPlayer) {
         
         // row keys... "series"
         final String player = "Player";
@@ -130,7 +130,7 @@ public class PlayerVsCountryVsOverallChart extends JPanel
         for(int i = 0; i < players.size(); i++)
         {
             //if the player's name in iteration i equals the chosen player's name
-            if(players.get(i).getPlayerName().equals(playerChosen))
+            if(players.get(i).getPlayerName().equalsIgnoreCase(chosenPlayer))
             {
             switch(graphDisplayOption)
                 {
