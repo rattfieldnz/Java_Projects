@@ -20,10 +20,8 @@ public class AppInterface extends javax.swing.JFrame {
     private StatUtilities stats;
     public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
     String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
-    String[] pVcVoOptions = new String[] { "Average Balls Bowled", "Average of Bowling Averages", "Average Career Length", "Average Economy Rate", "Average Number of Five Wicket Innings", "Average Innings Played", "Average Matches Played", "Average Runs Conceded", "Average Strike Rate", "Average Wickets Taken" };
-    ;
     private ArrayList<String> options;
-    private ArrayList<String> pVcVo; //"player v country v overall"
+    
     /**
      * Creates new form AppInterface
      */
@@ -36,9 +34,6 @@ public class AppInterface extends javax.swing.JFrame {
         options = new ArrayList<String>();
         options.addAll(Arrays.asList(compareStatsOptions));
         
-        pVcVo = new ArrayList<String>();
-        pVcVo.addAll(Arrays.asList(pVcVoOptions));
-        
         /*
          * This class is borrowed from http://tips4java.wordpress.com/2008/11/10/table-column-adjuster/. I couldn't 
          * find a way to resize certain columns, given the creation of the custom table model (tableModel). When I 
@@ -46,13 +41,7 @@ public class AppInterface extends javax.swing.JFrame {
          */
         TableColumnAdjuster columnAdjuster = new TableColumnAdjuster(playersDataTable);
         
-//        for(int i = 0; i < tableModel.getColumnCount(); i++)
-//        {
-//            columnAdjuster.adjustColumn(i);
-//        }
-        
         columnAdjuster.adjustColumns();
-        //columnAdjuster.adjustColumn(1);
     }
     
     DefaultTableModel tableModel = new DefaultTableModel(
@@ -460,15 +449,7 @@ public class AppInterface extends javax.swing.JFrame {
      * player stats, in the "Single Player Stats" tab.
      * @param option The option for which stats to display.
      */
-    public void processCvPvOchart(int option)
-    {
-        //pVcVo = "Player vs Country vs Overall"
-        String title = pVcVo.get(option);
-        PlayerVsCountryVsOverallChart chart = new PlayerVsCountryVsOverallChart(title, "", players, option + 1, getPlayerName.getText());
-        displayGraphPanel.add(chart);
-        repaint();
-        
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -517,11 +498,6 @@ public class AppInterface extends javax.swing.JFrame {
         flagImageLabel = new javax.swing.JLabel();
         resetPlayerStatsBtn = new javax.swing.JButton();
         infoLabel = new javax.swing.JLabel();
-        compareStatsPanel = new javax.swing.JPanel();
-        compareStatsLabel = new javax.swing.JLabel();
-        chooseGraphOption = new javax.swing.JComboBox();
-        confirmGraphBtn = new javax.swing.JButton();
-        displayGraphPanel = new javax.swing.JPanel();
         closeBtn = new javax.swing.JButton();
         multiplePlayerStatsPanel = new javax.swing.JPanel();
         multiplePlayerStatsLabel = new javax.swing.JLabel();
@@ -821,7 +797,7 @@ public class AppInterface extends javax.swing.JFrame {
                 .addGroup(playerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fiveWicketsInningsLabel)
                     .addComponent(fiveWicketsPerInnings))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         resetPlayerStatsBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -844,14 +820,19 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
                         .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchPlayerNameLabel)
-                            .addComponent(infoLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(searchPlayerNameLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelPlayerStatsLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(infoLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
                                 .addComponent(getPlayerStatsBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(resetPlayerStatsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                                .addComponent(resetPlayerStatsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(getPlayerName))))
                 .addContainerGap())
         );
@@ -864,74 +845,12 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(getPlayerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(getPlayerStatsBtn)
-                    .addComponent(resetPlayerStatsBtn)
+                    .addGroup(mainPanelPlayerStatsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(resetPlayerStatsBtn)
+                        .addComponent(getPlayerStatsBtn))
                     .addComponent(infoLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(playerStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        compareStatsPanel.setBackground(new java.awt.Color(211, 225, 255));
-        compareStatsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-
-        compareStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        compareStatsLabel.setText("Compare Stats - Player vs Country vs Overall");
-
-        chooseGraphOption.setModel(new javax.swing.DefaultComboBoxModel(pVcVoOptions));
-        chooseGraphOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chooseGraphOptionActionPerformed(evt);
-            }
-        });
-
-        confirmGraphBtn.setText("Go");
-        confirmGraphBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmGraphBtnActionPerformed(evt);
-            }
-        });
-
-        displayGraphPanel.setBackground(new java.awt.Color(255, 255, 255));
-        displayGraphPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
-
-        javax.swing.GroupLayout displayGraphPanelLayout = new javax.swing.GroupLayout(displayGraphPanel);
-        displayGraphPanel.setLayout(displayGraphPanelLayout);
-        displayGraphPanelLayout.setHorizontalGroup(
-            displayGraphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        displayGraphPanelLayout.setVerticalGroup(
-            displayGraphPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 373, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout compareStatsPanelLayout = new javax.swing.GroupLayout(compareStatsPanel);
-        compareStatsPanel.setLayout(compareStatsPanelLayout);
-        compareStatsPanelLayout.setHorizontalGroup(
-            compareStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(compareStatsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(compareStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(displayGraphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(compareStatsPanelLayout.createSequentialGroup()
-                        .addComponent(compareStatsLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
-                        .addComponent(chooseGraphOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(confirmGraphBtn)))
-                .addContainerGap())
-        );
-        compareStatsPanelLayout.setVerticalGroup(
-            compareStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(compareStatsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(compareStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(compareStatsLabel)
-                    .addComponent(chooseGraphOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmGraphBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(displayGraphPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(playerStatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -947,25 +866,25 @@ public class AppInterface extends javax.swing.JFrame {
         singlePlayerStatsPanelLayout.setHorizontalGroup(
             singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 547, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(closeBtn)
-                    .addComponent(singlePlayerStatsLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
-                .addComponent(compareStatsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(closeBtn))
+                    .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
+                        .addGap(402, 402, 402)
+                        .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(singlePlayerStatsLabel)
+                            .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
         singlePlayerStatsPanelLayout.setVerticalGroup(
             singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(singlePlayerStatsLabel)
                 .addGap(18, 18, 18)
-                .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(compareStatsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
+                .addComponent(singlePlayerStatsLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
                 .addComponent(closeBtn)
                 .addContainerGap())
         );
@@ -1366,53 +1285,15 @@ public class AppInterface extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Player Name", "Country", "Career Span", "Matches Played", "Innings Played", "Balls Bowled", "Runs Conceded", "Wickets Taken", "Bowling Average", "Economy Rate", "Strike Rate", "5 Wickets/Innings"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         playersDataTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         playersDataTable.setPreferredSize(new java.awt.Dimension(700, 160));
         playersDataTable.getTableHeader().setResizingAllowed(false);
         playersDataTable.getTableHeader().setReorderingAllowed(false);
         playersDataTable.setUpdateSelectionOnSort(false);
         tableScrollPane.setViewportView(playersDataTable);
-        playersDataTable.getColumnModel().getColumn(0).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(0).setPreferredWidth(20);
-        playersDataTable.getColumnModel().getColumn(1).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(2).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(3).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(3).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(4).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(4).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(5).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(5).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(6).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(6).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(7).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(7).setPreferredWidth(60);
-        playersDataTable.getColumnModel().getColumn(8).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(8).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(9).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(9).setPreferredWidth(55);
-        playersDataTable.getColumnModel().getColumn(10).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(10).setPreferredWidth(50);
-        playersDataTable.getColumnModel().getColumn(11).setResizable(false);
-        playersDataTable.getColumnModel().getColumn(11).setPreferredWidth(35);
-        playersDataTable.getColumnModel().getColumn(12).setResizable(false);
 
         javax.swing.GroupLayout multiplePlayerStatsPanelLayout = new javax.swing.GroupLayout(multiplePlayerStatsPanel);
         multiplePlayerStatsPanel.setLayout(multiplePlayerStatsPanelLayout);
@@ -1496,6 +1377,15 @@ public class AppInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_closeBtn1ActionPerformed
 
+    private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
+
+        String selectedOption = String.valueOf(compareStatsComboBox.getSelectedItem()).toString();
+        int statsOption = options.indexOf(selectedOption);
+
+        processCvCchart(statsOption);
+
+    }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
+
     private void getLastNPlayersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getLastNPlayersBtnActionPerformed
         try
         {
@@ -1561,14 +1451,6 @@ public class AppInterface extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_closeBtnActionPerformed
 
-    private void confirmGraphBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmGraphBtnActionPerformed
-        String selectedOption = String.valueOf(chooseGraphOption.getSelectedItem()).toString();
-        int statsOption = options.indexOf(selectedOption);
-        
-        processCvPvOchart(statsOption);
-        repaint();
-    }//GEN-LAST:event_confirmGraphBtnActionPerformed
-
     private void resetPlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetPlayerStatsBtnActionPerformed
         playerName.setText("");
         countryName.setText("");
@@ -1606,7 +1488,7 @@ public class AppInterface extends javax.swing.JFrame {
                 playerName.setText(players.get(i).getPlayerName());
                 countryName.setText(players.get(i).getCountryName());
                 careerSpan.setText(players.get(i).getCareerSpan());
-                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years");
+                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years"  + " (Ave for country: " + stats.aveCareerLength(players, players.get(i).getCountryName()) + ")");
                 matchesPlayed.setText(matches += players.get(i).getMatchesPlayed());
                 inningsPlayed.setText(innings += players.get(i).getInningsPlayed());
                 ballsBowled.setText(balls += players.get(i).getBallsBowled());
@@ -1624,19 +1506,6 @@ public class AppInterface extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
-
-    private void comparePlayerStatsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comparePlayerStatsBtnActionPerformed
-        
-        String selectedOption = String.valueOf(compareStatsComboBox.getSelectedItem()).toString();
-        int statsOption = options.indexOf(selectedOption);
-        
-        processCvCchart(statsOption);
-        
-    }//GEN-LAST:event_comparePlayerStatsBtnActionPerformed
-
-    private void chooseGraphOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseGraphOptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chooseGraphOptionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1710,20 +1579,15 @@ public class AppInterface extends javax.swing.JFrame {
     private javax.swing.JLabel careerLengthLabel;
     private javax.swing.JLabel careerSpan;
     private javax.swing.JLabel careerSpanLabel;
-    private javax.swing.JComboBox chooseGraphOption;
     private javax.swing.JButton closeBtn;
     private javax.swing.JButton closeBtn1;
     private javax.swing.JButton comparePlayerStatsBtn;
     private javax.swing.JLabel comparePlayerStatsLabel;
     private javax.swing.JComboBox compareStatsComboBox;
-    private javax.swing.JLabel compareStatsLabel;
-    private javax.swing.JPanel compareStatsPanel;
-    private javax.swing.JButton confirmGraphBtn;
     private javax.swing.JPanel countryFlagPanel;
     private javax.swing.JLabel countryName;
     private javax.swing.JLabel countryNameLabel;
     private javax.swing.JPanel countryVsCountryPanel;
-    private javax.swing.JPanel displayGraphPanel;
     private javax.swing.JLabel economyRate;
     private javax.swing.JLabel economyRateLabel;
     private javax.swing.JTextField firstNPlayers;
