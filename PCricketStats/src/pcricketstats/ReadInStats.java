@@ -24,8 +24,6 @@ public class ReadInStats {
      * This method loads player information from a CSV file.
      * 
      * @param players The ArrayList where each player will be loaded into, from each row of the CSV file.
-     * @throws IOException - This exception is thrown if there is an issue with the CSV file.
-     * The CSV file must be formatted like the one included with this project.
      */
     public void load(ArrayList<Player> players) {
         BufferedReader in;

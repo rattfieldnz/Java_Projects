@@ -24,6 +24,10 @@ import javax.swing.table.*;
  *  or more of the other columns must decrease. Because of this the resize mode
  *  of RESIZE_ALL_COLUMNS will work the best.
  */
+/**
+ *
+ * @author interkiwiwebdev
+ */
 public class TableColumnAdjuster implements PropertyChangeListener, TableModelListener {
 
     private JTable table;
@@ -68,6 +72,9 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 
     /*
      *  Adjust the widths of all the columns in the table
+     */
+    /**
+     *
      */
     public void adjustColumns() {
         TableColumnModel tcm = table.getColumnModel();
@@ -200,6 +207,9 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 
     /*
      *  Restore the widths of the columns in the table to its previous width
+     */
+    /**
+     *
      */
     public void restoreColumns() {
         TableColumnModel tcm = table.getColumnModel();

@@ -34,11 +34,24 @@ public class CountryVsCountryChart extends JPanel
     private static final long serialVersionUID = 1L;
     private ArrayList<Player> players;
     private StatUtilities stats;
+    /**
+     *
+     */
     public String yAxisLabel = "";
+    /**
+     *
+     */
     public String[] compareStatsOptions = { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
     ;
     
-	public CountryVsCountryChart(String applicationTitle, String chartTitle, ArrayList<Player> players, int option) {
+	/**
+     *
+     * @param applicationTitle
+     * @param chartTitle
+     * @param players
+     * @param option
+     */
+    public CountryVsCountryChart(String applicationTitle, String chartTitle, ArrayList<Player> players, int option) {
         //super(applicationTitle);
         
         this.players = players;
