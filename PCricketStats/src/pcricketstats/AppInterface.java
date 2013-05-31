@@ -19,7 +19,8 @@ public class AppInterface extends javax.swing.JFrame {
     private Object[] object;
     private StatUtilities stats;
     public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
-    String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    public String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    public String[] sortingOptions = new String[] {"Balls Bowled", "Bowling Average", "Career Span", "Country Name", "Economy Rate", "5 Wickets/Innings", "Innings Played", "Matches Played", "Player Name", "Runs Conceded", "Strike Rate", "Wickets Taken (default)"};
     private ArrayList<String> options;
     
     /**
@@ -345,6 +346,10 @@ public class AppInterface extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * 
+     * @param country 
+     */
     public void drawTable(String country) {
         
         ArrayList<Player> tempPlayers = new ArrayList<Player>();
@@ -392,6 +397,118 @@ public class AppInterface extends javax.swing.JFrame {
         }
         
             addStatsToAveragesPanel(tempPlayers);
+    }
+    
+    /**
+     * This method displays a sorted table, according to the 
+     * option parsed through.
+     * @param sortOption The option number, for which the players are to be sorted.
+     */
+    public void drawSortedTable(int sortOption) {
+        
+        ArrayList<Player> tempPlayers = new ArrayList<Player>();
+        
+        tableModel.setRowCount(0);
+        object = new Object[13];
+        for (int i = 0; i < players.size(); i++) {
+            
+            object[0] = players.get(i).getPlayerID();
+            object[1] = players.get(i).getPlayerName();
+            object[2] = players.get(i).getCountryName();
+            object[3] = players.get(i).getCareerSpan();
+            object[4] = players.get(i).getMatchesPlayed();
+            object[5] = players.get(i).getInningsPlayed();
+            object[6] = players.get(i).getBallsBowled();
+            object[7] = players.get(i).getRunsConceded();
+            object[8] = players.get(i).getWicketsTaken();
+            object[9] = players.get(i).getBowlingAverage();
+            object[10] = players.get(i).getEconomyRate();
+            object[11] = players.get(i).getStrikeRate();
+            object[12] = players.get(i).getFiveWicketsInnings();
+            
+//            tempPlayers.add(
+//                        new Player(
+//                        players.get(i).getPlayerID(), 
+//                        players.get(i).getPlayerName(), 
+//                        players.get(i).getCountryName(), 
+//                        players.get(i).getCareerSpan(), 
+//                        players.get(i).getMatchesPlayed(), 
+//                        players.get(i).getInningsPlayed(), 
+//                        players.get(i).getBallsBowled(), 
+//                        players.get(i).getRunsConceded(), 
+//                        players.get(i).getWicketsTaken(), 
+//                        players.get(i).getBowlingAverage(), 
+//                        players.get(i).getEconomyRate(), 
+//                        players.get(i).getStrikeRate(), 
+//                        players.get(i).getFiveWicketsInnings()));
+            
+            tempPlayers.add(
+                        new Player(
+                        ((Integer)(tableModel.getValueAt(0,i))).intValue(),
+                    ((String)(tableModel.getValueAt(1, i))).toString()
+        }
+            tableModel.getv
+            switch(sortOption)
+            {
+                case 0:
+                    Collections.sort(tempPlayers, new SortByBallsBowled());
+                    break;
+                case 1:
+                    Collections.sort(tempPlayers, new SortByBowlingAverage());
+                    break;
+                case 2:
+                    Collections.sort(tempPlayers, new SortByCareerSpan());
+                    break;
+                case 3:
+                    Collections.sort(tempPlayers, new SortByCountryName());
+                    break;
+                case 4:
+                    Collections.sort(tempPlayers, new SortByEconomyRate());
+                    break;
+                case 5:
+                    Collections.sort(tempPlayers, new SortByFiveWicketsInn());
+                    break;
+                case 6:
+                    Collections.sort(tempPlayers, new SortByInningsPlayed());
+                    break;
+                case 7:
+                    Collections.sort(tempPlayers, new SortByMatchesPlayed());
+                    break;
+                case 8:
+                    Collections.sort(tempPlayers, new SortByPlayerName());
+                    break;
+                case 9:
+                    Collections.sort(tempPlayers, new SortByRunsConceded());
+                    break;
+                case 10:
+                    Collections.sort(tempPlayers, new SortByStrikeRate());
+                    break;
+                case 11:
+                    Collections.sort(tempPlayers, new SortByWicketsTaken());
+                    break;
+            }
+            
+            for (int i = 0; i < tempPlayers.size(); i++) {
+                object = new Object[13];
+                object[0] = tempPlayers.get(i).getPlayerID();
+                object[1] = tempPlayers.get(i).getPlayerName();
+                object[2] = tempPlayers.get(i).getCountryName();
+                object[3] = tempPlayers.get(i).getCareerSpan();
+                object[4] = tempPlayers.get(i).getMatchesPlayed();
+                object[5] = tempPlayers.get(i).getInningsPlayed();
+                object[6] = tempPlayers.get(i).getBallsBowled();
+                object[7] = tempPlayers.get(i).getRunsConceded();
+                object[8] = tempPlayers.get(i).getWicketsTaken();
+                object[9] = tempPlayers.get(i).getBowlingAverage();
+                object[10] = tempPlayers.get(i).getEconomyRate();
+                object[11] = tempPlayers.get(i).getStrikeRate();
+                object[12] = tempPlayers.get(i).getFiveWicketsInnings();
+                tableModel.addRow(object);
+                
+            }
+            
+            
+            tableModel.fireTableDataChanged();
     }
     
     
@@ -733,7 +850,7 @@ public class AppInterface extends javax.swing.JFrame {
                     .addComponent(economyRate)
                     .addComponent(strikeRate)
                     .addComponent(fiveWicketsPerInnings))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(countryFlagPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -823,7 +940,7 @@ public class AppInterface extends javax.swing.JFrame {
                             .addGroup(mainPanelPlayerStatsLayout.createSequentialGroup()
                                 .addGap(65, 65, 65)
                                 .addComponent(searchPlayerNameLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelPlayerStatsLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(infoLabel)
@@ -871,20 +988,20 @@ public class AppInterface extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(closeBtn))
                     .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
-                        .addGap(402, 402, 402)
+                        .addGap(282, 282, 282)
                         .addGroup(singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(singlePlayerStatsLabel)
-                            .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(290, Short.MAX_VALUE))
+                            .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 786, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(282, Short.MAX_VALUE))
         );
         singlePlayerStatsPanelLayout.setVerticalGroup(
             singlePlayerStatsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(singlePlayerStatsPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addComponent(singlePlayerStatsLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mainPanelPlayerStats, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(closeBtn)
                 .addContainerGap())
         );
@@ -1053,6 +1170,11 @@ public class AppInterface extends javax.swing.JFrame {
         countryVsCountryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 204, 255), 2));
 
         compareStatsComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" }));
+        compareStatsComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                compareStatsComboBoxActionPerformed(evt);
+            }
+        });
 
         comparePlayerStatsLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         comparePlayerStatsLabel.setText("Compare Player Stats - Country vs Country");
@@ -1270,11 +1392,21 @@ public class AppInterface extends javax.swing.JFrame {
         });
 
         sortByComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Balls Bowled", "Bowling Average", "Career Span", "Country Name", "Economy Rate", "5 Wickets/Innings", "Innings Played", "Matches Played", "Player Name", "Runs Conceded", "Strike Rate", "Wickets Taken (default)" }));
+        sortByComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortByComboBoxActionPerformed(evt);
+            }
+        });
 
         sortByLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         sortByLabel.setText("Sort By");
 
         sortBtn.setText("Go");
+        sortBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sortBtnActionPerformed(evt);
+            }
+        });
 
         tableScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         tableScrollPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1488,16 +1620,46 @@ public class AppInterface extends javax.swing.JFrame {
                 playerName.setText(players.get(i).getPlayerName());
                 countryName.setText(players.get(i).getCountryName());
                 careerSpan.setText(players.get(i).getCareerSpan());
-                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + " years"  + " (Ave for country: " + stats.aveCareerLength(players, players.get(i).getCountryName()) + ")");
-                matchesPlayed.setText(matches += players.get(i).getMatchesPlayed());
-                inningsPlayed.setText(innings += players.get(i).getInningsPlayed());
-                ballsBowled.setText(balls += players.get(i).getBallsBowled());
-                runsConceded.setText(runs += players.get(i).getRunsConceded());
-                wicketsTaken.setText(wickets += players.get(i).getWicketsTaken());
-                bowlingAverage.setText(bowling += players.get(i).getBowlingAverage());
-                economyRate.setText(econRate += players.get(i).getEconomyRate());
-                strikeRate.setText(strRate += players.get(i).getStrikeRate());
-                fiveWicketsPerInnings.setText(fiveWickets += players.get(i).getFiveWicketsInnings());
+                
+                careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + 
+                        " years"  + " (Ave country: " + stats.aveCareerLength(players, players.get(i).getCountryName()) + 
+                        ", Ave Overall: " + stats.aveCareerLength(players) + ")");
+                
+                matchesPlayed.setText(matches += players.get(i).getMatchesPlayed() + 
+                        " (Ave country: " + stats.aveMatchesPerPlayer(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveMatchesPerPlayer(players) + ")");
+                
+                inningsPlayed.setText(innings += players.get(i).getInningsPlayed() + 
+                        " (Ave country: " + stats.aveInningsPerCountry(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveInningsPerPlayer(players) + ")");
+                
+                ballsBowled.setText(balls += players.get(i).getBallsBowled() + 
+                        " (Ave country: " + stats.aveBallsBowled(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveBallsBowled(players) + ")");
+                
+                runsConceded.setText(runs += players.get(i).getRunsConceded() + 
+                        " (Ave country: " + stats.aveRunsConceded(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveRunsConceded(players) + ")");
+                
+                wicketsTaken.setText(wickets += players.get(i).getWicketsTaken() + 
+                        " (Ave country: " + stats.aveWickets(players, players.get(i).getCountryName()) +
+                        ", Ave overall: " + stats.aveWickets(players) + ")");
+                
+                bowlingAverage.setText(bowling += players.get(i).getBowlingAverage() + 
+                        " (Ave country: " + stats.aveBowlingAverage(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveBowlingAverage(players) + ")");
+                
+                economyRate.setText(econRate += players.get(i).getEconomyRate() + 
+                        " (Ave country: " + stats.aveEconRate(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveEconRate(players) + ")");
+                
+                strikeRate.setText(strRate += players.get(i).getStrikeRate() + 
+                        " (Ave country: " + stats.aveStrikeRate(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveStrikeRate(players) + ")");
+                
+                fiveWicketsPerInnings.setText(fiveWickets += players.get(i).getFiveWicketsInnings() + 
+                        " (Ave country: " + stats.aveFiveWicketsInns(players, players.get(i).getCountryName()) + 
+                        ", Ave overall: " + stats.aveFiveWicketsInns(players) + ")");
 
                 String countryPath = "country-flags/" + players.get(i).getCountryName().toLowerCase().replaceAll("\\s","") + ".png";
                 flagImageLabel.setIcon(new ImageIcon(countryPath));
@@ -1506,6 +1668,21 @@ public class AppInterface extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
+
+    private void sortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortBtnActionPerformed
+        if(sortByComboBox.getSelectedItem().toString().equalsIgnoreCase(sortingOptions[sortByComboBox.getSelectedIndex()]))
+        {
+            drawSortedTable(sortByComboBox.getSelectedIndex());
+        }
+    }//GEN-LAST:event_sortBtnActionPerformed
+
+    private void sortByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sortByComboBoxActionPerformed
+
+    private void compareStatsComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compareStatsComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_compareStatsComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
