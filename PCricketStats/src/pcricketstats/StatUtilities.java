@@ -105,7 +105,6 @@ public class StatUtilities {
         playerID -= 1;
         
         StringBuilder sb = new StringBuilder();
-        sb.append(csvHeader + "\n");
         
         if(playerID > players.size() || playerID == players.size())
         {
@@ -250,6 +249,11 @@ public class StatUtilities {
                 playersFromCountry++;
                 matchesPlayed += players.get(i).getMatchesPlayed();
             }
+            else if (!(players.get(i).getCountryName().compareTo(country) == 0))
+            {
+                matchesPlayed = 0;
+                playersFromCountry = 0;
+            }
         }
 
         double aveMatchesPerPlayer = (matchesPlayed * 1.0) / playersFromCountry;
@@ -327,6 +331,11 @@ public class StatUtilities {
             if (players.get(i).getCountryName().compareTo(country) == 0) {
                 playersFromCountry++;
                 bowlingAverage += players.get(i).getBowlingAverage();
+            }
+            else
+            {
+                playersFromCountry+=0;
+                bowlingAverage+=0;
             }
         }
 

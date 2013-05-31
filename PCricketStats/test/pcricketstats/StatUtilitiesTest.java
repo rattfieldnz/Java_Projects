@@ -368,11 +368,6 @@ public class StatUtilitiesTest {
         
         ArrayList<Player> result = instance.listPlayersCountry(players, country);
         assertEquals(expResult, result);
-        
-        String country2 = "Morocco";
-        String expResult2 = null;
-        ArrayList<Player> result2 = instance.listPlayersCountry(players, country2);
-        assertEquals(expResult2, result2);
     }
 
     /**
@@ -602,8 +597,7 @@ public class StatUtilitiesTest {
         worker.load(players);
         
         int playerID = 1;
-        String expResult = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match\n" +
-"1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10";
+        String expResult = "1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10";
         String result = instance.listSinglePlayer(players, playerID);
         assertEquals(expResult, result);
         
@@ -624,14 +618,17 @@ public class StatUtilitiesTest {
     @Test
     public void testListSinglePlayer_ArrayList_int() {
         System.out.println("listSinglePlayer");
-        ArrayList<Player> players = null;
-        int playerID = 0;
         StatUtilities instance = new StatUtilities();
-        String expResult = "";
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        int playerID = 1;
+        
+        String expResult = "1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10";
         String result = instance.listSinglePlayer(players, playerID);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -640,13 +637,204 @@ public class StatUtilitiesTest {
     @Test
     public void testListSinglePlayer_ArrayList_String() {
         System.out.println("listSinglePlayer");
-        ArrayList<Player> players = null;
-        String playerName = "";
         StatUtilities instance = new StatUtilities();
-        String expResult = "";
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        String playerName = "M Muralitharan";
+        String expResult = "1 | M Muralitharan | Sri Lanka | Career Span: 18 years | 350 | 341 | 18811 | 12326 | 534 | 23.08 | 3.93 | 35.2 | 10";
         String result = instance.listSinglePlayer(players, playerName);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of toDoubleTwoDP method, of class StatUtilities.
+     */
+    @Test
+    public void testToDoubleTwoDP() {
+        System.out.println("toDoubleTwoDP");
+        double value = 12.3456789;
+        StatUtilities instance = new StatUtilities();
+        double expResult = 12.35;
+        double result = instance.toDoubleTwoDP(value);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveMatchesPerPlayer method, of class StatUtilities.
+     */
+    @Test
+    public void testAveMatchesPerPlayer_ArrayList() {
+        System.out.println("aveMatchesPerPlayer");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        double expResult = 78.5;
+        double result = instance.aveMatchesPerPlayer(players);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveMatchesPerPlayer method, of class StatUtilities.
+     */
+    @Test
+    public void testAveMatchesPerPlayer_ArrayList_String() {
+        System.out.println("aveMatchesPerPlayer");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        String country = "Australia";
+        double expResult = 84.57;
+        
+        double result = instance.aveMatchesPerPlayer(players, country);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveRunsConceded method, of class StatUtilities.
+     */
+    @Test
+    public void testAveRunsConceded_ArrayList() {
+        System.out.println("aveRunsConceded");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        double expResult = 2344.88;
+        double result = instance.aveRunsConceded(players);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveRunsConceded method, of class StatUtilities.
+     */
+    @Test
+    public void testAveRunsConceded_ArrayList_String() {
+        System.out.println("aveRunsConceded");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        String country = "New Zealand";
+        double expResult = 2518.91;
+        double result = instance.aveRunsConceded(players, country);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveBowlingAverage method, of class StatUtilities.
+     */
+    @Test
+    public void testAveBowlingAverage_ArrayList() {
+        System.out.println("aveBowlingAverage");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        double expResult = 33.12;
+        double result = instance.aveBowlingAverage(players);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveBowlingAverage method, of class StatUtilities.
+     */
+    @Test
+    public void testAveBowlingAverage_ArrayList_String() {
+        System.out.println("aveBowlingAverage");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        String country = "Pakistan";
+        
+        double expResult = 32.67;
+        
+        double result = instance.aveBowlingAverage(players, country);
+        
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveFiveWicketsInns method, of class StatUtilities.
+     */
+    @Test
+    public void testAveFiveWicketsInns_ArrayList() {
+        System.out.println("aveFiveWicketsInns");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        double expResult = 0.71;
+        double result = instance.aveFiveWicketsInns(players);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveFiveWicketsInns method, of class StatUtilities.
+     */
+    @Test
+    public void testAveFiveWicketsInns_ArrayList_String() {
+        System.out.println("aveFiveWicketsInns");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        
+        String country = "Australia";
+        
+        double expResult = 1.02;
+        
+        double result = instance.aveFiveWicketsInns(players, country);
+        
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveCareerLength method, of class StatUtilities.
+     */
+    @Test
+    public void testAveCareerLength_ArrayList() {
+        System.out.println("aveCareerLength");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        double expResult = 7.51;
+        
+        double result = instance.aveCareerLength(players);
+        assertEquals(expResult, result, 0.0);
+    }
+
+    /**
+     * Test of aveCareerLength method, of class StatUtilities.
+     */
+    @Test
+    public void testAveCareerLength_ArrayList_String() {
+        System.out.println("aveCareerLength");
+        StatUtilities instance = new StatUtilities();
+        ReadInStats worker = new ReadInStats();
+        
+        ArrayList<Player> players = new ArrayList<Player>();
+        worker.load(players);
+        String country = "New Zealand";
+        
+        double expResult = 8.05;
+        double result = instance.aveCareerLength(players, country);
+        assertEquals(expResult, result, 0.0);
     }
 }

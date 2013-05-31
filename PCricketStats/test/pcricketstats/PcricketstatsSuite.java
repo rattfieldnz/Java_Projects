@@ -16,7 +16,7 @@ import org.junit.runners.Suite;
  * @author interkiwiwebdev
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({pcricketstats.ReadInStatsTest.class, pcricketstats.StatUtilitiesTest.class, pcricketstats.PlayerTest.class})
+@Suite.SuiteClasses({PlayerTest.class, CountryVsCountryChartTest.class, AppInterfaceTest.class, StatUtilitiesTest.class, TableColumnAdjusterTest.class, ReadInStatsTest.class})
 public class PcricketstatsSuite {
 
     @BeforeClass

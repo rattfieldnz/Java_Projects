@@ -463,11 +463,10 @@ public class PlayerTest {
     @Test
     public void testGetPlayerLastName() {
         System.out.println("getPlayerLastName");
-        Player instance = null;
-        String expResult = "";
+        Player instance = new Player(1, "M Muralitharan", "Sri Lanka", "1993-2011", 350, 341, 18811, 12326, 534, 23.08, 3.93, 35.2, 10);
+        
+        String expResult = "Muralitharan";
         String result = instance.getPlayerLastName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }

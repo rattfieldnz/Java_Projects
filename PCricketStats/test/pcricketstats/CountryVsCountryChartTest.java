@@ -15,9 +15,9 @@ import static org.junit.Assert.*;
  *
  * @author interkiwiwebdev
  */
-public class CricketStatsAppTest {
+public class CountryVsCountryChartTest {
     
-    public CricketStatsAppTest() {
+    public CountryVsCountryChartTest() {
     }
     
     @BeforeClass
@@ -37,13 +37,17 @@ public class CricketStatsAppTest {
     }
 
     /**
-     * Test of main method, of class CricketStatsApp.
+     * Test of nthOccurrence method, of class CountryVsCountryChart.
      */
     @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        CricketStatsApp.main(args);
+    public void testNthOccurrence() {
+        System.out.println("nthOccurrence");
+        String str = "";
+        char c = ' ';
+        int n = 0;
+        int expResult = 0;
+        int result = CountryVsCountryChart.nthOccurrence(str, c, n);
+        assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }

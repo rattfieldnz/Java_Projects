@@ -94,7 +94,7 @@ public class Player {
      */
     public String getPlayerLastName()
     {
-        return this.playerName.substring(this.playerName.charAt(' ')+1);
+        return this.playerName.substring(this.playerName.indexOf(' ') + 1);
     }
     
     /**

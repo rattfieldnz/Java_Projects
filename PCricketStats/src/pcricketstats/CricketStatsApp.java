@@ -35,6 +35,6 @@ public class CricketStatsApp {
 //        worker.load(players);
 //        System.out.println(stats.listSinglePlayer(players,"Alan Harper"));
         
-        System.out.println(stats.listPlayersCountry(players, "Bermuda"));
+        System.out.println(stats.listSinglePlayer(players, 1));
     }
 }

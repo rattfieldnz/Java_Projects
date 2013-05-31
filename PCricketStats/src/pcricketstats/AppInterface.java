@@ -18,13 +18,23 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
+    /**
+     *
+     */
     public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
+    /**
+     *
+     */
     public String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    /**
+     *
+     */
     public String[] sortingOptions = new String[] {"Balls Bowled", "Bowling Average", "Career Span", "Country Name", "Economy Rate", "5 Wickets/Innings", "Innings Played", "Matches Played", "Player Name", "Runs Conceded", "Strike Rate", "Wickets Taken (default)"};
     private ArrayList<String> options;
     
     /**
      * Creates new form AppInterface
+     * @param players 
      */
     public AppInterface(ArrayList<Player> players) {
         initComponents();
@@ -408,46 +418,26 @@ public class AppInterface extends javax.swing.JFrame {
         
         ArrayList<Player> tempPlayers = new ArrayList<Player>();
         
-        tableModel.setRowCount(0);
         object = new Object[13];
-        for (int i = 0; i < players.size(); i++) {
-            
-            object[0] = players.get(i).getPlayerID();
-            object[1] = players.get(i).getPlayerName();
-            object[2] = players.get(i).getCountryName();
-            object[3] = players.get(i).getCareerSpan();
-            object[4] = players.get(i).getMatchesPlayed();
-            object[5] = players.get(i).getInningsPlayed();
-            object[6] = players.get(i).getBallsBowled();
-            object[7] = players.get(i).getRunsConceded();
-            object[8] = players.get(i).getWicketsTaken();
-            object[9] = players.get(i).getBowlingAverage();
-            object[10] = players.get(i).getEconomyRate();
-            object[11] = players.get(i).getStrikeRate();
-            object[12] = players.get(i).getFiveWicketsInnings();
-            
-//            tempPlayers.add(
-//                        new Player(
-//                        players.get(i).getPlayerID(), 
-//                        players.get(i).getPlayerName(), 
-//                        players.get(i).getCountryName(), 
-//                        players.get(i).getCareerSpan(), 
-//                        players.get(i).getMatchesPlayed(), 
-//                        players.get(i).getInningsPlayed(), 
-//                        players.get(i).getBallsBowled(), 
-//                        players.get(i).getRunsConceded(), 
-//                        players.get(i).getWicketsTaken(), 
-//                        players.get(i).getBowlingAverage(), 
-//                        players.get(i).getEconomyRate(), 
-//                        players.get(i).getStrikeRate(), 
-//                        players.get(i).getFiveWicketsInnings()));
+        for (int i = 0; i < tableModel.getRowCount(); i++) {
             
             tempPlayers.add(
                         new Player(
-                        ((Integer)(tableModel.getValueAt(0,i))).intValue(),
-                    ((String)(tableModel.getValueAt(1, i))).toString()
+                        ((Integer)(tableModel.getValueAt(i,0))).intValue(),
+                        ((String)(tableModel.getValueAt(i, 1))).toString(), 
+                        ((String)(tableModel.getValueAt(i, 2))).toString(), 
+                        ((String)(tableModel.getValueAt(i, 3))).toString(), 
+                        ((Integer)(tableModel.getValueAt(i, 4))).intValue(), 
+                        ((Integer)(tableModel.getValueAt(i, 5))).intValue(), 
+                        ((Integer)(tableModel.getValueAt(i, 6))).intValue(), 
+                        ((Integer)(tableModel.getValueAt(i, 7))).intValue(), 
+                        ((Integer)(tableModel.getValueAt(i, 8))).intValue(), 
+                        ((Double)(tableModel.getValueAt(i, 9))).doubleValue(), 
+                        ((Double)(tableModel.getValueAt(i, 10))).doubleValue(), 
+                        ((Double)(tableModel.getValueAt(i, 11))).doubleValue(), 
+                        ((Integer)(tableModel.getValueAt(i, 12))).intValue()));
+                        
         }
-            tableModel.getv
             switch(sortOption)
             {
                 case 0:
@@ -488,8 +478,8 @@ public class AppInterface extends javax.swing.JFrame {
                     break;
             }
             
+            tableModel.setRowCount(0);
             for (int i = 0; i < tempPlayers.size(); i++) {
-                object = new Object[13];
                 object[0] = tempPlayers.get(i).getPlayerID();
                 object[1] = tempPlayers.get(i).getPlayerName();
                 object[2] = tempPlayers.get(i).getCountryName();
@@ -512,6 +502,12 @@ public class AppInterface extends javax.swing.JFrame {
     }
     
     
+    /**
+     *
+     * @param row
+     * @param col
+     * @return
+     */
     public Object getValueAt(int row, int col) {
       if (row > tableModel.getRowCount()) {
          // throw an exception
@@ -1670,10 +1666,8 @@ public class AppInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_getPlayerStatsBtnActionPerformed
 
     private void sortBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortBtnActionPerformed
-        if(sortByComboBox.getSelectedItem().toString().equalsIgnoreCase(sortingOptions[sortByComboBox.getSelectedIndex()]))
-        {
-            drawSortedTable(sortByComboBox.getSelectedIndex());
-        }
+        int option = sortByComboBox.getSelectedIndex();
+            drawSortedTable(option);
     }//GEN-LAST:event_sortBtnActionPerformed
 
     private void sortByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sortByComboBoxActionPerformed
