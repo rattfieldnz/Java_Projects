@@ -249,11 +249,6 @@ public class StatUtilities {
                 playersFromCountry++;
                 matchesPlayed += players.get(i).getMatchesPlayed();
             }
-            else if (!(players.get(i).getCountryName().compareTo(country) == 0))
-            {
-                matchesPlayed = 0;
-                playersFromCountry = 0;
-            }
         }
 
         double aveMatchesPerPlayer = (matchesPlayed * 1.0) / playersFromCountry;
