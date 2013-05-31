@@ -503,12 +503,13 @@ public class AppInterface extends javax.swing.JFrame {
     
     
     /**
-     *
-     * @param row
-     * @param col
-     * @return
+     * This method returns the value at [row,col] in the 
+     * populated table model.
+     * @param row The row index in the table model
+     * @param col The column index in the table model
+     * @return The value at [row,col].
      */
-    public Object getValueAt(int row, int col) {
+      public Object getValueAt(int row, int col) {
       if (row > tableModel.getRowCount()) {
          // throw an exception
       }
