@@ -18,18 +18,11 @@ public class AppInterface extends javax.swing.JFrame {
     private ArrayList<Player> players;
     private Object[] object;
     private StatUtilities stats;
-    /**
-     *
-     */
-    public String[] countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
-    /**
-     *
-     */
-    public String[] compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
-    /**
-     *
-     */
-    public String[] sortingOptions = new String[] {"Balls Bowled", "Bowling Average", "Career Span", "Country Name", "Economy Rate", "5 Wickets/Innings", "Innings Played", "Matches Played", "Player Name", "Runs Conceded", "Strike Rate", "Wickets Taken (default)"};
+    
+    public String[] countryOptions;
+    public String[] compareStatsOptions;
+    public String[] sortingOptions;
+    
     private ArrayList<String> options;
     
     /**
@@ -39,6 +32,13 @@ public class AppInterface extends javax.swing.JFrame {
     public AppInterface(ArrayList<Player> players) {
         initComponents();
         this.players = players;
+        
+        countryOptions = new String[] { "Afghanistan", "Australia", "Bangladesh", "Bermuda", "Canada", "England", "India", "Ireland", "Kenya", "Netherlands", "New Zealand", "Pakistan", "Scotland", "South Africa", "Sri Lanka", "West Indies", "Zimbabwe" };
+    
+        compareStatsOptions = new String[] { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    
+        sortingOptions = new String[] {"Balls Bowled", "Bowling Average", "Career Span", "Country Name", "Economy Rate", "5 Wickets/Innings", "Innings Played", "Matches Played", "Player Name", "Runs Conceded", "Strike Rate", "Wickets Taken (default)"};
+        
         stats = new StatUtilities();
         playersDataTable.setModel(tableModel);
         
@@ -116,7 +116,7 @@ public class AppInterface extends javax.swing.JFrame {
         {
             aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " year");
         }
-        else if(stats.aveCareerLength(players) < 1 || stats.aveCareerLength(players) > 1)
+        else
         {
             aveCareerLength.setText(averageCareerLength += stats.aveCareerLength(players) + " years");
         }
@@ -1610,6 +1610,7 @@ public class AppInterface extends javax.swing.JFrame {
         String econRate = "";
         String strRate = "";
         String fiveWickets = "";
+        String year = "";
 
         for (int i = 0; i< players.size(); i++){
             if(getPlayerName.getText().equalsIgnoreCase(players.get(i).getPlayerName()))
@@ -1618,8 +1619,17 @@ public class AppInterface extends javax.swing.JFrame {
                 countryName.setText(players.get(i).getCountryName());
                 careerSpan.setText(players.get(i).getCareerSpan());
                 
+                if(players.get(i).calcCareerSpan() > 1)
+                { 
+                    year = " years";
+                }
+                else
+                {
+                    year = " year";
+                }
+                
                 careerLength.setText(calcCareerSpan += players.get(i).calcCareerSpan() + 
-                        " years"  + " (Ave country: " + stats.aveCareerLength(players, players.get(i).getCountryName()) + 
+                        year  + " (Ave country: " + stats.aveCareerLength(players, players.get(i).getCountryName()) + 
                         ", Ave Overall: " + stats.aveCareerLength(players) + ")");
                 
                 matchesPlayed.setText(matches += players.get(i).getMatchesPlayed() + 

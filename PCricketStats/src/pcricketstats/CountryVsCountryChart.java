@@ -41,8 +41,7 @@ public class CountryVsCountryChart extends JPanel
     /**
      *
      */
-    public String[] compareStatsOptions = { "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
-    ;
+    public String[] compareStatsOptions;
     
 	/**
      *
@@ -56,6 +55,8 @@ public class CountryVsCountryChart extends JPanel
         
         this.players = players;
         stats = new StatUtilities();
+        compareStatsOptions = new String[]{ "Compare Average Balls Bowled", "Compare Average Bowling Averages", "Compare Average Career Lengths", "Compare Average Economy Rates", "Compare Average Number of 5 Wicket Innings", "Compare Average Innings Played", "Compare Average Matches Played", "Compare Average Runs Conceded", "Compare Average Strike Rates", "Compare Average Wickets Taken" };
+    ;
 
         final CategoryDataset dataset = createDataset(option);
         
