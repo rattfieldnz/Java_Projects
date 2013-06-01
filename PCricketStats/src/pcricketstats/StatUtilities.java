@@ -20,8 +20,6 @@ import java.util.Set;
  */
 public class StatUtilities {
 
-    private String csvHeader = "Player ID | Player | Country | Career Span | Matches Played | Innings Played | Balls Bowled | Runs Conceded | "
-            + "Wickets Taken | Bowling Average | Economy Rate | Strike Rate | 5 Wickets/Match";
     private ArrayList<String> countries = new ArrayList<String>();
 
     /**
@@ -47,7 +45,6 @@ public class StatUtilities {
      */
     public String listNPlayers(ArrayList<Player> players, int noOfPlayers) {
         StringBuilder sb = new StringBuilder();
-        sb.append(csvHeader + "\n");
         for (int i = 0; i < noOfPlayers; i++) {
             sb.append(players.get(i).toString() + "\n");
         }
@@ -83,7 +80,6 @@ public class StatUtilities {
             sb.append("Your 'end' value cannot be greater than the size of your 'players' list.");
         } 
         else {
-            sb.append(csvHeader + "\n");
             for (i = start; i <= end; i++) {
                 sb.append(players.get(i).toString() + "\n");
             }
@@ -692,7 +688,6 @@ public class StatUtilities {
      */
     public String outputSort(ArrayList<Player> players, int chosenOption) {
         StringBuilder sb = new StringBuilder();
-        sb.append(csvHeader + "\n");
         switch (chosenOption) {
             case 0:
                 Collections.sort(players, new SortByBallsBowled());
