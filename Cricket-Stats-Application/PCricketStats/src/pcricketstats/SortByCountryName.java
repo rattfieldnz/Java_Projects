@@ -41,7 +41,7 @@ public class SortByCountryName implements Comparator<Player>  {
                 //sorts each player by their last name - using the 
                 //the "space" as a delimiter, the substring and indexOf 
                 //string methods.
-                return p1.getPlayerName().substring(p1.getPlayerName().indexOf(" ")).compareTo(p2.getPlayerName().substring(p2.getPlayerName().indexOf(" ")));
+                return p1.getPlayerName().substring(p1.getPlayerName().indexOf(" ") + 1).compareTo(p2.getPlayerName().substring(p2.getPlayerName().indexOf(" ") + 1));
             }
         }
         else
