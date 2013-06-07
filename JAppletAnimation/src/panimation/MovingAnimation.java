@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package panimation;
 
 import java.awt.*;
@@ -10,7 +6,7 @@ import javax.swing.*;
 
 /**
  *
- * @author interkiwiwebdev
+ * @author Rob Attfield
  */
 public class MovingAnimation extends JApplet {
 
@@ -26,6 +22,7 @@ public class MovingAnimation extends JApplet {
     public void init() {
 
         smileyFace = new ImageIcon("images/happyFace.png");
+        add(new ImagePanel());
         timerDelay = 10;
         timer = new Timer(timerDelay, new TimerListener());
         timer.start();
@@ -42,10 +39,26 @@ public class MovingAnimation extends JApplet {
 
     }
 
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        g.drawImage(smileyFace.getImage(), xCoord, yCoord, this);
+    class ImagePanel extends JPanel
+    {
+        
+        public ImagePanel()
+        {
+            setBackground(Color.BLACK);
+        }
+        
+        @Override
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(smileyFace.getImage(), xCoord, yCoord, this);
+        }
+
+        @Override
+        public void setBackground(Color bg) {
+            super.setBackground(bg); //To change body of generated methods, choose Tools | Templates.
+        }
+        
+        
     }
 
     private class TimerListener implements ActionListener {
